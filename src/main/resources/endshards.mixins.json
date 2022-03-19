@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.0.1",
+  "package": "dev.amot.endshards.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "dev.amot.endshards.mixin.EndShardsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

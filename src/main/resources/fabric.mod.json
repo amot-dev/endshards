@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "endshards",
+  "version": "${version}",
+
+  "name": "End Shards",
+  "description": "A mod to expand the armour/weapons/tools progression to the end. This new set will be equal to netherrite, but different.",
+  "authors": [
+    "Alexander Mot"
+  ],
+  "contact": {
+    "homepage": "https://github.com/asd1o1/end-shards",
+    "sources": "https://github.com/asd1o1/end-shards"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/endshards/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.amot.endshards.EndShards"
+    ]
+  },
+  "mixins": [
+    "endshards.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
