@@ -11,11 +11,11 @@ import org.slf4j.LoggerFactory;
 
 public class EndShards implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("endshards");
-	public static final Item endshard = new Item(new FabricItemSettings().group(ItemGroup.MISC));
+	public static final Item endshard = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
 
 	@Override
 	public void onInitialize() {
-		Registry.register(Registry.ITEM, new Identifier("tutorial", "endshard"), endshard);
+		Registry.register(Registry.ITEM, new Identifier("endshards", "endshard"), endshard);
 		LOGGER.info("Mod loaded!");
 	}
 }
