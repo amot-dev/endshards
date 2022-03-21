@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+      "item": "minecraft:diamond_sword"
+  },
+  "addition": {
+    "item": "endshards:ender_ingot"
+  },
+  "result": {
+    "item": "endshards:ender_sword"
+  }
+}
