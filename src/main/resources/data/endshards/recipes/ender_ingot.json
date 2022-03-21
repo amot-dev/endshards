@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "endshards:endshard"
+    },
+    {
+      "item": "endshards:endshard"
+    },
+    {
+      "item": "endshards:endshard"
+    },
+    {
+      "item": "endshards:endshard"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    }
+  ],
+  "result": {
+    "item": "endshards:ender_ingot"
+  }
+}
