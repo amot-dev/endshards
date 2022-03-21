@@ -1,9 +1,5 @@
 name: build
-on:
-  push:
-    branches:
-      - master
-  pull_request:
+on: [pull_request]
 
 jobs:
   pre_build:
@@ -15,6 +11,7 @@ jobs:
         uses: fkirc/skip-duplicate-actions@v3.4.0
         with:
           skip_after_successful_duplicate: 'true'
+          cancel_others: 'true'
   build:
     needs: pre_build
     if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
