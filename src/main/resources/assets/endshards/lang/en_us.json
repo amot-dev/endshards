@@ -4,5 +4,10 @@
   "item.endshards.ender_helmet": "Ender Helmet",
   "item.endshards.ender_chestplate": "Ender Chestplate",
   "item.endshards.ender_leggings": "Ender Leggings",
-  "item.endshards.ender_boots": "Ender Boots"
+  "item.endshards.ender_boots": "Ender Boots",
+  "item.endshards.ender_sword": "Ender Sword",
+  "item.endshards.ender_pickaxe": "Ender Pickaxe",
+  "item.endshards.ender_shovel": "Ender Shovel",
+  "item.endshards.ender_axe": "Ender Axe",
+  "item.endshards.ender_hoe": "Ender Hoe"
 }
