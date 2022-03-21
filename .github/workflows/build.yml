@@ -8,13 +8,13 @@ on:
 jobs:
   pre_build:
     runs-on: ubuntu-latest
-      outputs:
+    outputs:
         should_skip: ${{ steps.skip_check.outputs.should_skip }}
-      steps:
-        - id: skip_check
-          uses: fkirc/skip-duplicate-actions@v3.4.0
-          with:
-            skip_after_successful_duplicate: 'true'
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v3.4.0
+        with:
+          skip_after_successful_duplicate: 'true'
   build:
     needs: pre_build
     if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
