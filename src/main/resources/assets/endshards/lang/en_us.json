@@ -1,4 +1,8 @@
 {
   "item.endshards.endshard": "End Shard",
-  "item.endshards.ender_ingot": "Ender ingot"
+  "item.endshards.ender_ingot": "Ender Ingot",
+  "item.endshards.ender_helmet": "Ender Helmet",
+  "item.endshards.ender_chestplate": "Ender Chestplate",
+  "item.endshards.ender_leggings": "Ender Leggings",
+  "item.endshards.ender_boots": "Ender Boots"
 }
