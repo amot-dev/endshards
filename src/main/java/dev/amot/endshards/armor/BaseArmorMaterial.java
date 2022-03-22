@@ -1,4 +1,4 @@
-package dev.amot.endshards;
+package dev.amot.endshards.armor;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
@@ -20,8 +20,8 @@ public class BaseArmorMaterial implements ArmorMaterial {
     private final float knockback_resistance;
     private final SoundEvent equip_sound;
 
-    BaseArmorMaterial(String name, Item repair_ingredient, int[] protection_values, int durability_multiplier,
-                      int enchantability, float toughness, float knockback_resistance, SoundEvent equip_sound){
+    public BaseArmorMaterial(String name, Item repair_ingredient, int[] protection_values, int durability_multiplier,
+                             int enchantability, float toughness, float knockback_resistance, SoundEvent equip_sound){
         this.name = name;
         this.repair_ingredient = repair_ingredient;
         this.protection_values = protection_values;

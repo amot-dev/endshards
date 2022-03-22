@@ -1,7 +1,6 @@
 package dev.amot.endshards.mixin;
 
-import dev.amot.endshards.EndShards;
-import dev.amot.endshards.EnderArmorItem;
+import dev.amot.endshards.armor.EnderArmorItem;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;

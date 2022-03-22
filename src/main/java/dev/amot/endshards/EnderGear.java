@@ -1,5 +1,8 @@
 package dev.amot.endshards;
 
+import dev.amot.endshards.armor.BaseArmorMaterial;
+import dev.amot.endshards.armor.EnderArmorItem;
+import dev.amot.endshards.tools.BaseToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.entity.EquipmentSlot;
