@@ -1,12 +1,14 @@
 {
   "required": true,
-  "minVersion": "0.0.1",
+  "minVersion": "0.8",
   "package": "dev.amot.endshards.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
   ],
   "client": [
-    "EndShardsMixin"
+    "EndShardsMixin",
+    "SwitchArmorMixin",
+    "SwitchElytraMixin"
   ],
   "injectors": {
     "defaultRequire": 1
