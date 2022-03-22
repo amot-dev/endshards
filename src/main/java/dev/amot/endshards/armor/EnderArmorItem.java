@@ -1,4 +1,4 @@
-package dev.amot.endshards;
+package dev.amot.endshards.armor;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
