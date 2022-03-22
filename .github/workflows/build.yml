@@ -18,11 +18,11 @@ jobs:
           cancel_others: 'true'
   build:
     needs: pre_build
-    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     strategy:
       matrix:
         java: [17]
         os: [ubuntu-20.04, windows-2022]
+    if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     runs-on: ${{ matrix.os }}
     steps:
       - name: checkout repository
