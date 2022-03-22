@@ -1,6 +1,7 @@
 {
   "item.endshards.endshard": "End Shard",
   "item.endshards.ender_ingot": "Ender Ingot",
+  "item.endshards.ender_armor.tooltip": "SET BONUS: Negates all fall damage",
   "item.endshards.ender_helmet": "Ender Helmet",
   "item.endshards.ender_chestplate": "Ender Chestplate",
   "item.endshards.ender_leggings": "Ender Leggings",

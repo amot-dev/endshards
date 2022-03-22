@@ -1,6 +1,7 @@
 package dev.amot.endshards;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvents;
@@ -13,13 +14,13 @@ public class EnderGear {
             "ender", ENDER_INGOT, new int[] {3,8,6,3}, 37, 15, 3F, 0F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
     );
     public static final ToolMaterial ENDER_TOOL_MATERIAL = new BaseToolMaterial(
-            ENDER_INGOT, 2032, 9F, 4, 15
+            ENDER_INGOT, 2032, 9F, MiningLevels.NETHERITE, 15
     );
 
-    public static final Item ENDER_HELMET = new ArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ENDER_CHESTPLATE = new ArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ENDER_LEGGINGS = new ArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
-    public static final Item ENDER_BOOTS = new ArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ENDER_HELMET = new EnderArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.HEAD, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ENDER_CHESTPLATE = new EnderArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.CHEST, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ENDER_LEGGINGS = new EnderArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final Item ENDER_BOOTS = new EnderArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
     public static final ToolItem ENDER_SWORD = new SwordItem(ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
     public static final ToolItem ENDER_PICKAXE = new CustomPickaxeItem(ENDER_TOOL_MATERIAL, 6, -2.8F, new Item.Settings().group(ItemGroup.TOOLS));

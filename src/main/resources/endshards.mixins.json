@@ -8,7 +8,8 @@
   "client": [
     "EndShardsMixin",
     "SwitchArmorMixin",
-    "SwitchElytraMixin"
+    "SwitchElytraMixin",
+    "EnderArmorAbilityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
