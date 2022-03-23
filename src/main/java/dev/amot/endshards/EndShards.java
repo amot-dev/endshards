@@ -24,6 +24,7 @@ public class EndShards implements ModInitializer {
 		Registry.register(Registry.ITEM, new Identifier(modid, "ender_shovel"), EnderGear.ENDER_SHOVEL);
 		Registry.register(Registry.ITEM, new Identifier(modid, "ender_axe"), EnderGear.ENDER_AXE);
 		Registry.register(Registry.ITEM, new Identifier(modid, "ender_hoe"), EnderGear.ENDER_HOE);
+		Registry.register(Registry.STATUS_EFFECT, new Identifier(modid, "ender_cooldown"), EnderGear.ENDER_COOLDOWN);
 
 		LOGGER.info("Mod loaded!");
 	}

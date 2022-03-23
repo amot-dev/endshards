@@ -2,10 +2,12 @@ package dev.amot.endshards;
 
 import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.EnderArmorItem;
+import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.BaseToolMaterial;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvents;
 
@@ -30,6 +32,8 @@ public class EnderGear {
     public static final ToolItem ENDER_SHOVEL = new ShovelItem(ENDER_TOOL_MATERIAL, 6.5F, -3.0F, new Item.Settings().group(ItemGroup.TOOLS));
     public static final ToolItem ENDER_AXE = new CustomAxeItem(ENDER_TOOL_MATERIAL, 10, -3.0F, new Item.Settings().group(ItemGroup.TOOLS));
     public static final ToolItem ENDER_HOE = new CustomHoeItem(ENDER_TOOL_MATERIAL, 1, 0F, new Item.Settings().group(ItemGroup.TOOLS));
+
+    public static final StatusEffect ENDER_COOLDOWN = new CooldownEffect();
 
     public static class CustomPickaxeItem extends PickaxeItem {
         public CustomPickaxeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
