@@ -28,7 +28,7 @@ public abstract class SwitchElytraMixin implements ISwitchElytra {
             user.equipStack(equipmentSlot, stackInHand.copy());
         }
         if (!world.isClient()) {
-            user.incrementStat(Stats.USED.getOrCreateStat(new ElytraItem(new Item.Settings())));
+            user.incrementStat(Stats.USED.getOrCreateStat(stackInHand.getItem()));
         }
         return TypedActionResult.success(stackInHand, world.isClient());
     }

@@ -5,20 +5,15 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ArmorItem.class)
 public abstract class SwitchArmorMixin implements ISwitchArmor {
-    @Shadow public abstract ArmorMaterial getMaterial();
-    @Shadow public abstract EquipmentSlot getSlotType();
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -34,7 +29,7 @@ public abstract class SwitchArmorMixin implements ISwitchArmor {
             user.equipStack(equipmentSlot, stackInHand.copy());
         }
         if (!world.isClient()) {
-            user.incrementStat(Stats.USED.getOrCreateStat(new ArmorItem(this.getMaterial(), this.getSlotType(), new Item.Settings())));
+            user.incrementStat(Stats.USED.getOrCreateStat(stackInHand.getItem()));
         }
         return TypedActionResult.success(stackInHand, world.isClient());
     }

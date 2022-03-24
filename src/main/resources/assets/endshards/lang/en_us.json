@@ -10,5 +10,6 @@
   "item.endshards.ender_shovel": "Ender Shovel",
   "item.endshards.ender_axe": "Ender Axe",
   "item.endshards.ender_hoe": "Ender Hoe",
-  "item.endshards.ender_armor.tooltip": "SET BONUS: Negates all fall damage"
+  "item.endshards.ender_armor.tooltip": "SET BONUS: Negates all fall damage",
+  "effect.endshards.ender_cooldown": "Ender Cooldown"
 }
