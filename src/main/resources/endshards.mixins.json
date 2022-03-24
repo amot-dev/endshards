@@ -4,12 +4,13 @@
   "package": "dev.amot.endshards.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-  ],
-  "client": [
-    "EndShardsMixin",
     "SwitchArmorMixin",
     "SwitchElytraMixin",
-    "EnderArmorAbilityMixin"
+    "EnderArmorAbilityMixin",
+    "EnderToolAbilityMixin"
+  ],
+  "client": [
+    "EndShardsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
