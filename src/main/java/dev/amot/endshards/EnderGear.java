@@ -3,10 +3,7 @@ package dev.amot.endshards;
 import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.EnderArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
-import dev.amot.endshards.tools.BaseToolMaterial;
-import dev.amot.endshards.tools.EnderAxeItem;
-import dev.amot.endshards.tools.EnderHoeItem;
-import dev.amot.endshards.tools.EnderPickaxeItem;
+import dev.amot.endshards.tools.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.entity.EquipmentSlot;
@@ -34,7 +31,7 @@ public class EnderGear {
     public static final Item ENDER_LEGGINGS = new EnderArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.LEGS, new Item.Settings().group(ItemGroup.COMBAT));
     public static final Item ENDER_BOOTS = new EnderArmorItem(ENDER_ARMOR_MATERIAL, EquipmentSlot.FEET, new Item.Settings().group(ItemGroup.COMBAT));
 
-    public static final ToolItem ENDER_SWORD = new SwordItem(ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
+    public static final ToolItem ENDER_SWORD = new EnderSwordItem(ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
     public static final ToolItem ENDER_PICKAXE = new EnderPickaxeItem(ENDER_TOOL_MATERIAL, 6, -2.8F, new Item.Settings().group(ItemGroup.TOOLS));
     public static final ToolItem ENDER_SHOVEL = new ShovelItem(ENDER_TOOL_MATERIAL, 6.5F, -3.0F, new Item.Settings().group(ItemGroup.TOOLS));
     public static final ToolItem ENDER_AXE = new EnderAxeItem(ENDER_TOOL_MATERIAL, 10, -3.0F, new Item.Settings().group(ItemGroup.TOOLS));
