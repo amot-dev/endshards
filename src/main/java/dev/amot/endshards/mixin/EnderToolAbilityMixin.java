@@ -46,7 +46,7 @@ public abstract class EnderToolAbilityMixin implements dev.amot.endshards.util.I
                     }
                     else {
                         player.increaseStat(Stats.PICKED_UP.getOrCreateStat(stackX.getItem()), stackX.getCount());
-                        player.playSound(SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 1F, 1F);
+                        player.playSound(SoundEvents.ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
                     }
                 });
                 state.onStacksDropped((ServerWorld)world, pos, stack);

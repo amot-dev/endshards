@@ -1,5 +1,6 @@
 package dev.amot.endshards.tools;
 
+import dev.amot.endshards.EndShards;
 import dev.amot.endshards.EnderGear;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 
@@ -31,14 +33,15 @@ public class EnderSwordItem extends SwordItem {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (!user.getActiveStatusEffects().containsKey(EnderGear.ENDER_COOLDOWN)) {
-            if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER){
-                if (!EnderSwordAbilityBannedEntities.contains(entity.getType())) {
-                    //TODO
-                    //spawn enderman particles at entity location
-                    //teleport entity to ~ ~-1000 ~
-                    //play enderman teleport noise
-                    user.addStatusEffect(new StatusEffectInstance(EnderGear.ENDER_COOLDOWN, 1200, 0, false, false, true));
+        if (!user.world.isClient()) {
+            if (!user.getActiveStatusEffects().containsKey(EnderGear.ENDER_COOLDOWN)) {
+                if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER) {
+                    if (!EnderSwordAbilityBannedEntities.contains(entity.getType())) {
+                        entity.setPos(entity.getX(), -1000F, entity.getZ());
+                        user.world.sendEntityStatus(entity, (byte)46);
+                        user.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
+                        user.addStatusEffect(new StatusEffectInstance(EnderGear.ENDER_COOLDOWN, 1200, 0, false, false, true));EndShards.LOGGER.info("Entity teleported");
+                    }
                 }
             }
         }
