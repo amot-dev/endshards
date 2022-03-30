@@ -5,9 +5,6 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-
-import static dev.amot.endshards.EnderGear.ENDER_INGOT;
 
 public class BaseArmorMaterial implements ArmorMaterial {
     private final String name;

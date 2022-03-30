@@ -1,7 +1,6 @@
 package dev.amot.endshards.mixin;
 
-import dev.amot.endshards.EndShards;
-import dev.amot.endshards.EnderGear;
+import dev.amot.endshards.EnderItems;
 import dev.amot.endshards.armor.EnderArmorItem;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -38,8 +37,8 @@ public abstract class EnderArmorAbilityMixin {
                 }
             }
             if (ender_armor_equipped_count == 4) {
-                if (!this.activeStatusEffects.containsKey(EnderGear.ENDER_COOLDOWN)) {
-                    this.addStatusEffect(new StatusEffectInstance(EnderGear.ENDER_COOLDOWN, 600, 0, false, false, true));
+                if (!this.activeStatusEffects.containsKey(EnderItems.ENDER_COOLDOWN)) {
+                    this.addStatusEffect(new StatusEffectInstance(EnderItems.ENDER_COOLDOWN, 600, 0, false, false, true));
                     cir.setReturnValue(false);
                 }
             }

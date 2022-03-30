@@ -10,7 +10,7 @@ public class EndShards implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		EnderGear.register();
+		EnderItems.register();
 		LOGGER.info("Mod loaded!");
 	}
 }

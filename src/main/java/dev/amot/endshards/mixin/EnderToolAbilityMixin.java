@@ -1,6 +1,6 @@
 package dev.amot.endshards.mixin;
 
-import dev.amot.endshards.EnderGear;
+import dev.amot.endshards.EnderItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.math.BlockPos;
@@ -36,7 +35,7 @@ public abstract class EnderToolAbilityMixin implements dev.amot.endshards.util.I
         player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
         player.addExhaustion(0.005F);
         Item itemInHand = player.getEquippedStack(EquipmentSlot.MAINHAND).getItem();
-        if (itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderGear.ENDER_TOOL_MATERIAL) {
+        if (itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderItems.ENDER_TOOL_MATERIAL) {
             if (world instanceof ServerWorld) {
                 getDroppedStacks(state, (ServerWorld)world, pos, blockEntity, player, stack).forEach((stackX) -> {
                     if (!player.getInventory().insertStack(stackX)) {

@@ -1,7 +1,6 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.EndShards;
-import dev.amot.endshards.EnderGear;
+import dev.amot.endshards.EnderItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
@@ -34,13 +33,13 @@ public class EnderSwordItem extends SwordItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (!user.world.isClient()) {
-            if (!user.getActiveStatusEffects().containsKey(EnderGear.ENDER_COOLDOWN)) {
+            if (!user.getActiveStatusEffects().containsKey(EnderItems.ENDER_COOLDOWN)) {
                 if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER) {
                     if (!EnderSwordAbilityBannedEntities.contains(entity.getType())) {
                         entity.setPos(entity.getX(), -1000F, entity.getZ());
                         user.world.sendEntityStatus(entity, (byte)46);
                         user.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
-                        user.addStatusEffect(new StatusEffectInstance(EnderGear.ENDER_COOLDOWN, 1200, 0, false, false, true));EndShards.LOGGER.info("Entity teleported");
+                        user.addStatusEffect(new StatusEffectInstance(EnderItems.ENDER_COOLDOWN, 1200, 0, false, false, true));
                     }
                 }
             }
