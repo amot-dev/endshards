@@ -1,21 +1,14 @@
 package dev.amot.endshards.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.*;
+import net.minecraft.sound.BlockSoundGroup;
 
-public class StrangeCrystal extends Block {
-    public StrangeCrystal(Settings settings) {
-        super(settings);
-    }
+public class StrangeCrystal extends AmethystClusterBlock {
+    private static final int height = 7;
+    private static final int offset = 3;
 
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext context) {
-        //TODO figure out the shape of this thing
-        return VoxelShapes.cuboid(0f, 0f, 0f, 1f, 1.0f, 0.5f);
+    public StrangeCrystal() {
+        super(height, offset, FabricBlockSettings.of(Material.AMETHYST).nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(4.0f).requiresTool());
     }
 }
