@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "dev.amot.endshards.EndShards"
+    ],
+    "client": [
+      "dev.amot.endshards.EndShardsClient"
     ]
   },
   "mixins": [

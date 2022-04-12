@@ -8,11 +8,13 @@ import dev.amot.endshards.tools.*;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.yarn.constants.MiningLevels;
+import net.minecraft.block.AmethystClusterBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -20,7 +22,8 @@ import net.minecraft.util.registry.Registry;
 import static dev.amot.endshards.EndShards.modid;
 
 public class EnderItems {
-    public static final Block STRANGE_CRYSTAL = new StrangeCrystal(FabricBlockSettings.of(Material.AMETHYST).strength(4.0f).requiresTool());
+    public static final Block STRANGE_CRYSTAL = new AmethystClusterBlock(7, 3,
+            FabricBlockSettings.of(Material.AMETHYST).nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(4.0f).requiresTool());
     public static final Item ENDSHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item ENDER_INGOT = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
 
@@ -47,7 +50,7 @@ public class EnderItems {
     public static void register(){
         Registry.register(Registry.BLOCK, new Identifier(modid, "strange_crystal"), STRANGE_CRYSTAL);
         Registry.register(Registry.ITEM, new Identifier(modid, "strange_crystal"),
-                new BlockItem(STRANGE_CRYSTAL, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS)));
+                new BlockItem(STRANGE_CRYSTAL, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
 
         Registry.register(Registry.ITEM, new Identifier(modid, "endshard"), ENDSHARD);
         Registry.register(Registry.ITEM, new Identifier(modid, "ender_ingot"), ENDER_INGOT);

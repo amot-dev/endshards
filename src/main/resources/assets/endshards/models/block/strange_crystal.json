@@ -1,6 +1,6 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cross",
   "textures": {
-    "all": "endshards:block/strange_crystal"
+    "cross": "endshards:block/strange_crystal"
   }
 }
