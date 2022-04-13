@@ -4,7 +4,10 @@ import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.EnderArmorItem;
 import dev.amot.endshards.blocks.StrangeCrystal;
 import dev.amot.endshards.effects.CooldownEffect;
+import dev.amot.endshards.features.StrangeCrystalFeature;
 import dev.amot.endshards.tools.*;
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.block.Block;
@@ -13,12 +16,23 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.ConstantIntProvider;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.placementmodifier.RandomOffsetPlacementModifier;
+import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier;
+
+import java.util.List;
 
 import static dev.amot.endshards.EndShards.modid;
 
 public class EnderItems {
     public static final Block STRANGE_CRYSTAL = new StrangeCrystal();
+    public static final Feature<DefaultFeatureConfig> STRANGE_CRYSTAL_FEATURE = new StrangeCrystalFeature(DefaultFeatureConfig.CODEC);
+
     public static final Item ENDSHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item ENDER_INGOT = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
 
@@ -46,6 +60,19 @@ public class EnderItems {
         Registry.register(Registry.BLOCK, new Identifier(modid, "strange_crystal"), STRANGE_CRYSTAL);
         Registry.register(Registry.ITEM, new Identifier(modid, "strange_crystal"),
                 new BlockItem(STRANGE_CRYSTAL, new FabricItemSettings().group(ItemGroup.DECORATIONS)));
+
+        Registry.register(Registry.FEATURE, new Identifier(modid, "strange_crystal_feature"), STRANGE_CRYSTAL_FEATURE);
+        ConfiguredFeature<?, ?> STRANGE_CRYSTAL_FEATURE_CONFIGURED = new ConfiguredFeature<>(STRANGE_CRYSTAL_FEATURE, DefaultFeatureConfig.INSTANCE);
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(modid, "strange_crystal_feature"), STRANGE_CRYSTAL_FEATURE_CONFIGURED);
+        RegistryEntry<ConfiguredFeature<?, ?>> STRANGE_CRYSTAL_FEATURE_ENTRY = BuiltinRegistries.CONFIGURED_FEATURE
+                .getOrCreateEntry(BuiltinRegistries.CONFIGURED_FEATURE.getKey(STRANGE_CRYSTAL_FEATURE_CONFIGURED).orElseThrow());
+        PlacedFeature STRANGE_CRYSTAL_FEATURE_PLACED = new PlacedFeature(STRANGE_CRYSTAL_FEATURE_ENTRY, List.of(
+                RandomOffsetPlacementModifier.of(ConstantIntProvider.create(16), ConstantIntProvider.create(0)),
+                RarityFilterPlacementModifier.of(1)
+        ));
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(modid, "strange_crystal_feature"), STRANGE_CRYSTAL_FEATURE_PLACED);
+
+        BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, BuiltinRegistries.PLACED_FEATURE.getKey(STRANGE_CRYSTAL_FEATURE_PLACED).orElseThrow());
 
         Registry.register(Registry.ITEM, new Identifier(modid, "endshard"), ENDSHARD);
         Registry.register(Registry.ITEM, new Identifier(modid, "ender_ingot"), ENDER_INGOT);
