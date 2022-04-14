@@ -1,4 +1,5 @@
 {
+  "block.endshards.strange_crystal": "Strange Crystal",
   "item.endshards.endshard": "End Shard",
   "item.endshards.ender_ingot": "Ender Ingot",
   "item.endshards.ender_helmet": "Ender Helmet",
@@ -11,5 +12,7 @@
   "item.endshards.ender_axe": "Ender Axe",
   "item.endshards.ender_hoe": "Ender Hoe",
   "item.endshards.ender_armor.tooltip": "SET BONUS: Negates all fall damage",
+  "item.endshards.ender_sword.tooltip": "RIGHT CLICK: Warps enemies to the void",
+  "item.endshards.ender_tool.tooltip": "Warps mined blocks to your inventory",
   "effect.endshards.ender_cooldown": "Ender Cooldown"
 }

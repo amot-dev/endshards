@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "endshards:block/strange_crystal",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "endshards:block/strange_crystal",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "endshards:block/strange_crystal",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "endshards:block/strange_crystal",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "endshards:block/strange_crystal"
+    },
+    "facing=west": {
+      "model": "endshards:block/strange_crystal",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

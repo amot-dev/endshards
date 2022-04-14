@@ -1,6 +1,5 @@
 package dev.amot.endshards.mixin;
 
-import dev.amot.endshards.EndShards;
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

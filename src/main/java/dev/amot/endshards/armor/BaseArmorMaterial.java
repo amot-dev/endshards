@@ -5,31 +5,28 @@ import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-
-import static dev.amot.endshards.EnderGear.ENDER_INGOT;
 
 public class BaseArmorMaterial implements ArmorMaterial {
     private final String name;
-    private final Item repair_ingredient;
-    private final int[] protection_values;
-    private final int[] base_durability = {13,15,16,11};
-    private final int durability_multiplier;
+    private final Item repairIngredient;
+    private final int[] protectionValues;
+    private final int[] baseDurability = {13,15,16,11};
+    private final int durabilityMultiplier;
     private final int enchantability;
     private final float toughness;
-    private final float knockback_resistance;
-    private final SoundEvent equip_sound;
+    private final float knockbackResistance;
+    private final SoundEvent equipSound;
 
-    public BaseArmorMaterial(String name, Item repair_ingredient, int[] protection_values, int durability_multiplier,
-                             int enchantability, float toughness, float knockback_resistance, SoundEvent equip_sound){
+    public BaseArmorMaterial(String name, Item repairIngredient, int[] protectionValues, int durabilityMultiplier,
+                             int enchantability, float toughness, float knockbackResistance, SoundEvent equipSound){
         this.name = name;
-        this.repair_ingredient = repair_ingredient;
-        this.protection_values = protection_values;
-        this.durability_multiplier = durability_multiplier;
+        this.repairIngredient = repairIngredient;
+        this.protectionValues = protectionValues;
+        this.durabilityMultiplier = durabilityMultiplier;
         this.enchantability = enchantability;
         this.toughness = toughness;
-        this.knockback_resistance = knockback_resistance;
-        this.equip_sound = equip_sound;
+        this.knockbackResistance = knockbackResistance;
+        this.equipSound = equipSound;
     }
 
     @Override
@@ -39,18 +36,18 @@ public class BaseArmorMaterial implements ArmorMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(repair_ingredient);
+        return Ingredient.ofItems(repairIngredient);
     }
 
     @Override
     public int getProtectionAmount(EquipmentSlot slot) {
-        return protection_values[slot.getEntitySlotId()];
+        return protectionValues[slot.getEntitySlotId()];
     }
 
     @Override
     public int getDurability(EquipmentSlot slot) {
 
-        return base_durability[slot.getEntitySlotId()] * durability_multiplier;
+        return baseDurability[slot.getEntitySlotId()] * durabilityMultiplier;
     }
 
     @Override
@@ -65,11 +62,11 @@ public class BaseArmorMaterial implements ArmorMaterial {
 
     @Override
     public float getKnockbackResistance() {
-        return knockback_resistance;
+        return knockbackResistance;
     }
 
     @Override
     public SoundEvent getEquipSound() {
-        return equip_sound;
+        return equipSound;
     }
 }
