@@ -8,6 +8,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -31,24 +32,26 @@ public class EnderSwordItem extends SwordItem {
     private final List<EntityType<?>> EnderSwordAbilityBannedEntities = Arrays.asList(
             EntityType.ELDER_GUARDIAN,
             EntityType.ENDER_DRAGON,
+            EntityType.ENDERMAN,
+            EntityType.ENDERMITE,
             EntityType.RAVAGER,
             EntityType.SHULKER,
           //EntityType.WARDEN,
             EntityType.WITHER
             );
 
+
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (!user.world.isClient()) {
+        if (user.world instanceof ServerWorld) {
             if (!user.getActiveStatusEffects().containsKey(EnderItems.ENDER_COOLDOWN)) {
-                if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER) {
-                    if (!EnderSwordAbilityBannedEntities.contains(entity.getType())) {
-                        entity.setPos(entity.getX(), -1000F, entity.getZ());
-                        user.world.sendEntityStatus(entity, (byte)46);
-                        user.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
-                        user.addStatusEffect(new StatusEffectInstance(EnderItems.ENDER_COOLDOWN, 1200, 0, false, false, true));
-                    }
+                if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !EnderSwordAbilityBannedEntities.contains(entity.getType())) {
+                    entity.setPos(entity.getX(), -1000F, entity.getZ());
+                    user.world.sendEntityStatus(entity, (byte)46);
+                    user.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
+                    user.addStatusEffect(new StatusEffectInstance(EnderItems.ENDER_COOLDOWN, 1200, 0, false, false, true));
                 }
+                //TODO: Play a teleport fail sound if entity does not match parameters
             }
         }
         return ActionResult.PASS;

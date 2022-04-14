@@ -28,15 +28,15 @@ public abstract class EnderArmorAbilityMixin {
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void injectDamageMethod(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (source.isFromFalling()){
-            int ender_armor_equipped_count = 0;
+            int enderArmorEquippedCount = 0;
             for (EquipmentSlot equipmentSlot : EquipmentSlot.values()){
                 if (equipmentSlot.getType() == EquipmentSlot.Type.ARMOR) {
                     if (this.getEquippedStack(equipmentSlot).getItem().getClass() == EnderArmorItem.class) {
-                        ender_armor_equipped_count++;
+                        enderArmorEquippedCount++;
                     }
                 }
             }
-            if (ender_armor_equipped_count == 4) {
+            if (enderArmorEquippedCount == 4) {
                 if (!this.activeStatusEffects.containsKey(EnderItems.ENDER_COOLDOWN)) {
                     this.addStatusEffect(new StatusEffectInstance(EnderItems.ENDER_COOLDOWN, 600, 0, false, false, true));
                     cir.setReturnValue(false);

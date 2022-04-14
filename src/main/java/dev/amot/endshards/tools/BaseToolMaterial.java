@@ -4,12 +4,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
-public record BaseToolMaterial(Item repair_ingredient, int durability, float mining_speed_multiplier,
-                               int mining_level, int enchantability) implements ToolMaterial {
+public record BaseToolMaterial(Item repairIngredient, int durability, float miningSpeedMultiplier,
+                               int miningLevel, int enchantability) implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return Ingredient.ofItems(repair_ingredient);
+        return Ingredient.ofItems(repairIngredient);
     }
 
     @Override
@@ -19,12 +19,12 @@ public record BaseToolMaterial(Item repair_ingredient, int durability, float min
 
     @Override
     public float getMiningSpeedMultiplier() {
-        return mining_speed_multiplier;
+        return miningSpeedMultiplier;
     }
 
     @Override
     public int getMiningLevel() {
-        return mining_level;
+        return miningLevel;
     }
 
     @Override

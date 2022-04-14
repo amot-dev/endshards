@@ -22,8 +22,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 public class StrangeCrystal extends AmethystClusterBlock {
-    private static final int warp_range = 16;
-    private static final int warp_attempts = 16;
+    private static final int warpRange = 16;
+    private static final int warpAttempts = 16;
     private static final int height = 7;
     private static final int offset = 3;
 
@@ -38,11 +38,11 @@ public class StrangeCrystal extends AmethystClusterBlock {
 
         Random random = new Random();
         boolean blockDropped = false;
-        for (int i = 0; i < warp_attempts; ++i) {
+        for (int i = 0; i < warpAttempts; ++i) {
             BlockPos randomPos = new BlockPos(
-                    pos.getX() + (random.nextDouble() - 0.5) * warp_range,
-                    MathHelper.clamp(pos.getY() + (random.nextDouble() - 0.5) * warp_range, world.getBottomY(), world.getTopY()),
-                    pos.getZ() + (random.nextDouble() - 0.5) * warp_range
+                    pos.getX() + (random.nextDouble() - 0.5) * warpRange,
+                    MathHelper.clamp(pos.getY() + (random.nextDouble() - 0.5) * warpRange, world.getBottomY(), world.getTopY()),
+                    pos.getZ() + (random.nextDouble() - 0.5) * warpRange
             );
             if (world.getBlockState(randomPos).getBlock() == Blocks.AIR){
                 if (world.getBlockState(randomPos.offset(Direction.DOWN)).getBlock() != Blocks.AIR){
