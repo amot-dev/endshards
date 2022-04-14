@@ -1,6 +1,7 @@
 package dev.amot.endshards.tools;
 
 import dev.amot.endshards.EnderItems;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
@@ -8,8 +9,12 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+import net.minecraft.world.World;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +22,10 @@ import java.util.List;
 public class EnderSwordItem extends SwordItem {
     public EnderSwordItem() {
         super(EnderItems.ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
+    }
+    @Override
+    public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
+        tooltip.add( new TranslatableText("item.endshards.ender_sword.tooltip").formatted(Formatting.DARK_BLUE) );
     }
 
     private final List<EntityType<?>> EnderSwordAbilityBannedEntities = Arrays.asList(
