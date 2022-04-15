@@ -1,13 +1,16 @@
 package dev.amot.endshards.tools;
 
 import dev.amot.endshards.EnderItems;
+import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -40,7 +43,6 @@ public class EnderSwordItem extends SwordItem {
             EntityType.WITHER
             );
 
-
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
@@ -48,8 +50,13 @@ public class EnderSwordItem extends SwordItem {
                 if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !EnderSwordAbilityBannedEntities.contains(entity.getType())) {
                     entity.setPos(entity.getX(), -1000F, entity.getZ());
                     user.world.sendEntityStatus(entity, (byte)46);
+                    stack.damage(1, user, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
                     user.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
-                    user.addStatusEffect(new StatusEffectInstance(EnderItems.ENDER_COOLDOWN, 1200, 0, false, false, true));
+                    user.addStatusEffect(new StatusEffectInstance(
+                            EnderItems.ENDER_COOLDOWN, EnderItems.ENDER_COOLDOWN_DURATION_SWORD, 0, false, false, true)
+                    );
+
+                    if (user instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_SWORD_ABILITY_USED.trigger(serverUser);
                 }
                 //TODO: Play a teleport fail sound if entity does not match parameters
             }

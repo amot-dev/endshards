@@ -1,0 +1,19 @@
+{
+  "parent": "endshards:endshard",
+  "display": {
+    "icon": {
+      "item": "endshards:ender_chestplate"
+    },
+    "title": "Humpty Dumpty",
+    "description": "Have a great fall while wearing Ender Armor",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ender_armor_fall": {
+      "trigger": "endshards:ender_armor_ability_critical_damage"
+    }
+  }
+}

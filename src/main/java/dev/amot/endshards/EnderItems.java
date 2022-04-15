@@ -56,6 +56,8 @@ public class EnderItems {
     public static final ToolItem ENDER_AXE = new EnderAxeItem();
     public static final ToolItem ENDER_HOE = new EnderHoeItem();
 
+    public static final int ENDER_COOLDOWN_DURATION_ARMOR = 600;
+    public static final int ENDER_COOLDOWN_DURATION_SWORD = 1200;
     public static final StatusEffect ENDER_COOLDOWN = new CooldownEffect();
 
     public static void register(){
