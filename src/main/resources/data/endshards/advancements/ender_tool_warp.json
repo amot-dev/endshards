@@ -1,0 +1,19 @@
+{
+  "parent": "endshards:endshard",
+  "display": {
+    "icon": {
+      "item": "endshards:ender_pickaxe"
+    },
+    "title": "Beam me up, Scotty",
+    "description": "Have a block be warped to your inventory",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ender_tool_warp": {
+      "trigger": "endshards:ender_tool_ability"
+    }
+  }
+}

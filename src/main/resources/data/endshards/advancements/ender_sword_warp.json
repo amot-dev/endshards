@@ -1,0 +1,19 @@
+{
+  "parent": "endshards:endshard",
+  "display": {
+    "icon": {
+      "item": "endshards:ender_sword"
+    },
+    "title": "Banished to the Shadow Realm",
+    "description": "Send an enemy to the void",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ender_sword_warp": {
+      "trigger": "endshards:ender_sword_ability"
+    }
+  }
+}

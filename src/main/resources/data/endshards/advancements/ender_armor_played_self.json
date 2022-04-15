@@ -1,0 +1,19 @@
+{
+  "parent": "endshards:ender_sword_warp",
+  "display": {
+    "icon": {
+      "item": "endshards:ender_boots"
+    },
+    "title": "Congrats, you played yourself",
+    "description": "Warp a mob right before taking preventable critical fall damage",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ender_armor_played_self": {
+      "trigger": "endshards:ender_cooldown_fail"
+    }
+  }
+}

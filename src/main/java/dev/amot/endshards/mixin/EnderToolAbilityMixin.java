@@ -1,6 +1,7 @@
 package dev.amot.endshards.mixin;
 
 import dev.amot.endshards.EnderItems;
+import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -10,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -50,6 +52,7 @@ public abstract class EnderToolAbilityMixin implements dev.amot.endshards.util.I
                         //TODO: Decide whether to increase pick up stats for inventory warps (note: this line only works on client)
                         //player.increaseStat(Stats.PICKED_UP.getOrCreateStat(stackX.getItem()), stackX.getCount());
                         player.playSound(SoundEvents.ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
+                        if (player instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_TOOL_ABILITY_USED.trigger(serverUser);
                     }
                 });
                 state.onStacksDropped((ServerWorld)world, pos, stack);

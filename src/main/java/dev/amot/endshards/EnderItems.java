@@ -2,6 +2,7 @@ package dev.amot.endshards;
 
 import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.EnderArmorItem;
+import dev.amot.endshards.blocks.EnderBlock;
 import dev.amot.endshards.blocks.StrangeCrystal;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.features.StrangeCrystalFeature;
@@ -35,6 +36,7 @@ public class EnderItems {
 
     public static final Item ENDSHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item ENDER_INGOT = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
+    public static final Block ENDER_BLOCK = new EnderBlock();
 
     public static final ArmorMaterial ENDER_ARMOR_MATERIAL = new BaseArmorMaterial(
             "ender", ENDER_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
@@ -54,6 +56,8 @@ public class EnderItems {
     public static final ToolItem ENDER_AXE = new EnderAxeItem();
     public static final ToolItem ENDER_HOE = new EnderHoeItem();
 
+    public static final int ENDER_COOLDOWN_DURATION_ARMOR = 600;
+    public static final int ENDER_COOLDOWN_DURATION_SWORD = 1200;
     public static final StatusEffect ENDER_COOLDOWN = new CooldownEffect();
 
     public static void register(){
@@ -72,11 +76,13 @@ public class EnderItems {
                 RarityFilterPlacementModifier.of(1)
         ));
         Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(modid, "strange_crystal_feature"), STRANGE_CRYSTAL_FEATURE_PLACED);
-
         BiomeModifications.addFeature(BiomeSelectors.foundInTheEnd(), GenerationStep.Feature.UNDERGROUND_ORES, BuiltinRegistries.PLACED_FEATURE.getKey(STRANGE_CRYSTAL_FEATURE_PLACED).orElseThrow());
 
         Registry.register(Registry.ITEM, new Identifier(modid, "endshard"), ENDSHARD);
         Registry.register(Registry.ITEM, new Identifier(modid, "ender_ingot"), ENDER_INGOT);
+        Registry.register(Registry.BLOCK, new Identifier(modid, "ender_block"), ENDER_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(modid, "ender_block"),
+                new BlockItem(ENDER_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS)));
 
         Registry.register(Registry.ITEM, new Identifier(modid, "ender_helmet"), ENDER_HELMET);
         Registry.register(Registry.ITEM, new Identifier(modid, "ender_chestplate"), ENDER_CHESTPLATE);

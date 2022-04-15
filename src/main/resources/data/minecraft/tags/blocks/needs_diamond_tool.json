@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "endshards:strange_crystal"
+    "endshards:strange_crystal",
+    "endshards:ender_block"
   ]
 }
