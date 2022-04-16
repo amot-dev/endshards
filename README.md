@@ -1,6 +1,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/asd1o1/endshards/build)
-![Endshards Version](https://img.shields.io/github/v/release/asd1o1/endshards)
+![Endshards Version](https://img.shields.io/github/v/tag/asd1o1/endshards?include_prereleases)
 ![Minecraft Version](https://img.shields.io/badge/Minecraft-1.18.2-blue)
 ![FabricMC Version](https://img.shields.io/badge/FabricMC-0.48.0%2B1.18.2-blue)
 # End Shards
