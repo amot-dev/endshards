@@ -39,7 +39,7 @@ public class EnderItems {
     public static final Block ENDER_BLOCK = new EnderBlock();
 
     public static final ArmorMaterial ENDER_ARMOR_MATERIAL = new BaseArmorMaterial(
-            "ender", ENDER_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
+            "ender", ENDER_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
     );
     public static final ToolMaterial ENDER_TOOL_MATERIAL = new BaseToolMaterial(
             ENDER_INGOT, 2032, 9F, MiningLevels.NETHERITE, 15

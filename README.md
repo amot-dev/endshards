@@ -8,12 +8,12 @@
 A mod to expand the late game gear progression to a trio of equal sets, followed by a final, ultimate set of gear. More info on the [wiki](https://github.com/asd1o1/endshards/wiki).
 
 ## Downloads
-Will soon be available on Modrinth and Curseforge.
+Available on GitHub. Will soon be available on Modrinth and Curseforge.
 
 ## Installation
  - Install Fabric for the desired Minecraft version
  - Install the latest Fabric API version
- - Copy the jar file into `.minecraft/mods`
+ - Copy the endshards jar file into `.minecraft/mods`
 
 
 

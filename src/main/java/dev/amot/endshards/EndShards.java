@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class EndShards implements ModInitializer {
 	public static final String modid = "endshards";
-	public static final Logger LOGGER = LoggerFactory.getLogger("endshards");
+	public static final Logger LOGGER = LoggerFactory.getLogger("Endshards");
 
 	@Override
 	public void onInitialize() {
