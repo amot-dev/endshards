@@ -1,6 +1,5 @@
 package dev.amot.endshards.effects;
 
-import dev.amot.endshards.EndShards;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 

@@ -32,7 +32,7 @@ public class EnderSwordItem extends SwordItem {
         tooltip.add( new TranslatableText("item.endshards.ender_sword.tooltip").formatted(Formatting.DARK_BLUE) );
     }
 
-    private final List<EntityType<?>> EnderSwordAbilityBannedEntities = Arrays.asList(
+    private final List<EntityType<?>> AbilityBannedEntities = Arrays.asList(
             EntityType.ELDER_GUARDIAN,
             EntityType.ENDER_DRAGON,
             EntityType.ENDERMAN,
@@ -47,7 +47,7 @@ public class EnderSwordItem extends SwordItem {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
             if (!user.getActiveStatusEffects().containsKey(EnderItems.ENDER_COOLDOWN)) {
-                if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !EnderSwordAbilityBannedEntities.contains(entity.getType())) {
+                if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !AbilityBannedEntities.contains(entity.getType())) {
                     entity.setPos(entity.getX(), -1000F, entity.getZ());
                     user.world.sendEntityStatus(entity, (byte)46);
                     stack.damage(1, user, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));

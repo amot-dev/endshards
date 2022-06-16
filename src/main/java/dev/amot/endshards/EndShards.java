@@ -13,6 +13,7 @@ public class EndShards implements ModInitializer {
 	public void onInitialize() {
 		EndShardsCriteria.init();
 		EnderItems.register();
+		NetheriteItems.register();
 		LOGGER.info("Mod loaded!");
 	}
 }

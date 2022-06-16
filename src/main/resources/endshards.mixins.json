@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "EnderArmorAbilityMixin",
-    "EnderToolAbilityMixin",
+    "ToolAbilityMixin",
     "KnockbackResistanceMixin",
     "SwitchArmorMixin",
     "SwitchElytraMixin"

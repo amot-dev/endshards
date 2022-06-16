@@ -7,10 +7,10 @@ import dev.amot.endshards.blocks.StrangeCrystal;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.features.StrangeCrystalFeature;
 import dev.amot.endshards.tools.*;
+import dev.amot.endshards.util.EndShardsMiningLevels;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.fabricmc.yarn.constants.MiningLevels;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
@@ -39,10 +39,10 @@ public class EnderItems {
     public static final Block ENDER_BLOCK = new EnderBlock();
 
     public static final ArmorMaterial ENDER_ARMOR_MATERIAL = new BaseArmorMaterial(
-            "ender", ENDER_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
+            "ender", EnderItems.ENDER_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
     );
     public static final ToolMaterial ENDER_TOOL_MATERIAL = new BaseToolMaterial(
-            ENDER_INGOT, 2032, 9F, MiningLevels.NETHERITE, 15
+            EnderItems.ENDER_INGOT, 2032, 9.0F, EndShardsMiningLevels.ENDER, -1.0F, 15
     );
 
     public static final Item ENDER_HELMET = new EnderArmorItem(EquipmentSlot.HEAD);

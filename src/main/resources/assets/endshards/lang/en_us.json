@@ -15,5 +15,10 @@
   "item.endshards.ender_armor.tooltip": "SET BONUS: Negates all fall damage",
   "item.endshards.ender_sword.tooltip": "RIGHT CLICK: Warps enemies to the void",
   "item.endshards.ender_tool.tooltip": "Warps mined blocks to your inventory",
-  "effect.endshards.ender_cooldown": "Ender Cooldown"
+  "effect.endshards.ender_cooldown": "Ender Cooldown",
+
+  "item.endshards.netherite_armor.tooltip": "SET BONUS: Provides resistance on damage",
+  "item.endshards.netherite_sword.tooltip": "RIGHT CLICK: Set nearby enemies on fire",
+  "item.endshards.netherite_tool.tooltip": "Provides xp when mining regular blocks",
+  "effect.endshards.netherite_cooldown": "Netherite Cooldown"
 }
