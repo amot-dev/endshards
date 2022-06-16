@@ -22,7 +22,7 @@ public class NetheriteItems {
     //public static final ToolItem NETHERITE_SWORD = new NetheriteSwordItem();
     //public static final ToolItem NETHERITE_PICKAXE = new NetheritePickaxeItem();
     //public static final ToolItem NETHERITE_SHOVEL = new NetheriteShovelItem();
-    public static final ToolItem NETHERITE_AXE = new NetheriteAxeItem();
+    // public static final ToolItem NETHERITE_AXE = new NetheriteAxeItem();
     //public static final ToolItem NETHERITE_HOE = new NetheriteHoeItem();
 
     public static final int NETHERITE_COOLDOWN_DURATION_ARMOR = 1200;
@@ -33,12 +33,12 @@ public class NetheriteItems {
         //Registry.register(Registry.ITEM, new Identifier("minecraft", "netherite_sword"), NETHERITE_SWORD);
         //Registry.register(Registry.ITEM, new Identifier("minecraft", "netherite_pickaxe"), NETHERITE_PICKAXE);
         //Registry.register(Registry.ITEM, new Identifier("minecraft", "netherite_shovel"), NETHERITE_SHOVEL);
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_AXE)),
-                Registry.ITEM.getKey(Items.NETHERITE_AXE).get(),
-                Items.NETHERITE_AXE,
-                Lifecycle.stable()
-        );
+        //((MutableRegistry<Item>)Registry.ITEM).replace(
+        //        OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_AXE)),
+        //        Registry.ITEM.getKey(Items.NETHERITE_AXE).orElse(null),
+        //        Items.NETHERITE_AXE,
+        //        Lifecycle.stable()
+        //);
         //Registry.register(Registry.ITEM, new Identifier("minecraft", "netherite_hoe"), NETHERITE_HOE);
 
         Registry.register(Registry.STATUS_EFFECT, new Identifier(modid, "netherite_cooldown"), NETHERITE_COOLDOWN);

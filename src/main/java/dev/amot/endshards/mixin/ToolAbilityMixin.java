@@ -61,7 +61,7 @@ public abstract class ToolAbilityMixin implements dev.amot.endshards.util.IEnder
                         if (player instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_TOOL_ABILITY_USED.trigger(serverUser);
                     }
                 });
-                state.onStacksDropped((ServerWorld)world, pos, stack);
+                state.onStacksDropped((ServerWorld)world, pos, stack, true);
             }
             ci.cancel();
         }

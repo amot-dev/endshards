@@ -25,7 +25,7 @@ public abstract class EnderArmorAbilityMixin {
     @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot slot);
     @Shadow @Final private Map<StatusEffect, StatusEffectInstance> activeStatusEffects;
     @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
-    @Shadow protected abstract float applyEnchantmentsToDamage(DamageSource source, float amount);
+    @Shadow protected abstract float modifyAppliedDamage(DamageSource source, float amount);
 
     private int enderArmorEquippedCount = 0;
 
@@ -46,10 +46,8 @@ public abstract class EnderArmorAbilityMixin {
                             EnderItems.ENDER_COOLDOWN, EnderItems.ENDER_COOLDOWN_DURATION_ARMOR, 0, false, false, true)
                     );
 
-                    float totalDamage = this.applyEnchantmentsToDamage(source, amount);
+                    float totalDamage = this.modifyAppliedDamage(source, amount);
                     LivingEntity thisEntity = (LivingEntity)(Object)this;
-                    EndShards.LOGGER.info("Damage before: " + amount);
-                    EndShards.LOGGER.info("Damage after: " + totalDamage);
                     if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer){
                         EndShardsCriteria.ENDER_ARMOR_ABILITY_USED_CRITICAL_DAMAGE.trigger(serverPlayer);
                     }
@@ -65,7 +63,7 @@ public abstract class EnderArmorAbilityMixin {
         if (cir.getReturnValue() && source.isFromFalling() && enderArmorEquippedCount == 4){
             if (this.activeStatusEffects.containsKey(EnderItems.ENDER_COOLDOWN)){
                 if (this.activeStatusEffects.get(EnderItems.ENDER_COOLDOWN).getDuration() >= EnderItems.ENDER_COOLDOWN_DURATION_SWORD - 20) {
-                    float totalDamage = this.applyEnchantmentsToDamage(source, amount);
+                    float totalDamage = this.modifyAppliedDamage(source, amount);
                     LivingEntity thisEntity = (LivingEntity) (Object) this;
                     if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer) {
                         EndShardsCriteria.ENDER_COOLDOWN_FAIL.trigger(serverPlayer);

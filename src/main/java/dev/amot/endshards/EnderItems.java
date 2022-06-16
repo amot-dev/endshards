@@ -70,7 +70,7 @@ public class EnderItems {
         ConfiguredFeature<?, ?> STRANGE_CRYSTAL_FEATURE_CONFIGURED = new ConfiguredFeature<>(STRANGE_CRYSTAL_FEATURE, DefaultFeatureConfig.INSTANCE);
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(modid, "strange_crystal_feature"), STRANGE_CRYSTAL_FEATURE_CONFIGURED);
         RegistryEntry<ConfiguredFeature<?, ?>> STRANGE_CRYSTAL_FEATURE_ENTRY = BuiltinRegistries.CONFIGURED_FEATURE
-                .getOrCreateEntry(BuiltinRegistries.CONFIGURED_FEATURE.getKey(STRANGE_CRYSTAL_FEATURE_CONFIGURED).orElseThrow());
+                .entryOf(BuiltinRegistries.CONFIGURED_FEATURE.getKey(STRANGE_CRYSTAL_FEATURE_CONFIGURED).orElse(null));
         PlacedFeature STRANGE_CRYSTAL_FEATURE_PLACED = new PlacedFeature(STRANGE_CRYSTAL_FEATURE_ENTRY, List.of(
                 RandomOffsetPlacementModifier.of(ConstantIntProvider.create(16), ConstantIntProvider.create(0)),
                 RarityFilterPlacementModifier.of(1)

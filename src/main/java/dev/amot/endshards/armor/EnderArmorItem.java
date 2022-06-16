@@ -5,7 +5,6 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
@@ -17,6 +16,6 @@ public class EnderArmorItem extends ArmorItem {
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
-        tooltip.add(new TranslatableText("item.endshards.ender_armor.tooltip").formatted(Formatting.DARK_BLUE));
+        tooltip.add(Text.translatable("item.endshards.ender_armor.tooltip").formatted(Formatting.DARK_BLUE));
     }
 }
