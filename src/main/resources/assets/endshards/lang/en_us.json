@@ -19,6 +19,6 @@
 
   "item.endshards.netherite_armor.tooltip": "SET BONUS: Provides resistance on damage",
   "item.endshards.netherite_sword.tooltip": "RIGHT CLICK: Set nearby enemies on fire",
-  "item.endshards.netherite_tool.tooltip": "Provides xp when mining regular blocks",
+  "item.endshards.netherite_tool.tooltip": "Autosmelts mined blocks",
   "effect.endshards.netherite_cooldown": "Netherite Cooldown"
 }

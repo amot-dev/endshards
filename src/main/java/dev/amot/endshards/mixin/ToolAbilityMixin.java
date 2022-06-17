@@ -1,6 +1,7 @@
 package dev.amot.endshards.mixin;
 
 import dev.amot.endshards.EnderItems;
+import dev.amot.endshards.NetheriteItems;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -71,7 +72,7 @@ public abstract class ToolAbilityMixin implements dev.amot.endshards.util.IEnder
     private static void injectGetDroppedStacksMethod(BlockState state, ServerWorld world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
         List<ItemStack> smeltedDrops = new ArrayList<>();
         List<ItemStack> unsmeltedDrops = cir.getReturnValue();
-        if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == ToolMaterials.NETHERITE) {
+        if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == NetheriteItems.NETHERITE_TOOL_MATERIAL) {
             for (ItemStack unsmeltedDrop : unsmeltedDrops) {
                 Optional<SmeltingRecipe> recipe = world.getRecipeManager().listAllOfType(RecipeType.SMELTING).stream().filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(unsmeltedDrop))).findFirst();
                 if (recipe.isPresent()) {

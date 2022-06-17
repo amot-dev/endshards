@@ -5,10 +5,11 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "EnderArmorAbilityMixin",
-    "ToolAbilityMixin",
     "KnockbackResistanceMixin",
+    "RegistryReplaceMixin",
     "SwitchArmorMixin",
-    "SwitchElytraMixin"
+    "SwitchElytraMixin",
+    "ToolAbilityMixin"
   ],
   "client": [
     "EndShardsMixin"

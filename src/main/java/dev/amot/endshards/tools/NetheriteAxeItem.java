@@ -13,7 +13,6 @@ import java.util.List;
 
 public class NetheriteAxeItem extends AxeItem {
     public NetheriteAxeItem() {
-        //super(NetheriteItems.NETHERITE_TOOL_MATERIAL, 5.0F, -3.0F, new Settings().group(ItemGroup.TOOLS));
         super(NetheriteItems.NETHERITE_TOOL_MATERIAL, 50.0F, -3.0F, new Settings().group(ItemGroup.TOOLS));
     }
     @Override
