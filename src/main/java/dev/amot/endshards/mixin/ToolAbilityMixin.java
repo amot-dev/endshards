@@ -44,7 +44,7 @@ public abstract class ToolAbilityMixin implements dev.amot.endshards.util.IEnder
     @Inject(method = "afterBreak", at = @At("HEAD"), cancellable = true)
     public void injectAfterBreakMethod(World world, PlayerEntity player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
         Item itemInHand = player.getEquippedStack(EquipmentSlot.MAINHAND).getItem();
-        if (itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderItems.ENDER_TOOL_MATERIAL) {
+        if (itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderItems.ENDER_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
             player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
             player.addExhaustion(0.005F);
 
@@ -72,7 +72,7 @@ public abstract class ToolAbilityMixin implements dev.amot.endshards.util.IEnder
     private static void injectGetDroppedStacksMethod(BlockState state, ServerWorld world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
         List<ItemStack> smeltedDrops = new ArrayList<>();
         List<ItemStack> unsmeltedDrops = cir.getReturnValue();
-        if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == NetheriteItems.NETHERITE_TOOL_MATERIAL) {
+        if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == NetheriteItems.NETHERITE_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
             for (ItemStack unsmeltedDrop : unsmeltedDrops) {
                 Optional<SmeltingRecipe> recipe = world.getRecipeManager().listAllOfType(RecipeType.SMELTING).stream().filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(unsmeltedDrop))).findFirst();
                 if (recipe.isPresent()) {
