@@ -13,10 +13,10 @@ import java.util.List;
 
 public class NetheriteAxeItem extends AxeItem {
     public NetheriteAxeItem() {
-        super(NetheriteItems.NETHERITE_TOOL_MATERIAL, 50.0F, -3.0F, new Settings().group(ItemGroup.TOOLS));
+        super(NetheriteItems.NETHERITE_TOOL_MATERIAL, 10.0F, -3.0F, new Settings().group(ItemGroup.TOOLS));
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
-        tooltip.add(Text.translatable("item.endshards.netherite_tool.tooltip").formatted(Formatting.DARK_BLUE) );
+        tooltip.add(Text.translatable("item.endshards.netherite_tool.tooltip").formatted(Formatting.DARK_BLUE));
     }
 }

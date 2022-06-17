@@ -28,7 +28,7 @@ public class EnderSwordItem extends SwordItem {
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
-        tooltip.add(Text.translatable("item.endshards.ender_sword.tooltip").formatted(Formatting.DARK_BLUE) );
+        tooltip.add(Text.translatable("item.endshards.ender_sword.tooltip").formatted(Formatting.DARK_BLUE));
     }
 
     private final List<EntityType<?>> AbilityBannedEntities = Arrays.asList(
@@ -38,7 +38,7 @@ public class EnderSwordItem extends SwordItem {
             EntityType.ENDERMITE,
             EntityType.RAVAGER,
             EntityType.SHULKER,
-          //EntityType.WARDEN,
+            EntityType.WARDEN,
             EntityType.WITHER
             );
 
