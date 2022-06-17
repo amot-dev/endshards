@@ -1,11 +1,16 @@
 package dev.amot.endshards;
 
 import com.mojang.serialization.Lifecycle;
+import dev.amot.endshards.armor.BaseArmorMaterial;
+import dev.amot.endshards.armor.EnderArmorItem;
+import dev.amot.endshards.armor.NetheriteArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
 import dev.amot.endshards.util.EndShardsMiningLevels;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.MutableRegistry;
 import net.minecraft.util.registry.Registry;
@@ -16,9 +21,17 @@ import java.util.OptionalInt;
 import static dev.amot.endshards.EndShards.modid;
 
 public class NetheriteItems {
-    public static final ToolMaterial NETHERITE_TOOL_MATERIAL = new BaseToolMaterial(
-            Items.NETHERITE_INGOT, 2032, 9.0F, EndShardsMiningLevels.NETHERITE, 4.0F, 15
+    public static final ArmorMaterial NETHERITE_ARMOR_MATERIAL = new BaseArmorMaterial(
+            "netherite", Items.NETHERITE_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
     );
+    public static final ToolMaterial NETHERITE_TOOL_MATERIAL = new BaseToolMaterial(
+            Items.NETHERITE_INGOT, 2032, 9.0F, EndShardsMiningLevels.NETHERITE, -1.0F, 15
+    );
+
+    public static final Item NETHERITE_HELMET = new NetheriteArmorItem(EquipmentSlot.HEAD);
+    public static final Item NETHERITE_CHESTPLATE = new NetheriteArmorItem(EquipmentSlot.CHEST);
+    public static final Item NETHERITE_LEGGINGS = new NetheriteArmorItem(EquipmentSlot.LEGS);
+    public static final Item NETHERITE_BOOTS = new NetheriteArmorItem(EquipmentSlot.FEET);
 
     public static final ToolItem NETHERITE_SWORD = new NetheriteSwordItem();
     public static final ToolItem NETHERITE_PICKAXE = new NetheritePickaxeItem();
@@ -31,6 +44,30 @@ public class NetheriteItems {
     public static final StatusEffect NETHERITE_COOLDOWN = new CooldownEffect();
 
     public static void register(){
+        ((MutableRegistry<Item>)Registry.ITEM).replace(
+                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_HELMET)),
+                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_helmet")),
+                NETHERITE_HELMET,
+                Lifecycle.stable()
+        );
+        ((MutableRegistry<Item>)Registry.ITEM).replace(
+                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_CHESTPLATE)),
+                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_chestplate")),
+                NETHERITE_CHESTPLATE,
+                Lifecycle.stable()
+        );
+        ((MutableRegistry<Item>)Registry.ITEM).replace(
+                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_LEGGINGS)),
+                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_leggings")),
+                NETHERITE_LEGGINGS,
+                Lifecycle.stable()
+        );
+        ((MutableRegistry<Item>)Registry.ITEM).replace(
+                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_BOOTS)),
+                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_boots")),
+                NETHERITE_BOOTS,
+                Lifecycle.stable()
+        );
         ((MutableRegistry<Item>)Registry.ITEM).replace(
                 OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_SWORD)),
                 RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_sword")),
@@ -65,4 +102,3 @@ public class NetheriteItems {
         Registry.register(Registry.STATUS_EFFECT, new Identifier(modid, "netherite_cooldown"), NETHERITE_COOLDOWN);
     }
 }
-

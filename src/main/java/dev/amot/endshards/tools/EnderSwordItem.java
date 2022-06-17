@@ -51,6 +51,7 @@ public class EnderSwordItem extends SwordItem {
                     user.world.sendEntityStatus(entity, (byte)46);
                     stack.damage(1, user, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
                     user.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
+
                     user.addStatusEffect(new StatusEffectInstance(
                             EnderItems.ENDER_COOLDOWN, EnderItems.ENDER_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                     );
