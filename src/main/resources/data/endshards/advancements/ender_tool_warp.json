@@ -13,7 +13,7 @@
   },
   "criteria": {
     "ender_tool_warp": {
-      "trigger": "endshards:ender_tool_ability"
+      "trigger": "endshards:ender_tool_warp_trigger"
     }
   }
 }

@@ -9,6 +9,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.recipe.RecipeType;
@@ -59,7 +60,7 @@ public abstract class ToolAbilityMixin implements dev.amot.endshards.util.IEnder
                         //TODO: Decide whether to increase pick up stats for inventory warps (note: this line only works on client)
                         //player.increaseStat(Stats.PICKED_UP.getOrCreateStat(stackX.getItem()), stackX.getCount());
                         player.playSound(SoundEvents.ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
-                        if (player instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_TOOL_ABILITY_USED.trigger(serverUser);
+                        if (player instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_TOOL_WARP_CRITERION.trigger(serverUser);
                     }
                 });
                 state.onStacksDropped((ServerWorld)world, pos, stack, true);
@@ -79,6 +80,10 @@ public abstract class ToolAbilityMixin implements dev.amot.endshards.util.IEnder
                     ItemStack smeltedDrop = recipe.get().getOutput();
                     smeltedDrop.setCount(unsmeltedDrop.getCount());
                     smeltedDrops.add(smeltedDrop);
+
+                    if (entity instanceof ServerPlayerEntity serverPlayer) {
+                        EndShardsCriteria.NETHERITE_TOOL_AUTOSMELT_CRITERION.trigger(serverPlayer);
+                    }
                 }
                 else smeltedDrops.add(unsmeltedDrop);
             }

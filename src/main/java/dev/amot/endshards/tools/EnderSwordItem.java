@@ -56,7 +56,7 @@ public class EnderSwordItem extends SwordItem {
                             EnderItems.ENDER_COOLDOWN, EnderItems.ENDER_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                     );
 
-                    if (user instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_SWORD_ABILITY_USED.trigger(serverUser);
+                    if (user instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_SWORD_WARP_CRITERION.trigger(serverUser);
                 }
                 //TODO: Play a teleport fail sound if entity does not match parameters
             }

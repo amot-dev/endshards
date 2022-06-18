@@ -13,7 +13,7 @@
   },
   "criteria": {
     "ender_armor_fall": {
-      "trigger": "endshards:ender_armor_ability_critical_damage"
+      "trigger": "endshards:ender_armor_fall_trigger"
     }
   }
 }

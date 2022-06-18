@@ -56,7 +56,7 @@ public abstract class ArmorAbilityMixin {
                 float totalDamage = this.modifyAppliedDamage(source, amount);
                 LivingEntity thisEntity = (LivingEntity)(Object)this;
                 if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer){
-                    EndShardsCriteria.ENDER_ARMOR_ABILITY_USED_CRITICAL_DAMAGE.trigger(serverPlayer);
+                    EndShardsCriteria.ENDER_ARMOR_FALL_CRITERION.trigger(serverPlayer);
                 }
 
                 cir.setReturnValue(false);
@@ -67,7 +67,7 @@ public abstract class ArmorAbilityMixin {
                     float totalDamage = this.modifyAppliedDamage(source, amount);
                     LivingEntity thisEntity = (LivingEntity) (Object) this;
                     if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer) {
-                        EndShardsCriteria.ENDER_COOLDOWN_FAIL.trigger(serverPlayer);
+                        EndShardsCriteria.ENDER_ARMOR_PLAYED_SELF_CRITERION.trigger(serverPlayer);
                     }
                 }
             }
@@ -82,6 +82,10 @@ public abstract class ArmorAbilityMixin {
                     this.addStatusEffect(new StatusEffectInstance(
                             StatusEffects.RESISTANCE, NetheriteArmorItem.abilityDuration, NetheriteArmorItem.abilityPower, false, true, true)
                     );
+
+                    if ((LivingEntity)(Object)this instanceof ServerPlayerEntity serverPlayer) {
+                        EndShardsCriteria.NETHERITE_ARMOR_PROTECT_CRITERION.trigger(serverPlayer);
+                    }
                 }
             }
         }
