@@ -1,6 +1,6 @@
 package dev.amot.endshards.armor;
 
-import dev.amot.endshards.NetheriteItems;
+import dev.amot.endshards.items.NetheriteGear;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class NetheriteArmorItem extends ArmorItem {
     public NetheriteArmorItem(EquipmentSlot slot) {
-        super(NetheriteItems.NETHERITE_ARMOR_MATERIAL, slot, new Settings().group(ItemGroup.COMBAT));
+        super(NetheriteGear.NETHERITE_ARMOR_MATERIAL, slot, new Settings().group(ItemGroup.COMBAT));
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {

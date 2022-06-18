@@ -1,6 +1,6 @@
 package dev.amot.endshards.armor;
 
-import dev.amot.endshards.EnderItems;
+import dev.amot.endshards.items.EnderGear;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class EnderArmorItem extends ArmorItem {
     public EnderArmorItem(EquipmentSlot slot) {
-        super(EnderItems.ENDER_ARMOR_MATERIAL, slot, new Item.Settings().group(ItemGroup.COMBAT));
+        super(EnderGear.ENDER_ARMOR_MATERIAL, slot, new Item.Settings().group(ItemGroup.COMBAT));
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {

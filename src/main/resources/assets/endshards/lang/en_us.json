@@ -1,8 +1,19 @@
 {
-  "block.endshards.strange_crystal": "Strange Crystal",
   "item.endshards.endshard": "End Shard",
   "item.endshards.ender_ingot": "Ender Ingot",
+  "item.endshards.infusion_core": "Infusion Core",
+  "item.endshards.infusion_core_ender": "Infusion Core (Essence of Dragon)",
+  "item.endshards.infusion_core_netherite": "Infusion Core (Essence of Wither)",
+  "item.endshards.infusion_core_sculk": "Infusion Core (Essence of Warden)",
+  "item.endshards.infusion_core_nightmare": "Infusion Core (Essence of Terror)",
+  "item.endshards.phantom_soul_fragment": "Phantom Soul Fragment",
+  "item.endshards.soul_fragment": "Soul Fragment",
+  "item.endshards.terror_eyes": "Terror Eyes",
+  "item.endshards.warding_heart": "Warding Heart",
+
   "block.endshards.ender_block": "Block of Ender",
+  "block.endshards.strange_crystal": "Strange Crystal",
+
   "item.endshards.ender_helmet": "Ender Helmet",
   "item.endshards.ender_chestplate": "Ender Chestplate",
   "item.endshards.ender_leggings": "Ender Leggings",

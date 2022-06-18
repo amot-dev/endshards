@@ -1,8 +1,7 @@
-package dev.amot.endshards;
+package dev.amot.endshards.items;
 
 import com.mojang.serialization.Lifecycle;
 import dev.amot.endshards.armor.BaseArmorMaterial;
-import dev.amot.endshards.armor.EnderArmorItem;
 import dev.amot.endshards.armor.NetheriteArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
@@ -20,7 +19,7 @@ import java.util.OptionalInt;
 
 import static dev.amot.endshards.EndShards.modid;
 
-public class NetheriteItems {
+public class NetheriteGear {
     public static final ArmorMaterial NETHERITE_ARMOR_MATERIAL = new BaseArmorMaterial(
             "netherite", Items.NETHERITE_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
     );
@@ -39,9 +38,9 @@ public class NetheriteItems {
     public static final ToolItem NETHERITE_AXE = new NetheriteAxeItem();
     public static final ToolItem NETHERITE_HOE = new NetheriteHoeItem();
 
+    public static final StatusEffect NETHERITE_COOLDOWN = new CooldownEffect();
     public static final int NETHERITE_COOLDOWN_DURATION_ARMOR = 1200;
     public static final int NETHERITE_COOLDOWN_DURATION_SWORD = 600;
-    public static final StatusEffect NETHERITE_COOLDOWN = new CooldownEffect();
 
     public static void register(){
         ((MutableRegistry<Item>)Registry.ITEM).replace(

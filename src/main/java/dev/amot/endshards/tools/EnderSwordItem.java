@@ -1,6 +1,6 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.EnderItems;
+import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class EnderSwordItem extends SwordItem {
     public EnderSwordItem() {
-        super(EnderItems.ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
+        super(EnderGear.ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
@@ -45,7 +45,7 @@ public class EnderSwordItem extends SwordItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
-            if (!user.getActiveStatusEffects().containsKey(EnderItems.ENDER_COOLDOWN)) {
+            if (!user.getActiveStatusEffects().containsKey(EnderGear.ENDER_COOLDOWN)) {
                 if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !AbilityBannedEntities.contains(entity.getType())) {
                     entity.setPos(entity.getX(), -1000F, entity.getZ());
                     user.world.sendEntityStatus(entity, (byte)46);
@@ -53,7 +53,7 @@ public class EnderSwordItem extends SwordItem {
                     user.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
 
                     user.addStatusEffect(new StatusEffectInstance(
-                            EnderItems.ENDER_COOLDOWN, EnderItems.ENDER_COOLDOWN_DURATION_SWORD, 0, false, false, true)
+                            EnderGear.ENDER_COOLDOWN, EnderGear.ENDER_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                     );
 
                     if (user instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_SWORD_WARP_CRITERION.trigger(serverUser);

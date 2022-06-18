@@ -1,6 +1,6 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.NetheriteItems;
+import dev.amot.endshards.items.NetheriteGear;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.ItemGroup;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class NetheriteHoeItem extends HoeItem {
     public NetheriteHoeItem() {
-        super(NetheriteItems.NETHERITE_TOOL_MATERIAL, 1, 0F, new Settings().group(ItemGroup.TOOLS));
+        super(NetheriteGear.NETHERITE_TOOL_MATERIAL, 1, 0F, new Settings().group(ItemGroup.TOOLS));
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {

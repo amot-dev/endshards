@@ -2,7 +2,7 @@ package dev.amot.endshards.mixin;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import dev.amot.endshards.EnderItems;
+import dev.amot.endshards.items.EnderGear;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -31,7 +31,7 @@ public abstract class KnockbackResistanceMixin {
     private void constructor(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings, CallbackInfo ci) {
         UUID uUID = MODIFIERS[slot.getEntitySlotId()];
 
-        if (material == EnderItems.ENDER_ARMOR_MATERIAL) {
+        if (material == EnderGear.ENDER_ARMOR_MATERIAL) {
             ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
             this.attributeModifiers.forEach(builder::put);
             builder.put(
