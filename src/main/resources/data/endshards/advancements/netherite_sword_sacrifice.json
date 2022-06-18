@@ -1,0 +1,19 @@
+{
+  "parent": "endshards:netherite_sword_flame",
+  "display": {
+    "icon": {
+      "item": "minecraft:cooked_mutton"
+    },
+    "title": "Sacrificial Rite",
+    "description": "Conduct a mass sacrifice with the Netherite Sword",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "ender_armor_played_self": {
+      "trigger": "endshards:netherite_sword_sacrifice_trigger"
+    }
+  }
+}

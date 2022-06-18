@@ -5,7 +5,7 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 
 public record BaseToolMaterial(Item repairIngredient, int durability, float miningSpeedMultiplier,
-                               int miningLevel, int enchantability) implements ToolMaterial {
+                               int miningLevel, float attackDamage, int enchantability) implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
@@ -29,7 +29,7 @@ public record BaseToolMaterial(Item repairIngredient, int durability, float mini
 
     @Override
     public float getAttackDamage() {
-        return -1.0F;
+        return attackDamage;
     }
 
     @Override

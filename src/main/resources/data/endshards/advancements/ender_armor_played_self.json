@@ -13,7 +13,7 @@
   },
   "criteria": {
     "ender_armor_played_self": {
-      "trigger": "endshards:ender_cooldown_fail"
+      "trigger": "endshards:ender_armor_played_self_trigger"
     }
   }
 }

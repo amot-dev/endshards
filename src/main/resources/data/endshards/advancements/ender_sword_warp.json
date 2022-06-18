@@ -13,7 +13,7 @@
   },
   "criteria": {
     "ender_sword_warp": {
-      "trigger": "endshards:ender_sword_ability"
+      "trigger": "endshards:ender_sword_warp_trigger"
     }
   }
 }

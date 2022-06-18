@@ -10,8 +10,8 @@ import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
-public class CustomCriterion extends AbstractCriterion<CustomCriterion.Conditions> {
-    public CustomCriterion(String identifier){
+public class EndShardsCriterion extends AbstractCriterion<EndShardsCriterion.Conditions> {
+    public EndShardsCriterion(String identifier){
         this.ID = new Identifier(EndShards.modid, identifier);
     }
 
@@ -20,8 +20,8 @@ public class CustomCriterion extends AbstractCriterion<CustomCriterion.Condition
         return ID;
     }
 
-    public CustomCriterion.Conditions conditionsFromJson(JsonObject jsonObject, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
-        return new CustomCriterion.Conditions(extended);
+    public EndShardsCriterion.Conditions conditionsFromJson(JsonObject jsonObject, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
+        return new EndShardsCriterion.Conditions(extended);
     }
 
     public void trigger(ServerPlayerEntity player) {
@@ -30,7 +30,7 @@ public class CustomCriterion extends AbstractCriterion<CustomCriterion.Condition
 
     public class Conditions extends AbstractCriterionConditions {
         public Conditions(EntityPredicate.Extended player) {
-            super(CustomCriterion.this.ID, player);
+            super(EndShardsCriterion.this.ID, player);
         }
 
         public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
