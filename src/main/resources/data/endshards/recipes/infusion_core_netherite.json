@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "CIC",
+    " C "
+  ],
+  "key": {
+    "I": {
+      "tag": "minecraft:nether_star"
+    },
+    "C": {
+      "item": "endshards:infusion_core"
+    }
+  },
+  "result": {
+    "item": "endshards:infusion_core_netherite",
+    "count": 3
+  }
+}
