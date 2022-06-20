@@ -2,6 +2,7 @@ package dev.amot.endshards;
 
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import dev.amot.endshards.blocks.EndShardsBlocks;
+import dev.amot.endshards.enchantments.EndShardsEnchantments;
 import dev.amot.endshards.features.EndShardsFeatures;
 import dev.amot.endshards.items.EndShardsItems;
 import dev.amot.endshards.items.EnderGear;
@@ -18,6 +19,7 @@ public class EndShards implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		EndShardsCriteria.init();
+		EndShardsEnchantments.init();
 		EndShardsItems.register();
 		EndShardsBlocks.register();
 		EndShardsFeatures.register();
