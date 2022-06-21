@@ -1,12 +1,22 @@
 {
   "type": "minecraft:smithing",
-  "addition": {
-    "item": "minecraft:netherite_ingot"
-  },
   "base": {
-    "item": "minecraft:diamond_boots"
+      "item": "minecraft:diamond_boots"
+  },
+  "addition": {
+    "item": "minecraft:netherite_ingot",
+    "data": {
+      "require": {
+        "Enchantments": [
+          {
+            "id": "endshards:infused",
+            "lvl": 1
+          }
+        ]
+      }
+    }
   },
   "result": {
-    "item": "minecraft:air"
+    "item": "minecraft:netherite_boots"
   }
 }
