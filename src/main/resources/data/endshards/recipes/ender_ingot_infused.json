@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "endshards:infusion_core_ender",
+      "remainder": {
+        "item": "endshards:infusion_core"
+      }
+    },
+    {
+      "item": "endshards:ender_ingot",
+      "data": {
+        "deny": {
+          "Enchantments": [
+            {
+              "id": "endshards:infused",
+              "lvl": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "result": {
+    "item": "endshards:ender_ingot",
+    "data" : {
+      "Enchantments": [
+        {
+          "id": "endshards:infused",
+          "lvl": 1
+        }
+      ]
+    }
+  }
+}

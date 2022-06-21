@@ -4,7 +4,7 @@
       "item": "minecraft:diamond_boots"
   },
   "addition": {
-    "item": "endshards:ender_ingot",
+    "item": "minecraft:netherite_ingot",
     "data": {
       "require": {
         "Enchantments": [
@@ -17,6 +17,6 @@
     }
   },
   "result": {
-    "item": "endshards:ender_boots"
+    "item": "minecraft:netherite_boots"
   }
 }

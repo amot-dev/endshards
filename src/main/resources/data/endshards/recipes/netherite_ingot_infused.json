@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "endshards:infusion_core_netherite",
+      "remainder": {
+        "item": "endshards:infusion_core"
+      }
+    },
+    {
+      "item": "minecraft:netherite_ingot",
+      "data": {
+        "deny": {
+          "Enchantments": [
+            {
+              "id": "endshards:infused",
+              "lvl": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "result": {
+    "item": "minecraft:netherite_ingot",
+    "data" : {
+      "Enchantments": [
+        {
+          "id": "endshards:infused",
+          "lvl": 1
+        }
+      ]
+    }
+  }
+}
