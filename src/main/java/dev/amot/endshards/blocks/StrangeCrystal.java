@@ -1,8 +1,9 @@
 package dev.amot.endshards.blocks;
 
-import dev.amot.endshards.EnderItems;
+import dev.amot.endshards.items.EnderGear;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -49,7 +50,7 @@ public class StrangeCrystal extends AmethystClusterBlock {
                     super.afterBreak(world, player, randomPos, state, blockEntity, stack);
 
                     Item itemInHand = player.getEquippedStack(EquipmentSlot.MAINHAND).getItem();
-                    if (!(itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderItems.ENDER_TOOL_MATERIAL)) {
+                    if (!(itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderGear.ENDER_TOOL_MATERIAL)) {
                         world.playSound(null, randomPos.getX(), randomPos.getY(), randomPos.getZ(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.BLOCKS, 1.0f, 1.0f);
                     }
                     blockDropped = true;

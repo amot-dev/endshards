@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "CIC",
+    " C "
+  ],
+  "key": {
+    "I": {
+      "tag": "minecraft:dragon_breath"
+    },
+    "C": {
+      "item": "endshards:infusion_core"
+    }
+  },
+  "result": {
+    "item": "endshards:infusion_core_ender",
+    "count": 3
+  }
+}

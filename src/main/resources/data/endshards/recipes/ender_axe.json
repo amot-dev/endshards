@@ -4,7 +4,17 @@
       "item": "minecraft:diamond_axe"
   },
   "addition": {
-    "item": "endshards:ender_ingot"
+    "item": "endshards:ender_ingot",
+    "data": {
+      "require": {
+        "Enchantments": [
+          {
+            "id": "endshards:infused",
+            "lvl": 1
+          }
+        ]
+      }
+    }
   },
   "result": {
     "item": "endshards:ender_axe"

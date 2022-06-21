@@ -1,13 +1,11 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.EndShards;
-import dev.amot.endshards.NetheriteItems;
+import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -25,7 +23,7 @@ import java.util.List;
 
 public class NetheriteSwordItem extends SwordItem {
     public NetheriteSwordItem() {
-        super(NetheriteItems.NETHERITE_TOOL_MATERIAL, 8, -2.4F, new Settings().group(ItemGroup.COMBAT));
+        super(NetheriteGear.NETHERITE_TOOL_MATERIAL, 8, -2.4F, new Settings().group(ItemGroup.COMBAT));
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
@@ -38,7 +36,7 @@ public class NetheriteSwordItem extends SwordItem {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (user.world instanceof ServerWorld serverWorld) {
-            if (!user.getActiveStatusEffects().containsKey(NetheriteItems.NETHERITE_COOLDOWN)) {
+            if (!user.getActiveStatusEffects().containsKey(NetheriteGear.NETHERITE_COOLDOWN)) {
 
                 // Burnt valid mobs
                 int burntMobs = 0;
@@ -54,7 +52,7 @@ public class NetheriteSwordItem extends SwordItem {
 
                 if (burntMobs > 0) {
                     user.addStatusEffect(new StatusEffectInstance(
-                            NetheriteItems.NETHERITE_COOLDOWN, NetheriteItems.NETHERITE_COOLDOWN_DURATION_SWORD, 0, false, false, true)
+                            NetheriteGear.NETHERITE_COOLDOWN, NetheriteGear.NETHERITE_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                     );
 
                     if (user instanceof ServerPlayerEntity serverPlayer) {
