@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
 
-public class EnderBlock extends Block {
-    public EnderBlock() {
-        super(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(6.0f).requiresTool());
+public class SoulSculk extends Block {
+    public SoulSculk() {
+        super(FabricBlockSettings.of(Material.SCULK).sounds(BlockSoundGroup.SCULK).strength(1.0f).requiresTool());
     }
 }

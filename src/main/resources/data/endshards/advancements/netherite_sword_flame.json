@@ -4,7 +4,7 @@
     "icon": {
       "item": "minecraft:netherite_sword"
     },
-    "title": "Smells like bacon",
+    "title": "Smells Like Bacon",
     "description": "Light an animal on fire without touching it",
     "frame": "task",
     "show_toast": true,

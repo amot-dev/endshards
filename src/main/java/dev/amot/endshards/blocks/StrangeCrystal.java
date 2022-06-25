@@ -29,7 +29,7 @@ public class StrangeCrystal extends AmethystClusterBlock {
     private static final int offset = 3;
 
     public StrangeCrystal() {
-        super(height, offset, FabricBlockSettings.of(Material.AMETHYST).nonOpaque().sounds(BlockSoundGroup.AMETHYST_CLUSTER).strength(4.0f).requiresTool());
+        super(height, offset, FabricBlockSettings.of(Material.AMETHYST).sounds(BlockSoundGroup.AMETHYST_CLUSTER).nonOpaque().strength(4.0f).requiresTool());
     }
 
     @Override

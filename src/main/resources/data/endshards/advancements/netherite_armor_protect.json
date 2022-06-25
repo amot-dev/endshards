@@ -4,7 +4,7 @@
     "icon": {
       "item": "minecraft:netherite_chestplate"
     },
-    "title": "Pls help",
+    "title": "Pls Help",
     "description": "Be given some extra protection by your armor",
     "frame": "task",
     "show_toast": true,

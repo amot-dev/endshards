@@ -10,12 +10,17 @@ import static dev.amot.endshards.EndShards.modid;
 
 public class EndShardsBlocks {
     public static final Block ENDER_BLOCK = new EnderBlock();
+    public static final Block SOUL_SCULK = new SoulSculk();
     public static final Block STRANGE_CRYSTAL = new StrangeCrystal();
 
     public static void register(){
         Registry.register(Registry.BLOCK, new Identifier(modid, "ender_block"), ENDER_BLOCK);
         Registry.register(Registry.ITEM, new Identifier(modid, "ender_block"),
                 new BlockItem(ENDER_BLOCK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS)));
+
+        Registry.register(Registry.BLOCK, new Identifier(modid, "soul_sculk"), SOUL_SCULK);
+        Registry.register(Registry.ITEM, new Identifier(modid, "soul_sculk"),
+                new BlockItem(SOUL_SCULK, new FabricItemSettings().group(ItemGroup.BUILDING_BLOCKS)));
 
         Registry.register(Registry.BLOCK, new Identifier(modid, "strange_crystal"), STRANGE_CRYSTAL);
         Registry.register(Registry.ITEM, new Identifier(modid, "strange_crystal"),

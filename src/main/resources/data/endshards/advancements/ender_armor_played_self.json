@@ -4,7 +4,7 @@
     "icon": {
       "item": "endshards:ender_boots"
     },
-    "title": "Congrats, you played yourself",
+    "title": "Congrats, You Played Yourself",
     "description": "Warp a mob right before taking preventable critical fall damage",
     "frame": "challenge",
     "show_toast": true,
