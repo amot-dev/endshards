@@ -16,6 +16,7 @@ public class EndShardsItems {
     public static final Item INFUSION_CORE_SCULK = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item INFUSION_CORE_NIGHTMARE = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item PHANTOM_SOUL_FRAGMENT = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
+    public static final Item SCULK_GEM = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item SOUL_FRAGMENT = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item TERROR_EYES = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item WARDING_HEART = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
@@ -29,6 +30,7 @@ public class EndShardsItems {
         Registry.register(Registry.ITEM, new Identifier(modid, "infusion_core_sculk"), INFUSION_CORE_SCULK);
         Registry.register(Registry.ITEM, new Identifier(modid, "infusion_core_nightmare"), INFUSION_CORE_NIGHTMARE);
         Registry.register(Registry.ITEM, new Identifier(modid, "phantom_soul_fragment"), PHANTOM_SOUL_FRAGMENT);
+        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_gem"), SCULK_GEM);
         Registry.register(Registry.ITEM, new Identifier(modid, "soul_fragment"), SOUL_FRAGMENT);
         Registry.register(Registry.ITEM, new Identifier(modid, "terror_eyes"), TERROR_EYES);
         Registry.register(Registry.ITEM, new Identifier(modid, "warding_heart"), WARDING_HEART);
