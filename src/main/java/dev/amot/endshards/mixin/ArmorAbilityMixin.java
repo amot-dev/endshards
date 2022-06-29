@@ -1,5 +1,6 @@
 package dev.amot.endshards.mixin;
 
+import dev.amot.endshards.armor.SculkArmorItem;
 import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
@@ -17,6 +18,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
@@ -44,7 +46,7 @@ public abstract class ArmorAbilityMixin {
     }
 
     @Inject(method = "damage", at = @At("RETURN"), cancellable = true)
-    public void injectDamageMethodReturn(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+    public void injectDamageMethodReturn(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         // Handle fall damage with full Ender Armor
         if (cir.getReturnValue() && source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4){
             // Ability is good!
@@ -55,7 +57,7 @@ public abstract class ArmorAbilityMixin {
 
                 float totalDamage = this.modifyAppliedDamage(source, amount);
                 LivingEntity thisEntity = (LivingEntity)(Object)this;
-                if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer){
+                if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer) {
                     EndShardsCriteria.ENDER_ARMOR_FALL_CRITERION.trigger(serverPlayer);
                 }
 
@@ -88,6 +90,14 @@ public abstract class ArmorAbilityMixin {
                     }
                 }
             }
+        }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    public void injectTickMethodHead(CallbackInfo ci) {
+        LivingEntity thisEntity = (LivingEntity)(Object)this;
+        if (getArmorCount(thisEntity, SculkArmorItem.class) == 4) {
+            this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 0, false, false, true));
         }
     }
 }
