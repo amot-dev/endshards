@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "endshards:ender_ingot"
+    },
+    {
+      "item": "endshards:ender_ingot"
+    },
+    {
+      "item": "endshards:ender_ingot"
+    },
+    {
+      "item": "endshards:ender_ingot"
+    },
+    {
+      "item": "endshards:ender_ingot"
+    },
+    {
+      "item": "endshards:ender_ingot"
+    },
+    {
+      "item": "endshards:ender_ingot"
+    },
+    {
+      "item": "endshards:ender_ingot"
+    },
+    {
+      "item": "endshards:ender_ingot"
+    }
+  ],
+  "result": {
+    "item": "endshards:ender_block"
+  }
+}
