@@ -15,6 +15,7 @@
   "item.endshards.warding_heart": "Warding Heart",
 
   "block.endshards.ender_block": "Block of Ender",
+  "block.endshards.sculk_block": "Block of Sculk",
   "block.endshards.soul_sculk": "Soul-Infused Sculk",
   "block.endshards.strange_crystal": "Strange Crystal",
 
@@ -32,7 +33,7 @@
   "item.endshards.ender_tool.tooltip": "Warps mined blocks to your inventory",
   "effect.endshards.ender_cooldown": "Ender Cooldown",
 
-  "item.endshards.netherite_armor.tooltip": "SET BONUS: Provides resistance on damage",
+  "item.endshards.netherite_armor.tooltip": "SET BONUS: Provides Resistance on damage",
   "item.endshards.netherite_sword.tooltip": "RIGHT CLICK: Set nearby enemies on fire",
   "item.endshards.netherite_tool.tooltip": "Autosmelts mined blocks",
   "effect.endshards.netherite_cooldown": "Netherite Cooldown",

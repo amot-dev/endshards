@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "endshards:sculk_block",
     "endshards:soul_sculk"
   ]
 }
