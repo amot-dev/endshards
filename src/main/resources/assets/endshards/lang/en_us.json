@@ -1,4 +1,6 @@
 {
+  "gamerule.doNightVisionFlicker": "Do flicker effect when Night Vision is about to end",
+
   "enchantment.endshards.infused": "Infused",
 
   "item.endshards.endshard": "End Shard",

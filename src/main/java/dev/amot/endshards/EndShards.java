@@ -8,6 +8,7 @@ import dev.amot.endshards.items.EndShardsItems;
 import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.util.EndShardsGameRules;
 import dev.amot.endshards.util.EndShardsLootTables;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -19,6 +20,7 @@ public class EndShards implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		EndShardsGameRules.init();
 		EndShardsCriteria.init();
 		EndShardsEnchantments.init();
 		EndShardsItems.register();
