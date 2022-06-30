@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Block.class)
-public interface BlockInvoker {
+public interface IBlockInvoker {
     @Invoker("dropExperienceWhenMined")
     void invokeDropExperienceWhenMined(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience);
 }

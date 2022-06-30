@@ -50,7 +50,7 @@
   "item.endshards.sculk_axe": "Sculk Axe",
   "item.endshards.sculk_hoe": "Sculk Hoe",
   "item.endshards.sculk_armor.tooltip": "SET BONUS: Provides permanent Night Vision",
-  "item.endshards.sculk_sword.tooltip": "RIGHT CLICK: Makes simple mobs fight for you",
+  "item.endshards.sculk_sword.tooltip": "RIGHT CLICK: Enthralls weak-willed enemies",
   "item.endshards.sculk_tool.tooltip": "All mined blocks drop XP",
   "effect.endshards.sculk_cooldown": "Sculk Cooldown"
 }

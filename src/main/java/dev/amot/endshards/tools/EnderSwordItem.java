@@ -19,7 +19,6 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class EnderSwordItem extends SwordItem {
@@ -31,7 +30,7 @@ public class EnderSwordItem extends SwordItem {
         tooltip.add(Text.translatable("item.endshards.ender_sword.tooltip").formatted(Formatting.DARK_BLUE));
     }
 
-    private final List<EntityType<?>> AbilityBannedEntities = Arrays.asList(
+    private final List<EntityType<?>> AbilityBannedEntities = List.of(
             EntityType.ELDER_GUARDIAN,
             EntityType.ENDER_DRAGON,
             EntityType.ENDERMAN,
@@ -40,7 +39,7 @@ public class EnderSwordItem extends SwordItem {
             EntityType.SHULKER,
             EntityType.WARDEN,
             EntityType.WITHER
-            );
+    );
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {

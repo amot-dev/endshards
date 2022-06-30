@@ -110,7 +110,7 @@ public abstract class ToolAbilityMixin {
                 // Ore Blocks already do their own XP handling
                 if (!(state.getBlock() instanceof OreBlock)) {
                     // Drop 0-1 XP for each block (weighted more to 0)
-                    ((BlockInvoker)state.getBlock()).invokeDropExperienceWhenMined(serverWorld, pos, stack, BiasedToBottomIntProvider.create(0, 1));
+                    ((IBlockInvoker)state.getBlock()).invokeDropExperienceWhenMined(serverWorld, pos, stack, BiasedToBottomIntProvider.create(0, 1));
                 }
             }
         }
