@@ -1,9 +1,11 @@
 package dev.amot.endshards.tools;
 
 import dev.amot.endshards.items.SculkGear;
-import dev.amot.endshards.util.IMobEntity;
+import dev.amot.endshards.util.IThrallOwner;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.*;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -27,13 +29,10 @@ public class SculkSwordItem extends SwordItem {
         tooltip.add(Text.translatable("item.endshards.sculk_sword.tooltip").formatted(Formatting.DARK_BLUE));
     }
 
-    private final List<EntityType<?>> AbilityAllowedEntities = List.of(
+    private static final List<EntityType<?>> AbilityAllowedEntities = List.of(
             EntityType.CAVE_SPIDER,
             EntityType.DROWNED,
             EntityType.HUSK,
-            //EntityType.PIGLIN,
-            //EntityType.PIGLIN_BRUTE,
-            //EntityType.PILLAGER,
             EntityType.SKELETON,
             EntityType.SPIDER,
             EntityType.STRAY,
@@ -42,16 +41,27 @@ public class SculkSwordItem extends SwordItem {
             EntityType.ZOMBIE_VILLAGER,
             EntityType.ZOMBIFIED_PIGLIN
     );
+    private static final int AbilityMaxThrallCount = 3;
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
+            //EndShards.LOGGER.info("Info for " + entity.getUuidAsString());
+            //EndShards.LOGGER.info("\tThrall? " + ((IThrall)entity).isThrall());
+            //EndShards.LOGGER.info("\tOwner? " + ((IThrall)entity).getOwner());
             if (!user.getActiveStatusEffects().containsKey(SculkGear.SCULK_COOLDOWN)) {
                 if (AbilityAllowedEntities.contains(entity.getType())) {
-                    // All allowed entities are mob entities
-                    if (!((IMobEntity)entity).isThrall()) {
-                        ((IMobEntity)entity).makeThrallFor(user);
+                    if (((IThrallOwner)user).getThrallCount() < AbilityMaxThrallCount) {
+                        // Try to add thrall
+                        if (((IThrallOwner)user).addThrall((MobEntity)entity)) {
+                            user.addStatusEffect(new StatusEffectInstance(
+                                    SculkGear.SCULK_COOLDOWN, SculkGear.SCULK_COOLDOWN_DURATION_SWORD, 0, false, false, true)
+                            );
+
+                            //TODO: Achievement and stuff
+                        }
                     }
+
                 }
             }
         }

@@ -9,9 +9,10 @@
     "IBlockInvoker",
     "KnockbackResistanceMixin",
     "RegistryReplaceMixin",
-    "SculkSwordAbilityMixin",
     "SwitchArmorMixin",
     "SwitchElytraMixin",
+    "ThrallMixin",
+    "ThrallOwnerMixin",
     "ToolAbilityMixin"
   ],
   "client": [

@@ -2,8 +2,9 @@ package dev.amot.endshards.util;
 
 import net.minecraft.entity.player.PlayerEntity;
 
-public interface IMobEntity {
+public interface IThrall {
     void makeThrallFor(PlayerEntity owner);
+    void clearActiveTarget();
     boolean isThrall();
-    boolean isThrallOf(PlayerEntity player);
+    PlayerEntity getOwner();
 }
