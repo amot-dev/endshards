@@ -16,7 +16,7 @@ public class EndShardsCriteria {
     public static final EndShardsCriterion SCULK_ARMOR_LIGHT = Criteria.register(new EndShardsCriterion("sculk_armor_light_trigger"));
     public static final EndShardsCriterion SCULK_SWORD_ENTHRALL = Criteria.register(new EndShardsCriterion("sculk_sword_enthrall_trigger"));
     public static final EndShardsCriterion SCULK_TOOL_XP = Criteria.register(new EndShardsCriterion("sculk_tool_xp_trigger"));
-    //public static final EndShardsCriterion SCULK_CHALLENGE = Criteria.register(new EndShardsCriterion("sculk_challenge_trigger"));
+    public static final EndShardsCriterion SCULK_TOOL_MENDING_BREAK = Criteria.register(new EndShardsCriterion("sculk_tool_mending_break_trigger"));
 
     public static void init(){}
 }
