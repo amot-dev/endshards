@@ -22,10 +22,10 @@ public class ThrallOwnerMixin implements IThrallOwner {
         ((IThrall)thrall).makeThrallFor((PlayerEntity)(Object)this);
         thrall.setGlowing(true);
 
-        this.thralls.add(thrall);
         for (MobEntity ownedThrall : this.thralls) {
             ((IThrall)ownedThrall).clearActiveTarget();
         }
+        this.thralls.add(thrall);
         return true;
     }
 

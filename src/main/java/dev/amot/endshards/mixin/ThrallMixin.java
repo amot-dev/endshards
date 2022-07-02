@@ -27,6 +27,7 @@ public abstract class ThrallMixin implements IThrall {
         // Clear targeting goals and put in thrall goals
         this.clearActiveTarget();
         this.targetSelector.clear();
+        this.goalSelector.remove(new LookAtEntityGoal((MobEntity)(Object)this, PlayerEntity.class, 8.0F));
         this.targetSelector.add(3, new ActiveTargetGoal<>((MobEntity)(Object)this, MobEntity.class, true, new ThrallTargetPredicate<>(this.owner)));
         this.goalSelector.add(4, new FollowPlayerGoal((MobEntity)(Object)this, owner, 1.0D, 3.0F, 32.0F));
     }

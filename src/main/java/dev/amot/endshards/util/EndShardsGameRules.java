@@ -16,6 +16,8 @@ public class EndShardsGameRules {
     public static Identifier DO_NIGHT_VISION_FLICKER_CHANNEL = new Identifier(modid, "do_night_vision_flicker_channel");
     public static boolean doNightVisionFlickerGamerule = false;
 
+    public static GameRules.Key<GameRules.BooleanRule> THRALLS_ATTACK_CREEPERS;
+
     public static void init() {
         DO_NIGHT_VISION_FLICKER = GameRuleRegistry.register("doNightVisionFlicker", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false,
                 ((minecraftServer, booleanRule) -> {
@@ -25,5 +27,7 @@ public class EndShardsGameRules {
                         ServerPlayNetworking.send(player, DO_NIGHT_VISION_FLICKER_CHANNEL, buf);
                     }
                 })));
+
+        THRALLS_ATTACK_CREEPERS = GameRuleRegistry.register("thrallsAttackCreepers", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
     }
 }
