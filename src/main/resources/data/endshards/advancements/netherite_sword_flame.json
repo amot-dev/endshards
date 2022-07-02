@@ -1,10 +1,10 @@
 {
-  "parent": "endshards:ender_tool_warp",
+  "parent": "endshards:netherite_ingot",
   "display": {
     "icon": {
       "item": "minecraft:netherite_sword"
     },
-    "title": "Smells like bacon",
+    "title": "Smells Like Bacon",
     "description": "Light an animal on fire without touching it",
     "frame": "task",
     "show_toast": true,
@@ -12,7 +12,7 @@
     "hidden": false
   },
   "criteria": {
-    "ender_sword_warp": {
+    "netherite_sword_flame": {
       "trigger": "endshards:netherite_sword_flame_trigger"
     }
   }

@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "endshards:sculk_gem"
+    },
+    {
+      "item": "endshards:sculk_gem"
+    },
+    {
+      "item": "endshards:sculk_gem"
+    },
+    {
+      "item": "endshards:sculk_gem"
+    },
+    {
+      "item": "endshards:sculk_gem"
+    },
+    {
+      "item": "endshards:sculk_gem"
+    },
+    {
+      "item": "endshards:sculk_gem"
+    },
+    {
+      "item": "endshards:sculk_gem"
+    },
+    {
+      "item": "endshards:sculk_gem"
+    }
+  ],
+  "result": {
+    "item": "endshards:sculk_block"
+  }
+}

@@ -5,10 +5,14 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "ArmorAbilityMixin",
+    "DoNightVisionFlickerMixin",
+    "IBlockInvoker",
     "KnockbackResistanceMixin",
     "RegistryReplaceMixin",
     "SwitchArmorMixin",
     "SwitchElytraMixin",
+    "ThrallMixin",
+    "ThrallOwnerMixin",
     "ToolAbilityMixin"
   ],
   "client": [

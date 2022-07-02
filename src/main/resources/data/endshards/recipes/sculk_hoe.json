@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+      "item": "minecraft:diamond_hoe"
+  },
+  "addition": {
+    "item": "endshards:sculk_gem",
+    "data": {
+      "require": {
+        "Enchantments": [
+          {
+            "id": "endshards:infused",
+            "lvl": 1
+          }
+        ]
+      }
+    }
+  },
+  "result": {
+    "item": "endshards:sculk_hoe"
+  }
+}

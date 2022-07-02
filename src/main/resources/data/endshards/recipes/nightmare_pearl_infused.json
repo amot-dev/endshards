@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "endshards:infusion_core_nightmare",
+      "remainder": {
+        "item": "endshards:infusion_core"
+      }
+    },
+    {
+      "item": "endshards:nightmare_pearl",
+      "data": {
+        "deny": {
+          "Enchantments": [
+            {
+              "id": "endshards:infused",
+              "lvl": 1
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "result": {
+    "item": "endshards:nightmare_pearl",
+    "data" : {
+      "Enchantments": [
+        {
+          "id": "endshards:infused",
+          "lvl": 1
+        }
+      ]
+    }
+  }
+}

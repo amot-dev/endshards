@@ -1,22 +1,30 @@
 package dev.amot.endshards.mixin;
 
+import dev.amot.endshards.armor.SculkArmorItem;
 import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import dev.amot.endshards.armor.EnderArmorItem;
 import dev.amot.endshards.armor.NetheriteArmorItem;
+import dev.amot.endshards.items.SculkGear;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
+import net.minecraft.item.ToolItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
@@ -31,6 +39,8 @@ public abstract class ArmorAbilityMixin {
 
     @Shadow public abstract float getMaxHealth();
 
+    @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot slot);
+
     int getArmorCount(LivingEntity livingEntity, Class<?> armorItemClass) {
         int armorCount = 0;
         for (EquipmentSlot equipmentSlot : EquipmentSlot.values()){
@@ -44,7 +54,7 @@ public abstract class ArmorAbilityMixin {
     }
 
     @Inject(method = "damage", at = @At("RETURN"), cancellable = true)
-    public void injectDamageMethodReturn(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir){
+    public void injectDamageMethodReturn(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         // Handle fall damage with full Ender Armor
         if (cir.getReturnValue() && source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4){
             // Ability is good!
@@ -55,7 +65,7 @@ public abstract class ArmorAbilityMixin {
 
                 float totalDamage = this.modifyAppliedDamage(source, amount);
                 LivingEntity thisEntity = (LivingEntity)(Object)this;
-                if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer){
+                if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer) {
                     EndShardsCriteria.ENDER_ARMOR_FALL_CRITERION.trigger(serverPlayer);
                 }
 
@@ -65,7 +75,7 @@ public abstract class ArmorAbilityMixin {
             else {
                 if (this.activeStatusEffects.get(EnderGear.ENDER_COOLDOWN).getDuration() >= EnderGear.ENDER_COOLDOWN_DURATION_SWORD - 20) {
                     float totalDamage = this.modifyAppliedDamage(source, amount);
-                    LivingEntity thisEntity = (LivingEntity) (Object) this;
+                    LivingEntity thisEntity = (LivingEntity)(Object)this;
                     if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer) {
                         EndShardsCriteria.ENDER_ARMOR_PLAYED_SELF_CRITERION.trigger(serverPlayer);
                     }
@@ -86,6 +96,31 @@ public abstract class ArmorAbilityMixin {
                     if ((LivingEntity)(Object)this instanceof ServerPlayerEntity serverPlayer) {
                         EndShardsCriteria.NETHERITE_ARMOR_PROTECT_CRITERION.trigger(serverPlayer);
                     }
+                }
+            }
+        }
+    }
+
+    @Inject(method = "tick", at = @At("HEAD"))
+    public void injectTickMethodHead(CallbackInfo ci) {
+        // Do Sculk Armor ability
+        LivingEntity thisEntity = (LivingEntity)(Object)this;
+        if (getArmorCount(thisEntity, SculkArmorItem.class) == 4) {
+            this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 0, false, false, true));
+            if (thisEntity instanceof ServerPlayerEntity serverPlayer) {
+                EndShardsCriteria.SCULK_ARMOR_LIGHT.trigger(serverPlayer);
+            }
+        }
+    }
+
+    @Inject(method = "sendEquipmentBreakStatus", at = @At("HEAD"))
+    public void injectSendEquipmentBreakStatusMethod(EquipmentSlot slot, CallbackInfo ci) {
+        // Sculk tool Mending break advancement
+        LivingEntity thisEntity = (LivingEntity)(Object)this;
+        if (thisEntity instanceof ServerPlayerEntity serverPlayer && this.getEquippedStack(slot).getItem() instanceof ToolItem toolInHand) {
+            if (toolInHand.getMaterial() == SculkGear.SCULK_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
+                if (EnchantmentHelper.getLevel(Enchantments.MENDING, this.getEquippedStack(slot)) == 1) {
+                    EndShardsCriteria.SCULK_TOOL_MENDING_BREAK.trigger(serverPlayer);
                 }
             }
         }

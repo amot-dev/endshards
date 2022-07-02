@@ -1,19 +1,28 @@
 {
+  "gamerule.doNightVisionFlicker": "Do flicker effect when Night Vision is about to end",
+  "gamerule.thrallsAttackCreepers": "Thralls will attack Creepers",
+
   "enchantment.endshards.infused": "Infused",
 
   "item.endshards.endshard": "End Shard",
   "item.endshards.ender_ingot": "Ender Ingot",
+  "item.endshards.fear_essence": "Essence of Fear",
   "item.endshards.infusion_core": "Infusion Core",
   "item.endshards.infusion_core_ender": "Infusion Core (Essence of Dragon)",
   "item.endshards.infusion_core_netherite": "Infusion Core (Essence of Wither)",
   "item.endshards.infusion_core_sculk": "Infusion Core (Essence of Warden)",
   "item.endshards.infusion_core_nightmare": "Infusion Core (Essence of Terror)",
+  "item.endshards.nightmare_fuel": "Nightmare Fuel",
+  "item.endshards.nightmare_pearl": "Nightmare Pearl",
   "item.endshards.phantom_soul_fragment": "Phantom Soul Fragment",
+  "item.endshards.sculk_gem": "Sculk Gem",
   "item.endshards.soul_fragment": "Soul Fragment",
   "item.endshards.terror_eyes": "Terror Eyes",
   "item.endshards.warding_heart": "Warding Heart",
 
   "block.endshards.ender_block": "Block of Ender",
+  "block.endshards.sculk_block": "Block of Sculk",
+  "block.endshards.soul_sculk": "Soul-Infused Sculk",
   "block.endshards.strange_crystal": "Strange Crystal",
 
   "item.endshards.ender_helmet": "Ender Helmet",
@@ -30,8 +39,22 @@
   "item.endshards.ender_tool.tooltip": "Warps mined blocks to your inventory",
   "effect.endshards.ender_cooldown": "Ender Cooldown",
 
-  "item.endshards.netherite_armor.tooltip": "SET BONUS: Provides resistance on damage",
+  "item.endshards.netherite_armor.tooltip": "SET BONUS: Provides Resistance on damage",
   "item.endshards.netherite_sword.tooltip": "RIGHT CLICK: Set nearby enemies on fire",
   "item.endshards.netherite_tool.tooltip": "Autosmelts mined blocks",
-  "effect.endshards.netherite_cooldown": "Netherite Cooldown"
+  "effect.endshards.netherite_cooldown": "Netherite Cooldown",
+
+  "item.endshards.sculk_helmet": "Sculk Helmet",
+  "item.endshards.sculk_chestplate": "Sculk Chestplate",
+  "item.endshards.sculk_leggings": "Sculk Leggings",
+  "item.endshards.sculk_boots": "Sculk Boots",
+  "item.endshards.sculk_sword": "Sculk Sword",
+  "item.endshards.sculk_pickaxe": "Sculk Pickaxe",
+  "item.endshards.sculk_shovel": "Sculk Shovel",
+  "item.endshards.sculk_axe": "Sculk Axe",
+  "item.endshards.sculk_hoe": "Sculk Hoe",
+  "item.endshards.sculk_armor.tooltip": "SET BONUS: Provides permanent Night Vision",
+  "item.endshards.sculk_sword.tooltip": "RIGHT CLICK: Enthralls weak-willed enemies",
+  "item.endshards.sculk_tool.tooltip": "All mined blocks drop XP",
+  "effect.endshards.sculk_cooldown": "Sculk Cooldown"
 }

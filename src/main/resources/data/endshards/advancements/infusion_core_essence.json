@@ -1,0 +1,31 @@
+{
+  "parent": "endshards:infusion_core",
+  "display": {
+    "icon": {
+      "item": "endshards:infusion_core_ender"
+    },
+    "title": "It's a Poké Ball!",
+    "description": "Encase the energy of a powerful mob in an Infusion Core",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "infusion_core_essence": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endshards:infusion_core_ender",
+              "endshards:infusion_core_netherite",
+              "endshards:infusion_core_sculk",
+              "endshards:infusion_core_nightmare"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
