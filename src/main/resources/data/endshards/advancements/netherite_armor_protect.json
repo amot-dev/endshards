@@ -1,5 +1,5 @@
 {
-  "parent": "endshards:ender_tool_warp",
+  "parent": "endshards:netherite_ingot",
   "display": {
     "icon": {
       "item": "minecraft:netherite_chestplate"
@@ -12,7 +12,7 @@
     "hidden": false
   },
   "criteria": {
-    "ender_armor_fall": {
+    "netherite_armor_protect": {
       "trigger": "endshards:netherite_armor_protect_trigger"
     }
   }

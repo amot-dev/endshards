@@ -1,5 +1,6 @@
 package dev.amot.endshards.tools;
 
+import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import dev.amot.endshards.items.SculkGear;
 import dev.amot.endshards.util.IThrallOwner;
 import net.minecraft.client.item.TooltipContext;
@@ -11,6 +12,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -58,7 +60,9 @@ public class SculkSwordItem extends SwordItem {
                                     SculkGear.SCULK_COOLDOWN, SculkGear.SCULK_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                             );
 
-                            //TODO: Achievement and stuff
+                            if (user instanceof ServerPlayerEntity serverPlayer) {
+                                EndShardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
+                            }
                         }
                     }
 

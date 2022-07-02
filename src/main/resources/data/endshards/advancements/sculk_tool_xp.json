@@ -1,0 +1,19 @@
+{
+  "parent": "endshards:sculk_gem",
+  "display": {
+    "icon": {
+      "item": "endshards:sculk_pickaxe"
+    },
+    "title": "Mending++",
+    "description": "Get XP from a basic block",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "sculk_tool_xp": {
+      "trigger": "endshards:sculk_tool_xp_trigger"
+    }
+  }
+}

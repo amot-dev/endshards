@@ -21,6 +21,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.BiasedToBottomIntProvider;
+import net.minecraft.util.math.intprovider.IntProvider;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,15 +31,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 
 import static net.minecraft.block.Block.*;
 
 @Mixin(Block.class)
 public abstract class ToolAbilityMixin {
+    private static Map<BlockPos, ServerPlayerEntity> playersWhoMinedBlockAtPos = new LinkedHashMap<>();
 
     @Shadow
     private static void dropStack(World world, Supplier<ItemEntity> itemEntitySupplier, ItemStack stack) {
@@ -66,7 +66,7 @@ public abstract class ToolAbilityMixin {
                         //TODO: Decide whether to increase pick up stats for inventory warps (note: this line only works on client)
                         //player.increaseStat(Stats.PICKED_UP.getOrCreateStat(stackX.getItem()), stackX.getCount());
                         player.playSound(SoundEvents.ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
-                        if (player instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_TOOL_WARP_CRITERION.trigger(serverUser);
+                        if (player instanceof ServerPlayerEntity serverPlayer) EndShardsCriteria.ENDER_TOOL_WARP_CRITERION.trigger(serverPlayer);
                     }
                 });
                 state.onStacksDropped((ServerWorld)world, pos, stack, true);
@@ -109,10 +109,34 @@ public abstract class ToolAbilityMixin {
             if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == SculkGear.SCULK_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
                 // Ore Blocks already do their own XP handling
                 if (!(state.getBlock() instanceof OreBlock)) {
+                    // Don't want to trigger advancement for player unless XP is actually dropped
+                    /*
+                        This is a hacky way of doing this, but to prevent this triggering for the wrong player,
+                        I map the position of the block being broken to the player. This is mainly because
+                        dropStacks is static, which means I can't otherwise map the block being broken to the player
+                     */
+                    if (entity instanceof ServerPlayerEntity serverPlayer) {
+                        playersWhoMinedBlockAtPos.put(pos, serverPlayer);
+                    }
+
                     // Drop 0-1 XP for each block (weighted more to 0)
                     ((IBlockInvoker)state.getBlock()).invokeDropExperienceWhenMined(serverWorld, pos, stack, BiasedToBottomIntProvider.create(0, 1));
                 }
             }
         }
+    }
+
+    @Inject(method = "dropExperienceWhenMined", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;dropExperience(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;I)V"))
+    protected void injectDropExperienceWhenMinedMethod(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience, CallbackInfo ci) {
+        // If XP is dropped, trigger advancement for player who broke the block at pos
+        if (playersWhoMinedBlockAtPos.containsKey(pos)) {
+            EndShardsCriteria.SCULK_TOOL_XP.trigger(playersWhoMinedBlockAtPos.get(pos));
+        }
+    }
+
+    @Inject(method = "dropExperienceWhenMined", at = @At("RETURN"))
+    protected void injectDropExperienceWhenMinedMethodReturn(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience, CallbackInfo ci) {
+        // Remove entry for position of broken block
+        playersWhoMinedBlockAtPos.remove(pos);
     }
 }

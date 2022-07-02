@@ -98,6 +98,9 @@ public abstract class ArmorAbilityMixin {
         LivingEntity thisEntity = (LivingEntity)(Object)this;
         if (getArmorCount(thisEntity, SculkArmorItem.class) == 4) {
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 0, false, false, true));
+            if (thisEntity instanceof ServerPlayerEntity serverPlayer) {
+                EndShardsCriteria.SCULK_ARMOR_LIGHT.trigger(serverPlayer);
+            }
         }
     }
 }

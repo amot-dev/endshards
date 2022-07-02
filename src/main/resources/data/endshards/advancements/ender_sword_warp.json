@@ -1,5 +1,5 @@
 {
-  "parent": "endshards:endshard",
+  "parent": "endshards:infused_ingot",
   "display": {
     "icon": {
       "item": "endshards:ender_sword"

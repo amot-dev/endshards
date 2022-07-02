@@ -1,5 +1,5 @@
 {
-  "parent": "endshards:ender_sword_warp",
+  "parent": "endshards:ender_armor_fall",
   "display": {
     "icon": {
       "item": "endshards:ender_boots"

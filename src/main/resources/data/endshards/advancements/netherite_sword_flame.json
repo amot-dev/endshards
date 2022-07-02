@@ -1,5 +1,5 @@
 {
-  "parent": "endshards:ender_tool_warp",
+  "parent": "endshards:netherite_ingot",
   "display": {
     "icon": {
       "item": "minecraft:netherite_sword"
@@ -12,7 +12,7 @@
     "hidden": false
   },
   "criteria": {
-    "ender_sword_warp": {
+    "netherite_sword_flame": {
       "trigger": "endshards:netherite_sword_flame_trigger"
     }
   }

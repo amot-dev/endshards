@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Mixin(PlayerEntity.class)
-public class ThrallOwnerMixin implements IThrallOwner {
+public abstract class ThrallOwnerMixin implements IThrallOwner {
     @Unique
     private List<MobEntity> thralls = new LinkedList<>();
 
