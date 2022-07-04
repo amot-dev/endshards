@@ -2,6 +2,7 @@ package dev.amot.endshards.tools;
 
 import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -58,12 +59,17 @@ public class NetheriteSwordItem extends SwordItem {
                     if (user instanceof ServerPlayerEntity serverPlayer) {
                         EndShardsCriteria.NETHERITE_SWORD_FLAME_CRITERION.trigger(serverPlayer);
                     }
-                }
-                if (burntMobs > 99) {
-                    //TODO: Detect if the sacrificed mobs actually died
-                    if (user instanceof ServerPlayerEntity serverPlayer) {
-                        EndShardsCriteria.NETHERITE_SWORD_SACRIFICE_CRITERION.trigger(serverPlayer);
+
+                    if (burntMobs > 99) {
+                        //TODO: Detect if the sacrificed mobs actually died
+                        if (user instanceof ServerPlayerEntity serverPlayer) {
+                            EndShardsCriteria.NETHERITE_SWORD_SACRIFICE_CRITERION.trigger(serverPlayer);
+                        }
                     }
+                }
+                else {
+                    MinecraftClient client = MinecraftClient.getInstance();
+                    client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.netherite_sword_fail").formatted(Formatting.RED), false);
                 }
             }
         }

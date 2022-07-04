@@ -39,11 +39,13 @@
   "item.endshards.ender_sword.tooltip": "RIGHT CLICK: Warps enemies to the void",
   "item.endshards.ender_tool.tooltip": "Warps mined blocks to your inventory",
   "effect.endshards.ender_cooldown": "Ender Cooldown",
+  "message.endshards.ender_sword_fail": "This creature cannot be voided",
 
   "item.endshards.netherite_armor.tooltip": "SET BONUS: Provides Resistance on damage",
   "item.endshards.netherite_sword.tooltip": "RIGHT CLICK: Set nearby enemies on fire",
   "item.endshards.netherite_tool.tooltip": "Autosmelts mined blocks",
   "effect.endshards.netherite_cooldown": "Netherite Cooldown",
+  "message.endshards.netherite_sword_fail": "No creatures nearby",
 
   "item.endshards.sculk_helmet": "Sculk Helmet",
   "item.endshards.sculk_chestplate": "Sculk Chestplate",
@@ -57,5 +59,6 @@
   "item.endshards.sculk_armor.tooltip": "SET BONUS: Provides permanent Night Vision",
   "item.endshards.sculk_sword.tooltip": "RIGHT CLICK: Enthralls weak-willed enemies",
   "item.endshards.sculk_tool.tooltip": "All mined blocks drop XP",
-  "effect.endshards.sculk_cooldown": "Sculk Cooldown"
+  "effect.endshards.sculk_cooldown": "Sculk Cooldown",
+  "message.endshards.sculk_sword_fail": "This creature cannot be enthralled"
 }
