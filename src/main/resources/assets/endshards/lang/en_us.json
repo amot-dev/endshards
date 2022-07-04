@@ -1,4 +1,5 @@
 {
+  "gamerule.doEasyArmorSwitch": "Allows right-click switching equipped armor",
   "gamerule.doNightVisionFlicker": "Do flicker effect when Night Vision is about to end",
   "gamerule.thrallsAttackCreepers": "Thralls will attack Creepers",
 

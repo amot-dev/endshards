@@ -12,6 +12,8 @@ import net.minecraft.world.GameRules;
 import static dev.amot.endshards.EndShards.modid;
 
 public class EndShardsGameRules {
+    public static GameRules.Key<GameRules.BooleanRule> DO_EASY_ARMOR_SWITCH;
+
     public static GameRules.Key<GameRules.BooleanRule> DO_NIGHT_VISION_FLICKER;
     public static Identifier DO_NIGHT_VISION_FLICKER_CHANNEL = new Identifier(modid, "do_night_vision_flicker_channel");
     public static boolean doNightVisionFlickerGamerule = false;
@@ -19,6 +21,7 @@ public class EndShardsGameRules {
     public static GameRules.Key<GameRules.BooleanRule> THRALLS_ATTACK_CREEPERS;
 
     public static void init() {
+        DO_EASY_ARMOR_SWITCH = GameRuleRegistry.register("doEasyArmorSwitch", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
         DO_NIGHT_VISION_FLICKER = GameRuleRegistry.register("doNightVisionFlicker", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false,
                 ((minecraftServer, booleanRule) -> {
                     PacketByteBuf buf = PacketByteBufs.create();
@@ -28,6 +31,6 @@ public class EndShardsGameRules {
                     }
                 })));
 
-        THRALLS_ATTACK_CREEPERS = GameRuleRegistry.register("thrallsAttackCreepers", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false));
+        THRALLS_ATTACK_CREEPERS = GameRuleRegistry.register("thrallsAttackCreepers", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(false));
     }
 }

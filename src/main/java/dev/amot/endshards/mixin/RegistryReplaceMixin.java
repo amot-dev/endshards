@@ -20,7 +20,7 @@ public abstract class RegistryReplaceMixin<T> {
     @Shadow @Final private Map<RegistryKey<T>, RegistryEntry.Reference<T>> keyToEntry;
 
     @Inject(method = "replace", at = @At(value = "INVOKE", target = "Ljava/util/Map;remove(Ljava/lang/Object;)Ljava/lang/Object;"))
-    void injectReplaceMethod(OptionalInt rawId, RegistryKey<T> key, T newEntry, Lifecycle lifecycle, CallbackInfoReturnable<RegistryEntry<T>> cir){
+    void removeKeyToEntry(OptionalInt rawId, RegistryKey<T> key, T newEntry, Lifecycle lifecycle, CallbackInfoReturnable<RegistryEntry<T>> cir){
         // Fixes an issue in the Minecraft code which prevents replacing registry entries
         this.keyToEntry.remove(key);
     }

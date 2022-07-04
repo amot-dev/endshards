@@ -54,9 +54,9 @@ public abstract class ArmorAbilityMixin {
     }
 
     @Inject(method = "damage", at = @At("RETURN"), cancellable = true)
-    public void injectDamageMethodReturn(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    public void doEnderArmorAbility(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         // Handle fall damage with full Ender Armor
-        if (cir.getReturnValue() && source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4){
+        if (cir.getReturnValue() && source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4) {
             // Ability is good!
             if (!this.activeStatusEffects.containsKey(EnderGear.ENDER_COOLDOWN)) {
                 this.addStatusEffect(new StatusEffectInstance(
@@ -82,9 +82,13 @@ public abstract class ArmorAbilityMixin {
                 }
             }
         }
-        // Handle non-fall damage with Netherite Armor
-        else if (cir.getReturnValue() && !source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, NetheriteArmorItem.class) == 4) {
+    }
+
+    @Inject(method = "damage", at = @At("RETURN"))
+    public void doNetheriteArmorAbility(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if (cir.getReturnValue() && !source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, NetheriteArmorItem.class) == 4) {
             if (!this.activeStatusEffects.containsKey(NetheriteGear.NETHERITE_COOLDOWN)) {
+                // Only trigger ability if health is going below half
                 if (this.getHealth() <= this.getMaxHealth()/2) {
                     this.addStatusEffect(new StatusEffectInstance(
                             NetheriteGear.NETHERITE_COOLDOWN, NetheriteGear.NETHERITE_COOLDOWN_DURATION_ARMOR, 0, false, false, true)
@@ -102,8 +106,7 @@ public abstract class ArmorAbilityMixin {
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
-    public void injectTickMethodHead(CallbackInfo ci) {
-        // Do Sculk Armor ability
+    public void doSculkArmorAbility(CallbackInfo ci) {
         LivingEntity thisEntity = (LivingEntity)(Object)this;
         if (getArmorCount(thisEntity, SculkArmorItem.class) == 4) {
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 0, false, false, true));
@@ -114,8 +117,7 @@ public abstract class ArmorAbilityMixin {
     }
 
     @Inject(method = "sendEquipmentBreakStatus", at = @At("HEAD"))
-    public void injectSendEquipmentBreakStatusMethod(EquipmentSlot slot, CallbackInfo ci) {
-        // Sculk tool Mending break advancement
+    public void triggerSculkToolMendingBreakAdvancement(EquipmentSlot slot, CallbackInfo ci) {
         LivingEntity thisEntity = (LivingEntity)(Object)this;
         if (thisEntity instanceof ServerPlayerEntity serverPlayer && this.getEquippedStack(slot).getItem() instanceof ToolItem toolInHand) {
             if (toolInHand.getMaterial() == SculkGear.SCULK_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
