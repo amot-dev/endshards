@@ -2,6 +2,7 @@ package dev.amot.endshards.tools;
 
 import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import dev.amot.endshards.util.ISacrificedEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
@@ -38,38 +39,41 @@ public class NetheriteSwordItem extends SwordItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         if (user.world instanceof ServerWorld serverWorld) {
             if (!user.getActiveStatusEffects().containsKey(NetheriteGear.NETHERITE_COOLDOWN)) {
-
-                // Burnt valid mobs
-                int burntMobs = 0;
+                // Get living entities in range
                 List<LivingEntity> targets = serverWorld.getEntitiesByClass(
                         LivingEntity.class, (new Box(user.getBlockPos())).expand(abilityRange), Entity::isAlive
                 );
+                int burnedMobs = 0;
+
+                // Burn all valid targets
                 for (LivingEntity target : targets) {
                     if (target.equals(user)) continue;
                     if (target.isWet() || target.inPowderSnow) continue;
                     target.setOnFireFor(abilityDuration);
-                    burntMobs++;
+                    burnedMobs++;
                 }
 
-                if (burntMobs > 0) {
+                // Only do stuff if targets were burned
+                if (burnedMobs > 0) {
                     user.addStatusEffect(new StatusEffectInstance(
                             NetheriteGear.NETHERITE_COOLDOWN, NetheriteGear.NETHERITE_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                     );
-
                     if (user instanceof ServerPlayerEntity serverPlayer) {
                         EndShardsCriteria.NETHERITE_SWORD_FLAME_CRITERION.trigger(serverPlayer);
-                    }
-
-                    if (burntMobs > 99) {
-                        //TODO: Detect if the sacrificed mobs actually died
-                        if (user instanceof ServerPlayerEntity serverPlayer) {
-                            EndShardsCriteria.NETHERITE_SWORD_SACRIFICE_CRITERION.trigger(serverPlayer);
-                        }
                     }
                 }
                 else {
                     MinecraftClient client = MinecraftClient.getInstance();
                     client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.netherite_sword_fail").formatted(Formatting.RED), false);
+                }
+
+                // If Sacrifice advancement is possible, set targets to check for this
+                if (burnedMobs > 99) {
+                    if (user instanceof ServerPlayerEntity serverPlayer) {
+                        for (LivingEntity target : targets) {
+                            ((ISacrificedEntity)target).setSacrificingPlayer(serverPlayer);
+                        }
+                    }
                 }
             }
         }
