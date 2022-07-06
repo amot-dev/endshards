@@ -46,6 +46,9 @@ public class SculkSwordItem extends SwordItem {
     );
     private static final int AbilityMaxThrallCount = 3;
 
+    public static final float SoulFragmentDropChance = 0.005F;
+    public static final float SoulFragmentLootingMultiplier = 0.002F;
+
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
