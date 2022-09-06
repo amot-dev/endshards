@@ -20,9 +20,9 @@ public class InfusedEnchantment extends Enchantment {
 
     List<Item> acceptableItems = Arrays.asList(
             EndShardsItems.ENDER_INGOT,
-            Items.NETHERITE_INGOT
-            //EndShardsItems.SCULK_GEM
-            //EndShardsItems.NIGHTMARE_PEARL
+            Items.NETHERITE_INGOT,
+            EndShardsItems.SCULK_GEM,
+            EndShardsItems.NIGHTMARE_PEARL
     );
 
     @Override
