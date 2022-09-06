@@ -45,11 +45,11 @@ public abstract class ToolAbilityMixin {
     }
 
     @Inject(method = "afterBreak", at = @At("HEAD"), cancellable = true)
-    public void injectAfterBreakMethod(World world, PlayerEntity player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
+    public void doEnderToolAbility(World world, PlayerEntity player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
         Item itemInHand = player.getEquippedStack(EquipmentSlot.MAINHAND).getItem();
         // Only run for Ender Tools
         if (itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderGear.ENDER_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
-            // Only run once as the method cancels early for Ender Tools
+            // This only runs once as the method cancels early for Ender Tools
             player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
             player.addExhaustion(0.005F);
 
@@ -76,7 +76,7 @@ public abstract class ToolAbilityMixin {
     }
 
     @Inject(method = "getDroppedStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;)Ljava/util/List;", at = @At("RETURN"), cancellable = true)
-    private static void injectGetDroppedStacksMethod(BlockState state, ServerWorld world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
+    private static void doNetheriteToolAbility(BlockState state, ServerWorld world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
         List<ItemStack> smeltedDrops = new ArrayList<>();
         List<ItemStack> unsmeltedDrops = cir.getReturnValue();
         // Only run for Netherite Tools
@@ -103,7 +103,7 @@ public abstract class ToolAbilityMixin {
     }
 
     @Inject(method = "dropStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;onStacksDropped(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/item/ItemStack;Z)V"))
-    private static void injectDropStacksMethod(BlockState state, World world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack, CallbackInfo ci) {
+    private static void doSculkToolAbility(BlockState state, World world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack, CallbackInfo ci) {
         if (world instanceof ServerWorld serverWorld) {
             // Only run for Sculk Tools
             if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == SculkGear.SCULK_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
@@ -127,7 +127,7 @@ public abstract class ToolAbilityMixin {
     }
 
     @Inject(method = "dropExperienceWhenMined", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/Block;dropExperience(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;I)V"))
-    protected void injectDropExperienceWhenMinedMethod(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience, CallbackInfo ci) {
+    protected void triggerSculkToolXPAdvancement(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience, CallbackInfo ci) {
         // If XP is dropped, trigger advancement for player who broke the block at pos
         if (playersWhoMinedBlockAtPos.containsKey(pos)) {
             EndShardsCriteria.SCULK_TOOL_XP.trigger(playersWhoMinedBlockAtPos.get(pos));
@@ -135,7 +135,7 @@ public abstract class ToolAbilityMixin {
     }
 
     @Inject(method = "dropExperienceWhenMined", at = @At("RETURN"))
-    protected void injectDropExperienceWhenMinedMethodReturn(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience, CallbackInfo ci) {
+    protected void clearTriggerForSculkToolXPAdvancement(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience, CallbackInfo ci) {
         // Remove entry for position of broken block
         playersWhoMinedBlockAtPos.remove(pos);
     }

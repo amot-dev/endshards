@@ -13,7 +13,7 @@ public abstract class DoNightVisionFlickerMixin<T> {
 
 
     @Inject(method = "getNightVisionStrength", at = @At(value = "RETURN"), cancellable = true)
-    private static void injectGetNightVisionStrengthMethodReturn(LivingEntity entity, float tickDelta, CallbackInfoReturnable<Float> cir){
+    private static void disableNightVisionFlicker(LivingEntity entity, float tickDelta, CallbackInfoReturnable<Float> cir){
         if (!EndShardsGameRules.doNightVisionFlickerGamerule) {
             cir.setReturnValue(1.0F);
         }

@@ -2,6 +2,7 @@ package dev.amot.endshards.tools;
 
 import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -57,7 +58,10 @@ public class EnderSwordItem extends SwordItem {
 
                     if (user instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_SWORD_WARP_CRITERION.trigger(serverUser);
                 }
-                //TODO: Play a teleport fail sound if entity does not match parameters
+                else {
+                    MinecraftClient client = MinecraftClient.getInstance();
+                    client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.ender_sword_fail").formatted(Formatting.RED), false);
+                }
             }
         }
         return ActionResult.PASS;

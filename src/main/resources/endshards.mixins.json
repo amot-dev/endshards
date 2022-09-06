@@ -9,6 +9,8 @@
     "IBlockInvoker",
     "KnockbackResistanceMixin",
     "RegistryReplaceMixin",
+    "SacrificedEntityMixin",
+    "SacrificingPlayerMixin",
     "SwitchArmorMixin",
     "SwitchElytraMixin",
     "ThrallMixin",

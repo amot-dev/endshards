@@ -34,12 +34,11 @@ public abstract class ArmorAbilityMixin {
     @Shadow @Final private Map<StatusEffect, StatusEffectInstance> activeStatusEffects;
     @Shadow public abstract boolean addStatusEffect(StatusEffectInstance effect);
     @Shadow protected abstract float modifyAppliedDamage(DamageSource source, float amount);
-
     @Shadow public abstract float getHealth();
-
     @Shadow public abstract float getMaxHealth();
-
     @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot slot);
+
+    boolean totemUsed = false;
 
     int getArmorCount(LivingEntity livingEntity, Class<?> armorItemClass) {
         int armorCount = 0;
@@ -53,10 +52,24 @@ public abstract class ArmorAbilityMixin {
         return armorCount;
     }
 
-    @Inject(method = "damage", at = @At("RETURN"), cancellable = true)
-    public void injectDamageMethodReturn(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    //TODO: Find better way to handle damage (I don't like this injection point needed in 1.19)
+    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
+    public void doEnderArmorAbility(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if (((LivingEntity)(Object)this).isInvulnerableTo(source)) {
+            cir.setReturnValue(false);
+            cir.cancel();
+        }
+        else if (((LivingEntity)(Object)this).world.isClient) {
+            cir.setReturnValue(false);
+            cir.cancel();
+        }
+        else if (((LivingEntity)(Object)this).isDead()) {
+            cir.setReturnValue(false);
+            cir.cancel();
+        }
+
         // Handle fall damage with full Ender Armor
-        if (cir.getReturnValue() && source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4){
+        if (source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4) {
             // Ability is good!
             if (!this.activeStatusEffects.containsKey(EnderGear.ENDER_COOLDOWN)) {
                 this.addStatusEffect(new StatusEffectInstance(
@@ -64,27 +77,50 @@ public abstract class ArmorAbilityMixin {
                 );
 
                 float totalDamage = this.modifyAppliedDamage(source, amount);
-                LivingEntity thisEntity = (LivingEntity)(Object)this;
+                LivingEntity thisEntity = (LivingEntity) (Object) this;
                 if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer) {
                     EndShardsCriteria.ENDER_ARMOR_FALL_CRITERION.trigger(serverPlayer);
                 }
 
                 cir.setReturnValue(false);
+                cir.cancel();
             }
-            // Ability is not good!
-            else {
+        }
+    }
+
+    @Inject(method = "tryUseTotem", at = @At("RETURN"))
+    public void enderArmorPlayedSelfTotemValidator(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
+        totemUsed = cir.getReturnValue();
+    }
+
+    @Inject(method = "damage", at = @At("RETURN"))
+    public void enderArmorPlayedSelfTrigger(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        boolean enderArmorAbilityValid = (getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4);
+        // Local variable will be destroyed when out of scope
+        boolean totemUsedLocal = totemUsed;
+        totemUsed = false;
+
+        // Want to trigger Played Self Criterion even if totem is used
+        if (enderArmorAbilityValid && (cir.getReturnValue() || totemUsedLocal) && source.isFromFalling()) {
+            // Only trigger if Ender Cooldown has been active for a second or less
+            if (this.activeStatusEffects.containsKey(EnderGear.ENDER_COOLDOWN)) {
                 if (this.activeStatusEffects.get(EnderGear.ENDER_COOLDOWN).getDuration() >= EnderGear.ENDER_COOLDOWN_DURATION_SWORD - 20) {
                     float totalDamage = this.modifyAppliedDamage(source, amount);
                     LivingEntity thisEntity = (LivingEntity)(Object)this;
-                    if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer) {
+                    // Make sure lethal damage was taken
+                    if ((totalDamage >= thisEntity.getHealth() || totemUsedLocal) && thisEntity instanceof ServerPlayerEntity serverPlayer) {
                         EndShardsCriteria.ENDER_ARMOR_PLAYED_SELF_CRITERION.trigger(serverPlayer);
                     }
                 }
             }
         }
-        // Handle non-fall damage with Netherite Armor
-        else if (cir.getReturnValue() && !source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, NetheriteArmorItem.class) == 4) {
+    }
+
+    @Inject(method = "damage", at = @At("RETURN"))
+    public void doNetheriteArmorAbility(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if (cir.getReturnValue() && !source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, NetheriteArmorItem.class) == 4) {
             if (!this.activeStatusEffects.containsKey(NetheriteGear.NETHERITE_COOLDOWN)) {
+                // Only trigger ability if health is going below half
                 if (this.getHealth() <= this.getMaxHealth()/2) {
                     this.addStatusEffect(new StatusEffectInstance(
                             NetheriteGear.NETHERITE_COOLDOWN, NetheriteGear.NETHERITE_COOLDOWN_DURATION_ARMOR, 0, false, false, true)
@@ -102,8 +138,7 @@ public abstract class ArmorAbilityMixin {
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
-    public void injectTickMethodHead(CallbackInfo ci) {
-        // Do Sculk Armor ability
+    public void doSculkArmorAbility(CallbackInfo ci) {
         LivingEntity thisEntity = (LivingEntity)(Object)this;
         if (getArmorCount(thisEntity, SculkArmorItem.class) == 4) {
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 0, false, false, true));
@@ -114,8 +149,7 @@ public abstract class ArmorAbilityMixin {
     }
 
     @Inject(method = "sendEquipmentBreakStatus", at = @At("HEAD"))
-    public void injectSendEquipmentBreakStatusMethod(EquipmentSlot slot, CallbackInfo ci) {
-        // Sculk tool Mending break advancement
+    public void triggerSculkToolMendingBreakAdvancement(EquipmentSlot slot, CallbackInfo ci) {
         LivingEntity thisEntity = (LivingEntity)(Object)this;
         if (thisEntity instanceof ServerPlayerEntity serverPlayer && this.getEquippedStack(slot).getItem() instanceof ToolItem toolInHand) {
             if (toolInHand.getMaterial() == SculkGear.SCULK_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {

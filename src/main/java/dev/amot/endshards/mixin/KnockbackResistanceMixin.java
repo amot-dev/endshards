@@ -3,6 +3,7 @@ package dev.amot.endshards.mixin;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import dev.amot.endshards.items.EnderGear;
+import dev.amot.endshards.items.SculkGear;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -28,15 +29,15 @@ public abstract class KnockbackResistanceMixin {
     @Shadow @Final protected float knockbackResistance;
 
     @Inject(method = "<init>", at = @At(value = "RETURN"))
-    private void constructor(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings, CallbackInfo ci) {
-        UUID uUID = MODIFIERS[slot.getEntitySlotId()];
+    private void addKnockbackResistance(ArmorMaterial material, EquipmentSlot slot, Item.Settings settings, CallbackInfo ci) {
+        UUID uuid = MODIFIERS[slot.getEntitySlotId()];
 
-        if (material == EnderGear.ENDER_ARMOR_MATERIAL) {
+        if (material == EnderGear.ENDER_ARMOR_MATERIAL || material == SculkGear.SCULK_ARMOR_MATERIAL) {
             ImmutableMultimap.Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
             this.attributeModifiers.forEach(builder::put);
             builder.put(
                     EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
-                    new EntityAttributeModifier(uUID,
+                    new EntityAttributeModifier(uuid,
                             "Armor knockback resistance",
                             this.knockbackResistance,
                             EntityAttributeModifier.Operation.ADDITION

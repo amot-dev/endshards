@@ -3,6 +3,7 @@ package dev.amot.endshards.tools;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import dev.amot.endshards.items.SculkGear;
 import dev.amot.endshards.util.IThrallOwner;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.*;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -45,6 +46,9 @@ public class SculkSwordItem extends SwordItem {
     );
     private static final int AbilityMaxThrallCount = 3;
 
+    public static final float SoulFragmentDropChance = 0.005F;
+    public static final float SoulFragmentLootingMultiplier = 0.002F;
+
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
@@ -65,7 +69,10 @@ public class SculkSwordItem extends SwordItem {
                             }
                         }
                     }
-
+                }
+                else {
+                    MinecraftClient client = MinecraftClient.getInstance();
+                    client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.sculk_sword_fail").formatted(Formatting.RED), false);
                 }
             }
         }
