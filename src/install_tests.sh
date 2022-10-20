@@ -4,12 +4,12 @@ then
   exit
 fi
 
-rm -rf ../run/saves/$1/datapacks/tests
-cp -r tests ../run/saves/$1/datapacks/tests
+rm -rf $1/datapacks/tests
+cp -r tests $1/datapacks/tests
 
 export PLAYERNAME=$2
 
-for i in $(find ../run/saves/$1/datapacks/ -type f -name "*.mcfunction")
+for i in $(find $1/datapacks/ -type f -name "*.mcfunction")
 do
     envsubst < $i | sponge $i
 done
