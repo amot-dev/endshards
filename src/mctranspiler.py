@@ -1,4 +1,7 @@
-import sys, getopt
+import sys
+import os
+import getopt
+import shutil
 from math import gcd
 
 
@@ -6,7 +9,7 @@ def interpret_wait(infile, outfile):
 	waits = dict()
 	wait_time = 0
 	total_wait = 0
-	wait_gcd = 1
+	wait_gcd = 0
 	iteration = 0
 
 	# Parse for waits, find gcd of wait, store wait time of each line (except comments and wait commands)
@@ -21,7 +24,10 @@ def interpret_wait(infile, outfile):
 				except ValueError:
 					print("Syntax Error near 'wait'")
 					sys.exit(1)
-				wait_gcd = gcd(wait_gcd, wait_time)
+				if wait_gcd == 0:
+					wait_gcd = wait_time
+				else:
+					wait_gcd = gcd(wait_gcd, wait_time)
 				total_wait += wait_time
 				continue
 			waits[num] = total_wait
@@ -34,18 +40,16 @@ def interpret_wait(infile, outfile):
 		with open(outfile, "w") as output:
 			for num, line in enumerate(source):
 				if line.startswith("wait"):
-					print(line)
 					continue
 				elif line.startswith("#") or not line.strip():
 					output.write(line)
 				elif num in waits:
 					iteration = int(waits[num] / wait_gcd)
 					newline = "execute if score $PLAYERNAME iter matches " + str(iteration) + " run " + line
-					print(waits[num])
 					output.write(newline)
 
 	# Add looping
-	test_name = infile
+	test_name = infile.partition("functions/")[2].replace(".mctest", "")
 	with open(outfile, "a") as output:
 		output.write("\n\n")
 		output.write("# Loop control\n")
@@ -59,14 +63,16 @@ def interpret_wait(infile, outfile):
 				wait_gcd) + "\n")
 		output.write("execute if score $PLAYERNAME iter matches " + str(
 			iteration + 1) + " run scoreboard players set $PLAYERNAME iter 0\n")
-		output.write("\n# This test runs for " + str(total_wait + wait_gcd) + " ticks\n")
+		output.write("\n# This test runs for " + str(total_wait + wait_gcd) + " ticks")
 
 
-def process_playername(infile, outfile, playername):
-	with open(infile, "r") as source:
-		with open(outfile, "w") as output:
-			for line in source:
-				output.write(line.replace("$PLAYERNAME", playername))
+def process_playername(filename, playername):
+	shutil.copyfile(filename, filename + ".temp")
+	with open(filename + ".temp", "r") as temp:
+		with open(filename, "w") as f:
+			for line in temp:
+				f.write(line.replace("$PLAYERNAME", playername))
+	os.remove(filename + ".temp")
 
 
 def main(argv):
@@ -88,7 +94,7 @@ def main(argv):
 
 	output = source.replace(".mctest", ".mcfunction")
 	interpret_wait(source, output)
-	process_playername(output, output, playername)
+	process_playername(output, playername)
 
 
 if __name__ == "__main__":
