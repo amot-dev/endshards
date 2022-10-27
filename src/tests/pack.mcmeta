@@ -1,6 +1,6 @@
  {
      "pack": {
          "pack_format": 10,
-         "description": "Test suite for Endshards"
+         "description": "Test suite for End Shards. See documentation.md for additional info on each test."
      }
  }
