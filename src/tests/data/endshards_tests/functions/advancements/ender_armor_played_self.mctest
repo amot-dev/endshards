@@ -1,0 +1,41 @@
+# Prepare
+tellraw @a {"text":"[-- advancements/ender_armor_played_self --]","color":"aqua"}
+tellraw @a {"text":"[-- no_totem --]","color":"aqua"}
+function endshards_tests:clear
+item replace entity $PLAYERNAME armor.head with endshards:ender_helmet
+item replace entity $PLAYERNAME armor.chest with endshards:ender_chestplate
+item replace entity $PLAYERNAME armor.legs with endshards:ender_leggings
+item replace entity $PLAYERNAME armor.feet with endshards:ender_boots
+item attribute $PLAYERNAME minecraft:generic.max_health base set 1
+effect give $PLAYERNAME minecraft:poison 1 1
+
+# Run
+wait 20
+execute at $PLAYERNAME run tp $PLAYERNAME ~ ~4 ~
+effect give $PLAYERNAME endshards:ender_cooldown 60 1
+
+# Check
+wait 20
+execute as @a[advancements={endshards:ender_armor_played_self=true}] run scoreboard players set @s pass 1
+execute if score $PLAYERNAME pass matches 0 run tellraw @a {"text":"[-- Test Failed --]","color":"red"}
+execute if score $PLAYERNAME pass matches 1 run tellraw @a {"text":"[-- Test Passed --]","color":"green"}
+
+# Prepare
+wait 1
+tellraw @a {"text":"[-- totem --]","color":"aqua"}
+effect clear $PLAYERNAME
+item replace entity $PLAYERNAME weapon.offhand with minecraft:totem_of_undying
+
+# Run
+execute at $PLAYERNAME run tp $PLAYERNAME ~ ~4 ~
+effect give $PLAYERNAME endshards:ender_cooldown 60 1
+
+# Check conditions 2
+wait 20
+execute as @a[advancements={endshards:ender_armor_played_self=true}] run scoreboard players set @s pass 1
+execute if score $PLAYERNAME pass matches 0 run tellraw @a {"text":"[-- Test Failed --]","color":"red"}
+execute if score $PLAYERNAME pass matches 1 run tellraw @a {"text":"[-- Test Passed --]","color":"green"}
+
+# Cleanup
+wait 1
+attribute $PLAYERNAME minecraft:generic.max_health base set 20

@@ -7,9 +7,7 @@ fi
 rm -rf $1/datapacks/tests
 cp -r tests $1/datapacks/tests
 
-export PLAYERNAME=$2
-
-for i in $(find $1/datapacks/ -type f -name "*.mcfunction")
+for i in $(find $1/datapacks/ -type f -name "*.mctest")
 do
-    envsubst < $i | sponge $i
+    python3 mctranspiler -s $i -p $2
 done

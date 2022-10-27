@@ -31,11 +31,15 @@ Available on GitHub. Will soon be available on Modrinth and Curseforge.
  - Copy the endshards jar file into `.minecraft/mods`
 
 ## Testing
-I've included a test suite I made using a data pack and mcfunctions. To try it out:
- - Run `.install_tests.sh <path_to_world> <playername>`
- - Open the world in Minecraft (with the mod installed) and run `/reload`
+I've included a test suite I made using a data pack and mcfunctions. If you've used mcfunctions before,
+you'll know that anything involving time delays is horrendous to work with. To remedy that, I've created
+a new pseudo-language, mctest, to write tests. Tests can be transpiled to mcfunctions with `mctranspiler.py`,
+which is also handled automatically when installing tests with `install_tests.sh`. To try out the tests:
+ - Ensure Python 3 is installed
+ - Run `.install_tests.sh <path_to_world_folder> <playername>`
+ - Open the world in Minecraft (with the mod installed)
  - Start a test run with `/function endshards_tests:dispatch`
    - You can optionally also start tests individually
    - First, run `/function endshards_tests:init`
-   - Then, run the test(s). For example, `/function endshards_tests/advancements/ender_armor_played_self/totem`
+   - Then, run the test(s). For example, `/function endshards_tests/advancements/ender_armor_played_self`
    - When done, run `/function endshards_tests:deinit`
