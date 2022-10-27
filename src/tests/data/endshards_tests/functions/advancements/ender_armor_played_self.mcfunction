@@ -1,11 +1,10 @@
 # Prepare test
-execute if score $PLAYERNAME iter matches 0 run tellraw @a {"text":"[-- advancements/ender_armor_played_self/totem --]","color":"aqua"}
+execute if score $PLAYERNAME iter matches 0 run tellraw @a {"text":"[-- advancements/ender_armor_played_self --]","color":"aqua"}
 execute if score $PLAYERNAME iter matches 0 run function endshards_tests:clear
 execute if score $PLAYERNAME iter matches 0 run item replace entity $PLAYERNAME armor.head with endshards:ender_helmet
 execute if score $PLAYERNAME iter matches 0 run item replace entity $PLAYERNAME armor.chest with endshards:ender_chestplate
 execute if score $PLAYERNAME iter matches 0 run item replace entity $PLAYERNAME armor.legs with endshards:ender_leggings
 execute if score $PLAYERNAME iter matches 0 run item replace entity $PLAYERNAME armor.feet with endshards:ender_boots
-execute if score $PLAYERNAME iter matches 0 run item replace entity $PLAYERNAME weapon.offhand with minecraft:totem_of_undying
 execute if score $PLAYERNAME iter matches 0 run attribute $PLAYERNAME minecraft:generic.max_health base set 1
 execute if score $PLAYERNAME iter matches 0 run effect give $PLAYERNAME minecraft:poison 1 1
 
@@ -25,5 +24,5 @@ execute if score $PLAYERNAME iter matches 2 run attribute $PLAYERNAME minecraft:
 scoreboard players add $PLAYERNAME iter 1
 execute if score $PLAYERNAME iter matches 3.. run scoreboard players set $PLAYERNAME loop 0
 execute if score $PLAYERNAME iter matches ..2 run scoreboard players set $PLAYERNAME loop 1
-execute if score $PLAYERNAME loop matches 1 run schedule function endshards_tests:advancements/ender_armor_played_self/totem 20
+execute if score $PLAYERNAME loop matches 1 run schedule function endshards_tests:advancements/ender_armor_played_self 20
 execute if score $PLAYERNAME iter matches 3 run scoreboard players set $PLAYERNAME iter 0
