@@ -5,12 +5,15 @@ import shutil
 from math import gcd
 
 
-def interpret_wait(infile, outfile):
+def interpret_wait(outfile):
 	waits = dict()
 	wait_time = 0
 	total_wait = 0
 	wait_gcd = 0
 	iteration = 0
+
+	infile = outfile + ".temp"
+	shutil.copyfile(outfile, infile)
 
 	# Parse for waits, find gcd of wait, store wait time of each line (except comments and wait commands)
 	with open(infile, "r") as source:
@@ -23,6 +26,7 @@ def interpret_wait(infile, outfile):
 					wait_time = int(wait_time_str)
 				except ValueError:
 					print("Syntax Error near 'wait'")
+					os.remove(infile)
 					sys.exit(1)
 				if wait_gcd == 0:
 					wait_gcd = wait_time
@@ -33,6 +37,7 @@ def interpret_wait(infile, outfile):
 			waits[num] = total_wait
 
 	if total_wait == 0:
+		os.remove(infile)
 		return
 
 	# Remove wait statements and assign iterations to lines
@@ -49,30 +54,31 @@ def interpret_wait(infile, outfile):
 					output.write(newline)
 
 	# Add looping
-	test_name = infile.partition("functions/")[2].replace(".mctest", "")
+	test_name = outfile.partition("functions/")[2].replace(".mcfunction", "")
 	with open(outfile, "a") as output:
 		output.write("\n\n")
 		output.write("# Loop control\n")
 		output.write("scoreboard players add $PLAYERNAME iter 1\n")
-		output.write("execute if score $PLAYERNAME iter matches " + str(
-			iteration + 1) + ".. run scoreboard players set $PLAYERNAME loop 0\n")
-		output.write("execute if score $PLAYERNAME iter matches .." + str(
-			iteration) + " run scoreboard players set $PLAYERNAME loop 1\n")
-		output.write(
-			"execute if score $PLAYERNAME loop matches 1 run schedule function endshards_tests:" + test_name + " " + str(
-				wait_gcd) + "\n")
-		output.write("execute if score $PLAYERNAME iter matches " + str(
-			iteration + 1) + " run scoreboard players set $PLAYERNAME iter 0\n")
+		output.write("execute if score $PLAYERNAME iter matches "
+			+ str(iteration + 1) + ".. run scoreboard players set $PLAYERNAME loop 0\n")
+		output.write("execute if score $PLAYERNAME iter matches .."
+			+ str(iteration) + " run scoreboard players set $PLAYERNAME loop 1\n")
+		output.write("execute if score $PLAYERNAME loop matches 1 run schedule function endshards_tests:"
+			+ test_name + " " + str(wait_gcd) + "\n")
+		output.write("execute if score $PLAYERNAME iter matches "
+			+ str(iteration + 1) + " run function endshards_tests:cleanup\n")
 		output.write("\n# This test runs for " + str(total_wait + wait_gcd) + " ticks")
 
+	os.remove(infile)
 
-def process_playername(filename, playername):
-	shutil.copyfile(filename, filename + ".temp")
-	with open(filename + ".temp", "r") as temp:
-		with open(filename, "w") as f:
-			for line in temp:
-				f.write(line.replace("$PLAYERNAME", playername))
-	os.remove(filename + ".temp")
+def process_playername(outfile, playername):
+	infile = outfile + ".temp"
+	shutil.copyfile(outfile, infile)
+	with open(infile, "r") as source:
+		with open(outfile, "w") as output:
+			for line in source:
+				output.write(line.replace("$PLAYERNAME", playername))
+	os.remove(infile)
 
 
 def main(argv):
@@ -92,10 +98,13 @@ def main(argv):
 		elif opt in ("-p", "--playername"):
 			playername = arg
 
+	# Convert to mcfunction
 	output = source.replace(".mctest", ".mcfunction")
-	interpret_wait(source, output)
-	process_playername(output, playername)
+	shutil.copyfile(source, output)
 
+	# Process mctest
+	interpret_wait(output)
+	process_playername(output, playername)
 
 if __name__ == "__main__":
 	main(sys.argv[1:])

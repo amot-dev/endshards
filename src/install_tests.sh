@@ -7,7 +7,8 @@ fi
 rm -rf "$1"/datapacks/tests
 cp -r tests "$1"/datapacks/tests
 
-for i in "$(find "$1"/datapacks/ -type f -name "*.mctest")"
+shopt -s globstar
+for i in "$1"/datapacks/**/*.mctest
 do
     python3 mctranspiler.py -s "$i" -p "$2"
     rm -f "$i"

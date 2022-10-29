@@ -6,4 +6,4 @@ scoreboard objectives add pass dummy
 gamerule doImmediateRespawn true
 gamerule sendCommandFeedback true
 
-function endshards_tests:clear
+function endshards_tests:cleanup
