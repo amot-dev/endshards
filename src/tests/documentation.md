@@ -93,7 +93,6 @@ be seen while running tests from the Abilities section.
 | Totem        | ender_armor_played_self granted     | <li>Ender Armor</li><li>Ender Cooldown 59s</li><li>Totem of Undying</li> |
 | Low Cooldown | ender_armor_played_self not granted | <li>Ender Armor</li><li>Ender Cooldown <59s</li>                         |
 | No Cooldown  | ender_armor_played_self not granted | <li>Ender Armor</li>                                                     |
-| No Armor     | ender_armor_played_self not granted | None                                                                     |
 
 ### netherite_sword_sacrifice
 | Case          | Pass Condition                        | Requirements                               |

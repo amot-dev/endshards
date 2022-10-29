@@ -1,7 +1,6 @@
-tellraw @a {"text":"[-- advancements/ender_armor_played_self --]","color":"aqua"}
+tellraw @a {"text":"[-- challenges/ender_armor_played_self --]","color":"aqua"}
 
-# Base Case
-tellraw @a {"text":"[-- no_totem --]","color":"aqua"}
+tellraw @a {"text":"[-- Base Case --]","color":"aqua"}
 function endshards_tests:prep_case
 item replace entity $PLAYERNAME armor.head with endshards:ender_helmet
 item replace entity $PLAYERNAME armor.chest with endshards:ender_chestplate
@@ -14,10 +13,9 @@ wait 30
 execute as @a[advancements={endshards:ender_armor_played_self=true}] run scoreboard players set @s pass 1
 execute if score $PLAYERNAME pass matches 0 run tellraw @a {"text":"[-- Test Failed --]","color":"red"}
 execute if score $PLAYERNAME pass matches 1 run tellraw @a {"text":"[-- Test Passed --]","color":"green"}
-
-# Totem Case
 wait 31
-tellraw @a {"text":"[-- totem --]","color":"aqua"}
+
+tellraw @a {"text":"[-- Totem Case --]","color":"aqua"}
 function endshards_tests:prep_case
 item replace entity $PLAYERNAME weapon.offhand with minecraft:totem_of_undying
 execute at $PLAYERNAME run tp $PLAYERNAME ~ ~24 ~
@@ -27,11 +25,25 @@ wait 30
 execute as @a[advancements={endshards:ender_armor_played_self=true}] run scoreboard players set @s pass 1
 execute if score $PLAYERNAME pass matches 0 run tellraw @a {"text":"[-- Test Failed --]","color":"red"}
 execute if score $PLAYERNAME pass matches 1 run tellraw @a {"text":"[-- Test Passed --]","color":"green"}
-
 clear $PLAYERNAME minecraft:totem_of_undying
+wait 31
 
-# False Positive Active Cooldown Case
-#TODO
+tellraw @a {"text":"[-- Low Cooldown --]","color":"aqua"}
+function endshards_tests:prep_case
+execute at $PLAYERNAME run tp $PLAYERNAME ~ ~24 ~
+effect give $PLAYERNAME endshards:ender_cooldown 31 1
+wait 30
 
-# False Positive No Armor Case
-#TODO
+execute as @a[advancements={endshards:ender_armor_played_self=false}] run scoreboard players set @s pass 1
+execute if score $PLAYERNAME pass matches 0 run tellraw @a {"text":"[-- Test Failed --]","color":"red"}
+execute if score $PLAYERNAME pass matches 1 run tellraw @a {"text":"[-- Test Passed --]","color":"green"}
+wait 31
+
+tellraw @a {"text":"[-- No Cooldown --]","color":"aqua"}
+function endshards_tests:prep_case
+execute at $PLAYERNAME run tp $PLAYERNAME ~ ~24 ~
+wait 30
+
+execute as @a[advancements={endshards:ender_armor_played_self=false}] run scoreboard players set @s pass 1
+execute if score $PLAYERNAME pass matches 0 run tellraw @a {"text":"[-- Test Failed --]","color":"red"}
+execute if score $PLAYERNAME pass matches 1 run tellraw @a {"text":"[-- Test Passed --]","color":"green"}
