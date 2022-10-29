@@ -4,6 +4,57 @@ import getopt
 import shutil
 from math import gcd
 
+def print_error(message, temp_file):
+	print(message)
+	os.remove(temp_file)
+	sys.exit(1)
+
+
+def process_tests(outfile):
+	test_name = ""
+	case_name = ""
+
+	infile = outfile + ".temp"
+	shutil.copyfile(outfile, infile)
+	with open(infile, "r") as source:
+		with open(outfile, "w") as output:
+			for line in source:
+				# Print test start message
+				if line.startswith("test "):
+					if test_name != "":
+						print_error("Error: Multiple tests in one file", infile)
+					test_name = line.replace("test ", "").strip("\n")
+					output.write('tellraw @a ["",{"text":"[Test]","color":"aqua"},{"text":" Started ","color":"light_purple"},{"text":"'
+						+ test_name + '","color":"white"}]\n')
+				# Print case start message
+				elif line.startswith("case "):
+					if test_name == "":
+						print_error("Error: Case outside of test", infile)
+					elif case_name != "":
+						print_error("Error: Pass not set by case", infile)
+					case_name = line.replace("case ", "").strip("\n")
+					output.write('tellraw @a ["",{"text":"[Test]","color":"aqua"},{"text":" ' + case_name + ' Starting","color":"yellow"}]\n')
+				# Print case pass/fail messages after pass is set
+				elif "pass 1" in line:
+					if case_name == "":
+						print_error("Error: Pass set outside of case", infile)
+					output.write(line.strip("\n") + "\n")
+					output.write('execute if score $PLAYERNAME pass matches 0 run tellraw @a ["",{"text":"[Test]","color":"aqua"},{"text":" '
+						+ case_name + ' Failed","color":"red"}]\n')
+					output.write('execute if score $PLAYERNAME pass matches 1 run tellraw @a ["",{"text":"[Test]","color":"aqua"},{"text":" '
+						+ case_name + ' Passed","color":"green"}]\n')
+					case_name = ""
+				else:
+					output.write(line)
+
+	# Print test completed message
+	if test_name != "":
+		with open(outfile, "a") as output:
+			output.write("\n")
+			output.write('tellraw @a ["",{"text":"[Test]","color":"aqua"},{"text":" Finished ","color":"light_purple"},{"text":"'
+				+ test_name + '","color":"white"}]\n')
+	os.remove(infile)
+
 
 def interpret_wait(outfile):
 	waits = dict()
@@ -25,9 +76,7 @@ def interpret_wait(outfile):
 				try:
 					wait_time = int(wait_time_str)
 				except ValueError:
-					print("Syntax Error near 'wait'")
-					os.remove(infile)
-					sys.exit(1)
+					print_error("Error: invalid wait", infile)
 				if wait_gcd == 0:
 					wait_gcd = wait_time
 				else:
@@ -56,7 +105,7 @@ def interpret_wait(outfile):
 	# Add looping
 	test_name = outfile.partition("functions/")[2].replace(".mcfunction", "")
 	with open(outfile, "a") as output:
-		output.write("\n\n")
+		output.write("\n")
 		output.write("# Loop control\n")
 		output.write("scoreboard players add $PLAYERNAME iter 1\n")
 		output.write("execute if score $PLAYERNAME iter matches "
@@ -70,6 +119,7 @@ def interpret_wait(outfile):
 		output.write("\n# This test runs for " + str(total_wait + wait_gcd) + " ticks")
 
 	os.remove(infile)
+
 
 def process_playername(outfile, playername):
 	infile = outfile + ".temp"
@@ -103,6 +153,7 @@ def main(argv):
 	shutil.copyfile(source, output)
 
 	# Process mctest
+	process_tests(output)
 	interpret_wait(output)
 	process_playername(output, playername)
 

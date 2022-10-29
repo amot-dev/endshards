@@ -1,9 +1,10 @@
-tellraw @a {"text":"[-- Test Run Complete --]","color":"aqua"}
+tellraw @a ["",{"text":"[Test]","color":"aqua"},{"text":" Testing Offline","color":"gold"}]
 
 scoreboard objectives remove iter
 scoreboard objectives remove loop
 scoreboard objectives remove pass
 gamerule doImmediateRespawn false
+gamerule doMobSpawning true
 gamerule sendCommandFeedback true
 
 function endshards_tests:cleanup
