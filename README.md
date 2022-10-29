@@ -43,3 +43,5 @@ which is also handled automatically when installing tests with `install_tests.sh
    - First, run `/function endshards_tests:init`
    - Then, run the test(s). For example, `/function endshards_tests/advancements/ender_armor_played_self`
    - When done, run `/function endshards_tests:deinit`
+
+For more information on the purpose of each test and pass conditions, see the [Test Documentation](https://github.com/amot-dev/endshards/blob/mcfunction-tests/src/tests/documentation.md).
