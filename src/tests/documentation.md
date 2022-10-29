@@ -64,6 +64,7 @@ These tests are meant to ensure the various abilities work as advertised on the 
 | Active Cooldown     | Target does not become thrall when using ability | <li>Sculk Sword</li><li>Sculk Cooldown</li> |
 | Out of Thrall Slots | Target does not become thrall when using ability | <li>Sculk Sword</li><li>3 Thralls</li>      |
 | Invalid Target      | Target does not become thrall when using ability | <li>Sculk Sword</li><li>Invalid Mob</li>    |
+
 *These tests only check the Sculk Sword's ability to create Thralls.
 See the dedicated section for testing Thrall behaviour.*
 
