@@ -1,5 +1,0 @@
-schedule function endshards_tests:deinit 0
-schedule function endshards_tests:init 10
-schedule function endshards_tests:advancements/ender_armor_played_self/no_totem 20
-schedule function endshards_tests:advancements/ender_armor_played_self/totem 80
-schedule function endshards_tests:deinit 140
