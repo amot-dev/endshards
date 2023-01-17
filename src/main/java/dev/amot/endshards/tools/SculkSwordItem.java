@@ -52,9 +52,6 @@ public class SculkSwordItem extends SwordItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
-            //EndShards.LOGGER.info("Info for " + entity.getUuidAsString());
-            //EndShards.LOGGER.info("\tThrall? " + ((IThrall)entity).isThrall());
-            //EndShards.LOGGER.info("\tOwner? " + ((IThrall)entity).getOwner());
             if (!user.getActiveStatusEffects().containsKey(SculkGear.SCULK_COOLDOWN)) {
                 if (AbilityAllowedEntities.contains(entity.getType())) {
                     if (((IThrallOwner)user).getThrallCount() < AbilityMaxThrallCount) {

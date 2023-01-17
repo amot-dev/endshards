@@ -17,7 +17,7 @@ public class ThrallTargetPredicate<LivingEntity> implements Predicate<LivingEnti
     public boolean test(LivingEntity targetEntity) {
         if (targetEntity instanceof MobEntity targetMob) {
             // Return true if mob is targeting or player
-            if (Objects.equals(targetMob.getTarget(), this.thrallOwner)) {
+            if (Objects.equals(targetMob.getTarget(), this.thrallOwner) || targetMob.getAttacker() == this.thrallOwner) {
                 // Don't attack creepers unless enabled
                 if (targetMob instanceof CreeperEntity) {
                     return targetMob.world.getGameRules().getBoolean(EndShardsGameRules.THRALLS_ATTACK_CREEPERS);
