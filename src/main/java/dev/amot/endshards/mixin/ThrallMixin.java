@@ -4,7 +4,10 @@ import dev.amot.endshards.util.FollowPlayerGoal;
 import dev.amot.endshards.util.IThrall;
 import dev.amot.endshards.util.ThrallTargetPredicate;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import org.spongepowered.asm.mixin.Final;
@@ -33,9 +36,28 @@ public abstract class ThrallMixin implements IThrall {
         // Clear targeting goals and put in thrall goals
         this.clearActiveTarget();
         this.targetSelector.clear();
-        this.goalSelector.remove(new LookAtEntityGoal((MobEntity)(Object)this, PlayerEntity.class, 8.0F));
         this.targetSelector.add(3, new ActiveTargetGoal<>((MobEntity)(Object)this, MobEntity.class, true, new ThrallTargetPredicate<>(thrallOwner)));
         this.goalSelector.add(4, new FollowPlayerGoal((MobEntity)(Object)this, thrallOwner, 1.0D, 3.0F, 32.0F));
+
+        // Clear other goals
+        removeGoal(LookAtEntityGoal.class);
+        removeGoal(WanderAroundGoal.class);
+        removeGoal(WanderAroundFarGoal.class);
+
+        // Zombie-type mobs
+        removeGoal(StepAndDestroyBlockGoal.class);
+        removeGoal(MoveThroughVillageGoal.class);
+
+        // Get rid of zombie reinforcements
+        if ((MobEntity)(Object)this instanceof ZombieEntity zombie) {
+            EntityAttributeInstance reinforcements = zombie.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+            if (reinforcements != null) reinforcements.setBaseValue(0.0);
+        }
+    }
+
+    @Unique
+    private void removeGoal(Class<? extends Goal> goalToRemove) {
+        this.goalSelector.getGoals().removeIf(goal -> goalToRemove.isInstance(goal.getGoal()));
     }
 
     @Inject(method = "writeCustomDataToNbt", at = @At(value = "RETURN"))
