@@ -23,16 +23,19 @@ import java.util.UUID;
 public abstract class ThrallOwnerMixin implements IThrallOwner {
     @Unique
     private List<UUID> thrallUUIDs = new LinkedList<>();
+    private List<UUID> lostThrallUUIDs = new LinkedList<>();
 
     @Unique
     public boolean addThrall(MobEntity thrall) {
         if (((IThrall)thrall).isThrall()) return false;
 
-        ((IThrall)thrall).makeThrallFor((PlayerEntity)(Object)this);
+        ((IThrall)thrall).convertToThrall();
+        ((IThrall)thrall).assignOwner((PlayerEntity)(Object)this);
         this.thrallUUIDs.add(thrall.getUuid());
-        thrall.setGlowing(true);
 
-        // Clear targeting of all thralls to prevent thralls attacking each other
+        thrall.setGlowing(true);//debug
+
+        // Clear targeting of all thralls to prevent thralls attacking each other (temp measure)
         if (((PlayerEntity)(Object)this).getWorld() instanceof ServerWorld serverWorld) {
             for (UUID ownedThrallUUID : this.thrallUUIDs) {
                 ((IThrall)Objects.requireNonNull(serverWorld.getEntity(ownedThrallUUID))).clearActiveTarget();
@@ -67,10 +70,22 @@ public abstract class ThrallOwnerMixin implements IThrallOwner {
             UUID thrallUUID = UUID.fromString(nbtElement.asString());
             // Search World for thrall matching UUID and reinstate Thrall
             if (((PlayerEntity)(Object)this).getWorld() instanceof ServerWorld serverWorld) {
+
                 this.thrallUUIDs.add(thrallUUID);
-                //#TODO: Figure out what happens if the entity is unloaded
-                this.addThrall((MobEntity) serverWorld.getEntity(thrallUUID));
+                IThrall thrall = (IThrall)serverWorld.getEntity(thrallUUID);
+                // Thrall is unloaded
+                if (thrall == null) lostThrallUUIDs.add(thrallUUID);
+                // Thrall is loaded
+                else thrall.assignOwner(((PlayerEntity)(Object)this));
             }
+        }
+    }
+
+    @Unique
+    public void findLostThrall(MobEntity potentialThrall) {
+        if (lostThrallUUIDs.contains(potentialThrall.getUuid())) {
+            ((IThrall)potentialThrall).assignOwner(((PlayerEntity)(Object)this));
+            lostThrallUUIDs.remove(potentialThrall.getUuid());
         }
     }
 

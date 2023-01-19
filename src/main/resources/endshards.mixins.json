@@ -8,6 +8,7 @@
     "DoNightVisionFlickerMixin",
     "IBlockInvoker",
     "KnockbackResistanceMixin",
+    "LostThrallMixin",
     "RegistryReplaceMixin",
     "SacrificedEntityMixin",
     "SacrificingPlayerMixin",

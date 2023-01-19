@@ -29,15 +29,23 @@ public abstract class ThrallMixin implements IThrall {
     @Unique private boolean isThrall = false;
 
     @Unique
-    public void makeThrallFor(PlayerEntity thrallOwner) {
-        this.isThrall = true;
+    public void assignOwner(PlayerEntity thrallOwner) {
         this.thrallOwnerUUID = thrallOwner.getUuid();
 
-        // Clear targeting goals and put in thrall goals
+        // Set targeting goals
         this.clearActiveTarget();
         this.targetSelector.clear();
         this.targetSelector.add(3, new ActiveTargetGoal<>((MobEntity)(Object)this, MobEntity.class, true, new ThrallTargetPredicate<>(thrallOwner)));
         this.goalSelector.add(4, new FollowPlayerGoal((MobEntity)(Object)this, thrallOwner, 1.0D, 3.0F, 32.0F));
+    }
+
+    @Unique
+    public void convertToThrall() {
+        this.isThrall = true;
+
+        // Clear targeting goals
+        this.clearActiveTarget();
+        this.targetSelector.clear();
 
         // Clear other goals
         removeGoal(LookAtEntityGoal.class);
@@ -73,7 +81,7 @@ public abstract class ThrallMixin implements IThrall {
         // If mob has ThrallOwner nbt, it must be a thrall
         if (nbt.containsUuid("ThrallOwner")) {
             this.thrallOwnerUUID = nbt.getUuid("ThrallOwner");
-            this.isThrall = true;
+            this.convertToThrall();
         }
     }
 
