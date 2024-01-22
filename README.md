@@ -1,6 +1,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![Endshards Version](https://img.shields.io/github/v/release/amot-dev/endshards?include_prereleases)
-![Endshards Source](https://img.shields.io/badge/source-v0.2.6-orange)
+![Endshards Source](https://img.shields.io/badge/source-v0.2.7-orange)
 ![Minecraft Version](https://img.shields.io/badge/Minecraft-1.19.0-blue)
 ![FabricMC Version](https://img.shields.io/badge/FabricMC-0.56.0%2B1.19.0-blue)
 # Endshards <img src="src/main/resources/assets/endshards/icon.png" width="32">
