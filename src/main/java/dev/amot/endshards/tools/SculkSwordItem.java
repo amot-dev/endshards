@@ -23,6 +23,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+import static dev.amot.endshards.util.AbilityConstants.THRALL_ALLOWED_ENTITIES;
+
 public class SculkSwordItem extends SwordItem {
     public SculkSwordItem() {
         super(SculkGear.SCULK_TOOL_MATERIAL, 8, -2.4F, new Settings().group(ItemGroup.COMBAT));
@@ -32,18 +34,6 @@ public class SculkSwordItem extends SwordItem {
         tooltip.add(Text.translatable("item.endshards.sculk_sword.tooltip").formatted(Formatting.DARK_BLUE));
     }
 
-    private static final List<EntityType<?>> AbilityAllowedEntities = List.of(
-            EntityType.CAVE_SPIDER,
-            EntityType.DROWNED,
-            EntityType.HUSK,
-            EntityType.SKELETON,
-            EntityType.SPIDER,
-            EntityType.STRAY,
-            EntityType.WITHER_SKELETON,
-            EntityType.ZOMBIE,
-            EntityType.ZOMBIE_VILLAGER,
-            EntityType.ZOMBIFIED_PIGLIN
-    );
     private static final int AbilityMaxThrallCount = 3;
 
     public static final float SoulFragmentDropChance = 0.005F;
@@ -52,11 +42,8 @@ public class SculkSwordItem extends SwordItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
-            //EndShards.LOGGER.info("Info for " + entity.getUuidAsString());
-            //EndShards.LOGGER.info("\tThrall? " + ((IThrall)entity).isThrall());
-            //EndShards.LOGGER.info("\tOwner? " + ((IThrall)entity).getOwner());
             if (!user.getActiveStatusEffects().containsKey(SculkGear.SCULK_COOLDOWN)) {
-                if (AbilityAllowedEntities.contains(entity.getType())) {
+                if (THRALL_ALLOWED_ENTITIES.contains(entity.getType())) {
                     if (((IThrallOwner)user).getThrallCount() < AbilityMaxThrallCount) {
                         // Try to add thrall
                         if (((IThrallOwner)user).addThrall((MobEntity)entity)) {

@@ -2,9 +2,13 @@ package dev.amot.endshards.util;
 
 import net.minecraft.entity.player.PlayerEntity;
 
+import java.util.UUID;
+
 public interface IThrall {
-    void makeThrallFor(PlayerEntity owner);
-    void clearActiveTarget();
     boolean isThrall();
-    PlayerEntity getOwner();
+    UUID getThrallOwnerUUID();
+    void assignOwner(PlayerEntity owner);
+    void convertToThrall();
+    void clearActiveTarget();
+
 }

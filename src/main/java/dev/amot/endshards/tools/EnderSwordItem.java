@@ -4,7 +4,6 @@ import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnGroup;
@@ -22,6 +21,8 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+import static dev.amot.endshards.util.AbilityConstants.ENDER_WARP_BANNED_ENTITIES;
+
 public class EnderSwordItem extends SwordItem {
     public EnderSwordItem() {
         super(EnderGear.ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
@@ -31,22 +32,11 @@ public class EnderSwordItem extends SwordItem {
         tooltip.add(Text.translatable("item.endshards.ender_sword.tooltip").formatted(Formatting.DARK_BLUE));
     }
 
-    private final List<EntityType<?>> AbilityBannedEntities = List.of(
-            EntityType.ELDER_GUARDIAN,
-            EntityType.ENDER_DRAGON,
-            EntityType.ENDERMAN,
-            EntityType.ENDERMITE,
-            EntityType.RAVAGER,
-            EntityType.SHULKER,
-            EntityType.WARDEN,
-            EntityType.WITHER
-    );
-
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.world instanceof ServerWorld) {
             if (!user.getActiveStatusEffects().containsKey(EnderGear.ENDER_COOLDOWN)) {
-                if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !AbilityBannedEntities.contains(entity.getType())) {
+                if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !ENDER_WARP_BANNED_ENTITIES.contains(entity.getType())) {
                     entity.setPos(entity.getX(), -1000F, entity.getZ());
                     user.world.sendEntityStatus(entity, (byte)46);
                     stack.damage(1, user, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
