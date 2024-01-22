@@ -3,7 +3,7 @@
 ![Endshards Source](https://img.shields.io/badge/source-v0.2.6-orange)
 ![Minecraft Version](https://img.shields.io/badge/Minecraft-1.19.0-blue)
 ![FabricMC Version](https://img.shields.io/badge/FabricMC-0.56.0%2B1.19.0-blue)
-# End Shards
+# Endshards <img src="src/main/resources/assets/endshards/icon.png" width="32">
 ## About
 Endshards is a mod for those players who are bored in the endgame.
 Sure, building has its appeal, but you want challenge! Adventure!
@@ -22,7 +22,8 @@ a variety of biomes and an exciting new boss fight!
 More info on the [wiki](https://github.com/asd1o1/endshards/wiki).
 
 ## Downloads
-Available on GitHub. Will soon be available on Modrinth and Curseforge.
+Available on [GitHub](https://github.com/amot-dev/endshards/releases) and [Modrinth](https://modrinth.com/mod/endshards).
+Will soon be available on Curseforge.
 
 ## Installation
  - Install Fabric for the desired Minecraft version
