@@ -53,7 +53,7 @@ public abstract class ThrallMixin implements IThrall {
                 new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.DEFENSE)));
         this.targetSelector.add(4, new ActiveTargetGoal<>((MobEntity)(Object)this, LivingEntity.class, true,
                 new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.OFFENSE)));
-        this.goalSelector.add(1, new FollowPlayerGoal((MobEntity)(Object)this, thrallOwner, 1.0D, 3.0F, 32.0F));
+        this.goalSelector.add(1, new FollowPlayerGoal((MobEntity)(Object)this, thrallOwner, 1.0D, 10.0F, 4.0F));
     }
 
     @Unique
@@ -118,8 +118,8 @@ public abstract class ThrallMixin implements IThrall {
         if (enemyPlayer == null) return;
 
         // If enemy player is owner, or enemy player is not attacking/attacked, clear target
-        if (Objects.equals(enemyPlayer, owner)) ((MobEntity)(Object)this).setTarget(null);
+        if (Objects.equals(enemyPlayer, owner)) this.clearActiveTarget();
         if (!Objects.equals(enemyPlayer.getAttacking(), owner) && !Objects.equals(owner.getAttacking(), enemyPlayer))
-            ((MobEntity)(Object)this).setTarget(null);
+            this.clearActiveTarget();
     }
 }
