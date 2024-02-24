@@ -59,6 +59,10 @@ public class SculkSwordItem extends SwordItem {
                     client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.sculk_sword_fail").formatted(Formatting.RED), false);
                 }
             }
+            else {
+                MinecraftClient client = MinecraftClient.getInstance();
+                client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.cooldown_active").formatted(Formatting.RED), false);
+            }
         }
         return ActionResult.PASS;
     }

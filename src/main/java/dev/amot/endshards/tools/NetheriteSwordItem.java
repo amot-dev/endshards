@@ -76,6 +76,10 @@ public class NetheriteSwordItem extends SwordItem {
                     }
                 }
             }
+            else {
+                MinecraftClient client = MinecraftClient.getInstance();
+                client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.cooldown_active").formatted(Formatting.RED), false);
+            }
         }
         return TypedActionResult.pass(user.getStackInHand(hand));
     }
