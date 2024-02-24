@@ -14,7 +14,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -41,19 +40,17 @@ public class SculkSwordItem extends SwordItem {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (user.world instanceof ServerWorld) {
-            if (!user.getActiveStatusEffects().containsKey(SculkGear.SCULK_COOLDOWN)) {
+        if (user instanceof ServerPlayerEntity serverPlayer) {
+            if (!serverPlayer.getActiveStatusEffects().containsKey(SculkGear.SCULK_COOLDOWN)) {
                 if (THRALL_ALLOWED_ENTITIES.contains(entity.getType())) {
-                    if (((IThrallOwner)user).getThrallCount() < AbilityMaxThrallCount) {
+                    if (((IThrallOwner)serverPlayer).getThrallCount() < AbilityMaxThrallCount) {
                         // Try to add thrall
-                        if (((IThrallOwner)user).addThrall((MobEntity)entity)) {
-                            user.addStatusEffect(new StatusEffectInstance(
+                        if (((IThrallOwner)serverPlayer).addThrall((MobEntity)entity)) {
+                            serverPlayer.addStatusEffect(new StatusEffectInstance(
                                     SculkGear.SCULK_COOLDOWN, SculkGear.SCULK_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                             );
 
-                            if (user instanceof ServerPlayerEntity serverPlayer) {
-                                EndShardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
-                            }
+                            EndShardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
                         }
                     }
                 }
