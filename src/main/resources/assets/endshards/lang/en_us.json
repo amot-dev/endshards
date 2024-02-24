@@ -1,4 +1,6 @@
 {
+  "message.endshards.cooldown_active": "Cooldown still active",
+
   "gamerule.doEasyArmorSwitch": "Allows right-click switching equipped armor",
   "gamerule.doNightVisionFlicker": "Do flicker effect when Night Vision is about to end",
   "gamerule.thrallsAttackCreepers": "Thralls will attack Creepers",
@@ -60,5 +62,7 @@
   "item.endshards.sculk_sword.tooltip": "RIGHT CLICK: Enthralls weak-willed enemies",
   "item.endshards.sculk_tool.tooltip": "All mined blocks drop XP",
   "effect.endshards.sculk_cooldown": "Sculk Cooldown",
+  "message.endshards.sculk_sword_thrall_count": "Created enthralled. You may enthrall %s more",
+  "message.endshards.sculk_sword_thrall_count_over": "Thrall limit has been reached",
   "message.endshards.sculk_sword_fail": "This creature cannot be enthralled"
 }

@@ -8,7 +8,6 @@
     "DoNightVisionFlickerMixin",
     "IBlockInvoker",
     "KnockbackResistanceMixin",
-    "LostThrallMixin",
     "RegistryReplaceMixin",
     "SacrificedEntityMixin",
     "SacrificingPlayerMixin",
@@ -16,6 +15,7 @@
     "SwitchElytraMixin",
     "ThrallMixin",
     "ThrallOwnerMixin",
+    "ThrallProjectileCollisionMixin",
     "ToolAbilityMixin"
   ],
   "client": [

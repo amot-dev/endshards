@@ -10,7 +10,7 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Util;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,7 +27,7 @@ public abstract class ThrallMixin implements IThrall {
     @Shadow @Final protected GoalSelector goalSelector;
     @Shadow @Final protected GoalSelector targetSelector;
 
-    @Unique private UUID thrallOwnerUUID = null;
+    @Unique private UUID thrallOwnerUUID = Util.NIL_UUID;
     @Unique private boolean isThrall = false;
 
     @Unique
@@ -53,7 +53,7 @@ public abstract class ThrallMixin implements IThrall {
                 new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.DEFENSE)));
         this.targetSelector.add(4, new ActiveTargetGoal<>((MobEntity)(Object)this, LivingEntity.class, true,
                 new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.OFFENSE)));
-        this.goalSelector.add(1, new FollowPlayerGoal((MobEntity)(Object)this, thrallOwner, 1.0D, 3.0F, 32.0F));
+        this.goalSelector.add(1, new FollowPlayerGoal((MobEntity)(Object)this, thrallOwner, 1.0D, 10.0F, 4.0F));
     }
 
     @Unique
@@ -94,14 +94,18 @@ public abstract class ThrallMixin implements IThrall {
     //TODO: Find a way to clear invalid targets without doing all these checks every tick
     @Inject(method = "baseTick", at = @At(value = "RETURN"))
     public void clearInvalidTarget(CallbackInfo ci) {
-        // Check if the thrall has a target
+        // Return if mob is not a thrall
+        if (!this.isThrall()) return;
+
+        // Return if thrall does not have a target
         LivingEntity target = ((MobEntity)(Object)this).getTarget();
         if (target == null) return;
 
+        // Find owner (can be null)
         PlayerEntity owner = target.getWorld().getPlayerByUuid(thrallOwnerUUID);
         PlayerEntity enemyPlayer = null;
 
-        // Find enemy player (owner of targeted thrall or targeted player)
+        // Find enemy player (targeted player or owner of targeted thrall)
         if (target instanceof MobEntity targetMob) {
             if (((IThrall)targetMob).isThrall()) {
                 enemyPlayer = targetMob.getWorld().getPlayerByUuid(((IThrall)targetMob).getThrallOwnerUUID());
@@ -114,25 +118,8 @@ public abstract class ThrallMixin implements IThrall {
         if (enemyPlayer == null) return;
 
         // If enemy player is owner, or enemy player is not attacking/attacked, clear target
-        if (Objects.equals(enemyPlayer, owner)) ((MobEntity)(Object)this).setTarget(null);
+        if (Objects.equals(enemyPlayer, owner)) this.clearActiveTarget();
         if (!Objects.equals(enemyPlayer.getAttacking(), owner) && !Objects.equals(owner.getAttacking(), enemyPlayer))
-            ((MobEntity)(Object)this).setTarget(null);
-    }
-
-    @Inject(method = "writeCustomDataToNbt", at = @At(value = "RETURN"))
-    public void writeThrallDataToNbt(NbtCompound nbt, CallbackInfo ci) {
-        // If this is a thrall, save the Thrall Owner Nbt
-        if (thrallOwnerUUID != null) {
-            nbt.putUuid("ThrallOwner", thrallOwnerUUID);
-        }
-    }
-
-    @Inject(method = "readCustomDataFromNbt", at = @At(value = "RETURN"))
-    public void readThrallDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
-        // If mob has ThrallOwner nbt, it must be a thrall
-        if (nbt.containsUuid("ThrallOwner")) {
-            this.thrallOwnerUUID = nbt.getUuid("ThrallOwner");
-            this.convertToThrall();
-        }
+            this.clearActiveTarget();
     }
 }
