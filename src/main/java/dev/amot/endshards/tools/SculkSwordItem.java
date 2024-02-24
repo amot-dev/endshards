@@ -41,6 +41,7 @@ public class SculkSwordItem extends SwordItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user instanceof ServerPlayerEntity serverPlayer) {
+            MinecraftClient client = MinecraftClient.getInstance();
             if (!serverPlayer.getActiveStatusEffects().containsKey(SculkGear.SCULK_COOLDOWN)) {
                 if (THRALL_ALLOWED_ENTITIES.contains(entity.getType())) {
                     if (((IThrallOwner)serverPlayer).getThrallCount() < AbilityMaxThrallCount) {
@@ -49,18 +50,22 @@ public class SculkSwordItem extends SwordItem {
                             serverPlayer.addStatusEffect(new StatusEffectInstance(
                                     SculkGear.SCULK_COOLDOWN, SculkGear.SCULK_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                             );
-
+                            client.inGameHud.setOverlayMessage(Text.translatable(
+                                    "message.endshards.sculk_sword_thrall_count",
+                                    AbilityMaxThrallCount - ((IThrallOwner)serverPlayer).getThrallCount()
+                            ).formatted(Formatting.DARK_GREEN), false);
                             EndShardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
                         }
                     }
+                    else {
+                        client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.sculk_sword_thrall_count_over").formatted(Formatting.RED), false);
+                    }
                 }
                 else {
-                    MinecraftClient client = MinecraftClient.getInstance();
                     client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.sculk_sword_fail").formatted(Formatting.RED), false);
                 }
             }
             else {
-                MinecraftClient client = MinecraftClient.getInstance();
                 client.inGameHud.setOverlayMessage(Text.translatable("message.endshards.cooldown_active").formatted(Formatting.RED), false);
             }
         }
