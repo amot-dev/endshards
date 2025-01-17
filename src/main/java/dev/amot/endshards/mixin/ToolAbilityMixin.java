@@ -35,6 +35,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 import static net.minecraft.block.Block.*;
+import static net.minecraft.sound.SoundEvents.ENTITY_ITEM_PICKUP;
 
 @Mixin(Block.class)
 public abstract class ToolAbilityMixin {
@@ -65,7 +66,7 @@ public abstract class ToolAbilityMixin {
                     else {
                         //TODO: Decide whether to increase pick up stats for inventory warps (note: this line only works on client)
                         //player.increaseStat(Stats.PICKED_UP.getOrCreateStat(stackX.getItem()), stackX.getCount());
-                        player.playSound(SoundEvents.ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
+                        player.playSound(ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
                         if (player instanceof ServerPlayerEntity serverPlayer) EndShardsCriteria.ENDER_TOOL_WARP_CRITERION.trigger(serverPlayer);
                     }
                 });

@@ -1,9 +1,9 @@
-{
+{i
   "schemaVersion": 1,
   "id": "endshards",
   "version": "${version}",
 
-  "name": "End Shards",
+  "name": "Endshards",
   "description": "A mod to expand the armor/weapons/tools progression to the end. This new set will be equal to netherite, but different.",
   "authors": [
     "amot-dev"
