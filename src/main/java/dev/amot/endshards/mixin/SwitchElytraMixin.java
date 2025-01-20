@@ -1,6 +1,6 @@
 package dev.amot.endshards.mixin;
 
-import dev.amot.endshards.util.EndShardsGameRules;
+import dev.amot.endshards.util.EndshardsGameRules;
 import dev.amot.endshards.util.ISwitchElytra;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
@@ -21,7 +21,7 @@ public abstract class SwitchElytraMixin implements ISwitchElytra {
     @Inject(method = "use", at = @At("RETURN"), cancellable = true)
     public void switchElytra(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         // Only do easy armor switch with gamerule
-        if (world instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(EndShardsGameRules.DO_EASY_ARMOR_SWITCH)) {
+        if (world instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(EndshardsGameRules.DO_EASY_ARMOR_SWITCH)) {
             // If right-click equip fails, do it anyway
             if (!cir.getReturnValue().getResult().isAccepted()) {
                 ItemStack stackInHand = user.getStackInHand(hand);

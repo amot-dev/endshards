@@ -19,7 +19,7 @@
     "ToolAbilityMixin"
   ],
   "client": [
-    "EndShardsMixin"
+    "EndshardsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

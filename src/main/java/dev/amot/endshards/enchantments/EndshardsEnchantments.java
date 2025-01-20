@@ -4,9 +4,9 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static dev.amot.endshards.EndShards.modid;
+import static dev.amot.endshards.Endshards.modid;
 
-public class EndShardsEnchantments {
+public class EndshardsEnchantments {
     public static final Enchantment INFUSED = new InfusedEnchantment();
 
     public static void init(){

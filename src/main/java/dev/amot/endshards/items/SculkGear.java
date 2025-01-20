@@ -4,7 +4,7 @@ import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.SculkArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
-import dev.amot.endshards.util.EndShardsMiningLevels;
+import dev.amot.endshards.util.EndshardsMiningLevels;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.ArmorMaterial;
@@ -15,14 +15,14 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static dev.amot.endshards.EndShards.modid;
+import static dev.amot.endshards.Endshards.modid;
 
 public class SculkGear {
     public static final ArmorMaterial SCULK_ARMOR_MATERIAL = new BaseArmorMaterial(
-            "sculk", EndShardsItems.SCULK_GEM, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
+            "sculk", EndshardsItems.SCULK_GEM, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
     );
     public static final ToolMaterial SCULK_TOOL_MATERIAL = new BaseToolMaterial(
-            EndShardsItems.SCULK_GEM, 2032, 9.0F, EndShardsMiningLevels.SCULK, -1.0F, 15
+            EndshardsItems.SCULK_GEM, 2032, 9.0F, EndshardsMiningLevels.SCULK, -1.0F, 15
     );
 
     public static final Item SCULK_HELMET = new SculkArmorItem(EquipmentSlot.HEAD);

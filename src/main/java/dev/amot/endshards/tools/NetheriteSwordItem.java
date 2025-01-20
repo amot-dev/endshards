@@ -1,7 +1,7 @@
 package dev.amot.endshards.tools;
 
 import dev.amot.endshards.items.NetheriteGear;
-import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.util.ISacrificedEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
@@ -59,7 +59,7 @@ public class NetheriteSwordItem extends SwordItem {
                             NetheriteGear.NETHERITE_COOLDOWN, NetheriteGear.NETHERITE_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                     );
                     if (user instanceof ServerPlayerEntity serverPlayer) {
-                        EndShardsCriteria.NETHERITE_SWORD_FLAME_CRITERION.trigger(serverPlayer);
+                        EndshardsCriteria.NETHERITE_SWORD_FLAME_CRITERION.trigger(serverPlayer);
                     }
                 }
                 else {

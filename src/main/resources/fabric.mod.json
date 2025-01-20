@@ -1,4 +1,4 @@
-{i
+{
   "schemaVersion": 1,
   "id": "endshards",
   "version": "${version}",
@@ -19,10 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "dev.amot.endshards.EndShards"
+      "dev.amot.endshards.Endshards"
     ],
     "client": [
-      "dev.amot.endshards.EndShardsClient"
+      "dev.amot.endshards.EndshardsClient"
     ]
   },
   "mixins": [

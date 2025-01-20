@@ -1,6 +1,6 @@
 package dev.amot.endshards.mixin;
 
-import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.util.ISacrificingPlayer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -24,7 +24,7 @@ public class SacrificingPlayerMixin implements ISacrificingPlayer {
         // If sacrificing player still has cooldown, check if count is met
         if (((ServerPlayerEntity)(Object)this).getActiveStatusEffects().containsKey(NetheriteGear.NETHERITE_COOLDOWN)) {
             if (sacrificeCount > 99) {
-                EndShardsCriteria.NETHERITE_SWORD_SACRIFICE_CRITERION.trigger((ServerPlayerEntity)(Object)this);
+                EndshardsCriteria.NETHERITE_SWORD_SACRIFICE_CRITERION.trigger((ServerPlayerEntity)(Object)this);
                 sacrificeCount = 0;
             }
         }

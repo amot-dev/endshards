@@ -1,6 +1,6 @@
 package dev.amot.endshards.util;
 
-public final class EndShardsMiningLevels {
+public final class EndshardsMiningLevels {
 
     /**
      * Blocks with this level require an Ender tool or better to harvest.
@@ -22,6 +22,6 @@ public final class EndShardsMiningLevels {
      */
     public static final int NIGHTMARE = 7;
 
-    public EndShardsMiningLevels(){
+    public EndshardsMiningLevels(){
     }
 }

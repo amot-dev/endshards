@@ -3,7 +3,7 @@ package dev.amot.endshards.mixin;
 import dev.amot.endshards.armor.SculkArmorItem;
 import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.items.NetheriteGear;
-import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.armor.EnderArmorItem;
 import dev.amot.endshards.armor.NetheriteArmorItem;
 import dev.amot.endshards.items.SculkGear;
@@ -22,6 +22,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -38,8 +39,10 @@ public abstract class ArmorAbilityMixin {
     @Shadow public abstract float getMaxHealth();
     @Shadow public abstract ItemStack getEquippedStack(EquipmentSlot slot);
 
+    @Unique
     boolean totemUsed = false;
 
+    @Unique
     int getArmorCount(LivingEntity livingEntity, Class<?> armorItemClass) {
         int armorCount = 0;
         for (EquipmentSlot equipmentSlot : EquipmentSlot.values()){
@@ -79,7 +82,7 @@ public abstract class ArmorAbilityMixin {
                 float totalDamage = this.modifyAppliedDamage(source, amount);
                 LivingEntity thisEntity = (LivingEntity) (Object) this;
                 if (totalDamage >= thisEntity.getHealth() && thisEntity instanceof ServerPlayerEntity serverPlayer) {
-                    EndShardsCriteria.ENDER_ARMOR_FALL_CRITERION.trigger(serverPlayer);
+                    EndshardsCriteria.ENDER_ARMOR_FALL_CRITERION.trigger(serverPlayer);
                 }
 
                 cir.setReturnValue(false);
@@ -109,7 +112,7 @@ public abstract class ArmorAbilityMixin {
                     LivingEntity thisEntity = (LivingEntity)(Object)this;
                     // Make sure lethal damage was taken
                     if ((totalDamage >= thisEntity.getHealth() || totemUsedLocal) && thisEntity instanceof ServerPlayerEntity serverPlayer) {
-                        EndShardsCriteria.ENDER_ARMOR_PLAYED_SELF_CRITERION.trigger(serverPlayer);
+                        EndshardsCriteria.ENDER_ARMOR_PLAYED_SELF_CRITERION.trigger(serverPlayer);
                     }
                 }
             }
@@ -130,7 +133,7 @@ public abstract class ArmorAbilityMixin {
                     );
 
                     if ((LivingEntity)(Object)this instanceof ServerPlayerEntity serverPlayer) {
-                        EndShardsCriteria.NETHERITE_ARMOR_PROTECT_CRITERION.trigger(serverPlayer);
+                        EndshardsCriteria.NETHERITE_ARMOR_PROTECT_CRITERION.trigger(serverPlayer);
                     }
                 }
             }
@@ -143,7 +146,7 @@ public abstract class ArmorAbilityMixin {
         if (getArmorCount(thisEntity, SculkArmorItem.class) == 4) {
             this.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 20, 0, false, false, true));
             if (thisEntity instanceof ServerPlayerEntity serverPlayer) {
-                EndShardsCriteria.SCULK_ARMOR_LIGHT.trigger(serverPlayer);
+                EndshardsCriteria.SCULK_ARMOR_LIGHT.trigger(serverPlayer);
             }
         }
     }
@@ -154,7 +157,7 @@ public abstract class ArmorAbilityMixin {
         if (thisEntity instanceof ServerPlayerEntity serverPlayer && this.getEquippedStack(slot).getItem() instanceof ToolItem toolInHand) {
             if (toolInHand.getMaterial() == SculkGear.SCULK_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
                 if (EnchantmentHelper.getLevel(Enchantments.MENDING, this.getEquippedStack(slot)) == 1) {
-                    EndShardsCriteria.SCULK_TOOL_MENDING_BREAK.trigger(serverPlayer);
+                    EndshardsCriteria.SCULK_TOOL_MENDING_BREAK.trigger(serverPlayer);
                 }
             }
         }

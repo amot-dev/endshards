@@ -4,7 +4,7 @@ import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.EnderArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
-import dev.amot.endshards.util.EndShardsMiningLevels;
+import dev.amot.endshards.util.EndshardsMiningLevels;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
@@ -12,14 +12,14 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static dev.amot.endshards.EndShards.modid;
+import static dev.amot.endshards.Endshards.modid;
 
 public class EnderGear {
     public static final ArmorMaterial ENDER_ARMOR_MATERIAL = new BaseArmorMaterial(
-            "ender", EndShardsItems.ENDER_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
+            "ender", EndshardsItems.ENDER_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
     );
     public static final ToolMaterial ENDER_TOOL_MATERIAL = new BaseToolMaterial(
-            EndShardsItems.ENDER_INGOT, 2032, 9.0F, EndShardsMiningLevels.ENDER, -1.0F, 15
+            EndshardsItems.ENDER_INGOT, 2032, 9.0F, EndshardsMiningLevels.ENDER, -1.0F, 15
     );
 
     public static final Item ENDER_HELMET = new EnderArmorItem(EquipmentSlot.HEAD);

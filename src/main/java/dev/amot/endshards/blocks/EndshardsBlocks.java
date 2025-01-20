@@ -6,9 +6,9 @@ import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static dev.amot.endshards.EndShards.modid;
+import static dev.amot.endshards.Endshards.modid;
 
-public class EndShardsBlocks {
+public class EndshardsBlocks {
     public static final Block ENDER_BLOCK = new EnderBlock();
     public static final Block SCULK_BLOCK = new SculkBlock();
     public static final Block SOUL_SCULK = new SoulSculk();

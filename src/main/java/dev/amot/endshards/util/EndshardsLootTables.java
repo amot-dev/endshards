@@ -1,6 +1,6 @@
 package dev.amot.endshards.util;
 
-import dev.amot.endshards.items.EndShardsItems;
+import dev.amot.endshards.items.EndshardsItems;
 import dev.amot.endshards.items.SculkGear;
 import dev.amot.endshards.tools.SculkSwordItem;
 import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
@@ -14,14 +14,14 @@ import net.minecraft.predicate.entity.EntityEquipmentPredicate;
 import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.item.ItemPredicate;
 
-public class EndShardsLootTables {
+public class EndshardsLootTables {
 
     public static void init() {
         // Add Warding Heart drop to Warden
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
             if (EntityType.WARDEN.getLootTableId().equals(id)) {
                 LootPool pool = LootPool.builder()
-                        .with(ItemEntry.builder(EndShardsItems.WARDING_HEART))
+                        .with(ItemEntry.builder(EndshardsItems.WARDING_HEART))
                         .build();
 
                 tableBuilder.pool(pool);
@@ -36,7 +36,7 @@ public class EndShardsLootTables {
             if (EntityType.get(entityTypeId).isPresent()) {
                 if (EntityType.get(entityTypeId).get().getSpawnGroup() == SpawnGroup.MONSTER) {
                     LootPool pool = LootPool.builder()
-                            .with(ItemEntry.builder(EndShardsItems.SOUL_FRAGMENT))
+                            .with(ItemEntry.builder(EndshardsItems.SOUL_FRAGMENT))
                             .conditionally(EntityPropertiesLootCondition.builder(
                                     LootContext.EntityTarget.DIRECT_KILLER,
                                     EntityPredicate.Builder.create().equipment(

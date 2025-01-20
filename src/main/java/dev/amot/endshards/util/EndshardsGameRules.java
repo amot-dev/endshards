@@ -9,9 +9,9 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.GameRules;
 
-import static dev.amot.endshards.EndShards.modid;
+import static dev.amot.endshards.Endshards.modid;
 
-public class EndShardsGameRules {
+public class EndshardsGameRules {
     public static GameRules.Key<GameRules.BooleanRule> DO_EASY_ARMOR_SWITCH;
 
     public static GameRules.Key<GameRules.BooleanRule> DO_NIGHT_VISION_FLICKER;

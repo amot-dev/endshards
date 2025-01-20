@@ -1,6 +1,6 @@
 package dev.amot.endshards.features;
 
-import dev.amot.endshards.blocks.EndShardsBlocks;
+import dev.amot.endshards.blocks.EndshardsBlocks;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.block.Blocks;
@@ -18,13 +18,13 @@ import net.minecraft.world.gen.placementmodifier.*;
 
 import java.util.List;
 
-import static dev.amot.endshards.EndShards.modid;
+import static dev.amot.endshards.Endshards.modid;
 
-public class EndShardsFeatures {
+public class EndshardsFeatures {
     private static final ConfiguredFeature<?, ?> SOUL_SCULK_CONFIGURED_FEATURE = new ConfiguredFeature<>(
             Feature.ORE, new OreFeatureConfig(
                     new BlockMatchRuleTest(Blocks.SCULK),
-                    EndShardsBlocks.SOUL_SCULK.getDefaultState(),
+                    EndshardsBlocks.SOUL_SCULK.getDefaultState(),
                     4
             )
     );

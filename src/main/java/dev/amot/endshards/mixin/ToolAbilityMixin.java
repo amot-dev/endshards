@@ -2,7 +2,7 @@ package dev.amot.endshards.mixin;
 
 import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.items.NetheriteGear;
-import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.items.SculkGear;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -26,6 +26,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -39,6 +40,7 @@ import static net.minecraft.sound.SoundEvents.ENTITY_ITEM_PICKUP;
 
 @Mixin(Block.class)
 public abstract class ToolAbilityMixin {
+    @Unique
     private static Map<BlockPos, ServerPlayerEntity> playersWhoMinedBlockAtPos = new LinkedHashMap<>();
 
     @Shadow
@@ -67,7 +69,7 @@ public abstract class ToolAbilityMixin {
                         //TODO: Decide whether to increase pick up stats for inventory warps (note: this line only works on client)
                         //player.increaseStat(Stats.PICKED_UP.getOrCreateStat(stackX.getItem()), stackX.getCount());
                         player.playSound(ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
-                        if (player instanceof ServerPlayerEntity serverPlayer) EndShardsCriteria.ENDER_TOOL_WARP_CRITERION.trigger(serverPlayer);
+                        if (player instanceof ServerPlayerEntity serverPlayer) EndshardsCriteria.ENDER_TOOL_WARP_CRITERION.trigger(serverPlayer);
                     }
                 });
                 state.onStacksDropped((ServerWorld)world, pos, stack, true);
@@ -91,7 +93,7 @@ public abstract class ToolAbilityMixin {
                     smeltedDrops.add(smeltedDrop);
 
                     if (entity instanceof ServerPlayerEntity serverPlayer) {
-                        EndShardsCriteria.NETHERITE_TOOL_AUTOSMELT_CRITERION.trigger(serverPlayer);
+                        EndshardsCriteria.NETHERITE_TOOL_AUTOSMELT_CRITERION.trigger(serverPlayer);
                     }
                 }
                 else smeltedDrops.add(unsmeltedDrop);
@@ -131,7 +133,7 @@ public abstract class ToolAbilityMixin {
     protected void triggerSculkToolXPAdvancement(ServerWorld world, BlockPos pos, ItemStack tool, IntProvider experience, CallbackInfo ci) {
         // If XP is dropped, trigger advancement for player who broke the block at pos
         if (playersWhoMinedBlockAtPos.containsKey(pos)) {
-            EndShardsCriteria.SCULK_TOOL_XP.trigger(playersWhoMinedBlockAtPos.get(pos));
+            EndshardsCriteria.SCULK_TOOL_XP.trigger(playersWhoMinedBlockAtPos.get(pos));
         }
     }
 

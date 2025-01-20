@@ -5,7 +5,7 @@ import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.NetheriteArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
-import dev.amot.endshards.util.EndShardsMiningLevels;
+import dev.amot.endshards.util.EndshardsMiningLevels;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
@@ -17,14 +17,14 @@ import net.minecraft.util.registry.RegistryKey;
 
 import java.util.OptionalInt;
 
-import static dev.amot.endshards.EndShards.modid;
+import static dev.amot.endshards.Endshards.modid;
 
 public class NetheriteGear {
     public static final ArmorMaterial NETHERITE_ARMOR_MATERIAL = new BaseArmorMaterial(
             "netherite", Items.NETHERITE_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
     );
     public static final ToolMaterial NETHERITE_TOOL_MATERIAL = new BaseToolMaterial(
-            Items.NETHERITE_INGOT, 2032, 9.0F, EndShardsMiningLevels.NETHERITE, -1.0F, 15
+            Items.NETHERITE_INGOT, 2032, 9.0F, EndshardsMiningLevels.NETHERITE, -1.0F, 15
     );
 
     public static final Item NETHERITE_HELMET = new NetheriteArmorItem(EquipmentSlot.HEAD);

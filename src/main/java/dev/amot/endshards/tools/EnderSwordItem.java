@@ -1,7 +1,7 @@
 package dev.amot.endshards.tools;
 
 import dev.amot.endshards.items.EnderGear;
-import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.EquipmentSlot;
@@ -46,7 +46,7 @@ public class EnderSwordItem extends SwordItem {
                             EnderGear.ENDER_COOLDOWN, EnderGear.ENDER_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                     );
 
-                    if (user instanceof ServerPlayerEntity serverUser) EndShardsCriteria.ENDER_SWORD_WARP_CRITERION.trigger(serverUser);
+                    if (user instanceof ServerPlayerEntity serverUser) EndshardsCriteria.ENDER_SWORD_WARP_CRITERION.trigger(serverUser);
                 }
                 else {
                     MinecraftClient client = MinecraftClient.getInstance();

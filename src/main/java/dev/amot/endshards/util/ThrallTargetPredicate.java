@@ -26,7 +26,7 @@ public class ThrallTargetPredicate<LivingEntity> implements Predicate<LivingEnti
     public boolean test(LivingEntity targetEntity) {
         // Do not attack creepers unless gamerule set
         if (targetEntity instanceof CreeperEntity creeper
-                && !creeper.world.getGameRules().getBoolean(EndShardsGameRules.THRALLS_ATTACK_CREEPERS))
+                && !creeper.world.getGameRules().getBoolean(EndshardsGameRules.THRALLS_ATTACK_CREEPERS))
             return false;
 
         // Assign target based on mode

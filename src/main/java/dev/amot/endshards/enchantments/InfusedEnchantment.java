@@ -1,6 +1,6 @@
 package dev.amot.endshards.enchantments;
 
-import dev.amot.endshards.items.EndShardsItems;
+import dev.amot.endshards.items.EndshardsItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
@@ -19,10 +19,10 @@ public class InfusedEnchantment extends Enchantment {
     }
 
     List<Item> acceptableItems = Arrays.asList(
-            EndShardsItems.ENDER_INGOT,
+            EndshardsItems.ENDER_INGOT,
             Items.NETHERITE_INGOT,
-            EndShardsItems.SCULK_GEM,
-            EndShardsItems.NIGHTMARE_PEARL
+            EndshardsItems.SCULK_GEM,
+            EndshardsItems.NIGHTMARE_PEARL
     );
 
     @Override

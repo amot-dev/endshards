@@ -1,6 +1,6 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
+import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.items.SculkGear;
 import dev.amot.endshards.util.IThrallOwner;
 import net.minecraft.client.MinecraftClient;
@@ -54,7 +54,7 @@ public class SculkSwordItem extends SwordItem {
                                     "message.endshards.sculk_sword_thrall_count",
                                     AbilityMaxThrallCount - ((IThrallOwner)serverPlayer).getThrallCount()
                             ).formatted(Formatting.DARK_GREEN), false);
-                            EndShardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
+                            EndshardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
                         }
                     }
                     else {

@@ -5,9 +5,9 @@ import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static dev.amot.endshards.EndShards.modid;
+import static dev.amot.endshards.Endshards.modid;
 
-public class EndShardsItems {
+public class EndshardsItems {
     public static final Item ENDSHARD = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item ENDER_INGOT = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
     public static final Item FEAR_ESSENCE = new Item(new FabricItemSettings().group(ItemGroup.MATERIALS));
