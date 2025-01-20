@@ -13,6 +13,8 @@ import static dev.amot.endshards.Endshards.modid;
 
 public class EndshardsGameRules {
     public static GameRules.Key<GameRules.BooleanRule> DO_EASY_ARMOR_SWITCH;
+    public static Identifier DO_EASY_ARMOR_SWITCH_CHANNEL = new Identifier(modid, "do_easy_armor_switch_channel");
+    public static boolean doEasyArmorSwitchGamerule = true;
 
     public static GameRules.Key<GameRules.BooleanRule> DO_NIGHT_VISION_FLICKER;
     public static Identifier DO_NIGHT_VISION_FLICKER_CHANNEL = new Identifier(modid, "do_night_vision_flicker_channel");
@@ -21,7 +23,14 @@ public class EndshardsGameRules {
     public static GameRules.Key<GameRules.BooleanRule> THRALLS_ATTACK_CREEPERS;
 
     public static void init() {
-        DO_EASY_ARMOR_SWITCH = GameRuleRegistry.register("doEasyArmorSwitch", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true));
+        DO_EASY_ARMOR_SWITCH = GameRuleRegistry.register("doEasyArmorSwitch", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true,
+                ((minecraftServer, booleanRule) -> {
+                    PacketByteBuf buf = PacketByteBufs.create();
+                    buf.writeBoolean(booleanRule.get());
+                    for (ServerPlayerEntity player : minecraftServer.getPlayerManager().getPlayerList()) {
+                        ServerPlayNetworking.send(player, DO_EASY_ARMOR_SWITCH_CHANNEL, buf);
+                    }
+                })));
         DO_NIGHT_VISION_FLICKER = GameRuleRegistry.register("doNightVisionFlicker", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(false,
                 ((minecraftServer, booleanRule) -> {
                     PacketByteBuf buf = PacketByteBufs.create();

@@ -7,6 +7,8 @@
     "ArmorAbilityMixin",
     "DoNightVisionFlickerMixin",
     "IBlockInvoker",
+    "InventoryEquipmentSwitchMixin",
+    "IScreenHandlerInvoker",
     "KnockbackResistanceMixin",
     "RegistryReplaceMixin",
     "SacrificedEntityMixin",
