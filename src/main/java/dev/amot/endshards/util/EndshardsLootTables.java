@@ -30,7 +30,7 @@ public class EndshardsLootTables {
 
         // Add Soul Fragment to all hostile mob loot tables killed by Sculk Sword
         LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
-            // Get entity ID in simple form (eg. "husk")
+            // Get entity ID in simple form (e.g. "husk")
             String entityTypeId = id.toString().substring(id.toString().lastIndexOf("/") + 1);
             // If an entity matching that ID exists, and it's a monster, modify loot table
             if (EntityType.get(entityTypeId).isPresent()) {

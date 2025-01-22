@@ -4,6 +4,7 @@ import dev.amot.endshards.util.ISacrificedEntity;
 import dev.amot.endshards.util.ISacrificingPlayer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -17,14 +18,14 @@ public abstract class SacrificedEntityMixin implements ISacrificedEntity {
     @Unique private ServerPlayerEntity sacrificingPlayer = null;
 
     @Unique
-    public void setSacrificingPlayer(ServerPlayerEntity serverPlayer) {
+    public void endshards$setSacrificingPlayer(ServerPlayerEntity serverPlayer) {
         sacrificingPlayer = serverPlayer;
     }
 
     @Inject(method = "onDeath", at = @At("RETURN"))
     public void incrementSacrificeCount(DamageSource damageSource, CallbackInfo ci) {
         // If entity has a sacrificing player and died from fire, count is as a sacrifice
-        if (this.sacrificingPlayer != null && damageSource.isFire()) {
+        if (this.sacrificingPlayer != null && damageSource.isIn(DamageTypeTags.IS_FIRE)) {
             ((ISacrificingPlayer)this.sacrificingPlayer).incrementSacrificeCount();
         }
     }

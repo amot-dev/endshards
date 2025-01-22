@@ -25,7 +25,7 @@ import static dev.amot.endshards.util.AbilityConstants.ENDER_WARP_BANNED_ENTITIE
 
 public class EnderSwordItem extends SwordItem {
     public EnderSwordItem() {
-        super(EnderGear.ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().group(ItemGroup.COMBAT));
+        super(EnderGear.ENDER_TOOL_MATERIAL, 8, -2.4F, new Item.Settings().fireproof());
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
@@ -34,11 +34,11 @@ public class EnderSwordItem extends SwordItem {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (user.world instanceof ServerWorld) {
+        if (user.getWorld() instanceof ServerWorld serverWorld) {
             if (!user.getActiveStatusEffects().containsKey(EnderGear.ENDER_COOLDOWN)) {
                 if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !ENDER_WARP_BANNED_ENTITIES.contains(entity.getType())) {
                     entity.setPos(entity.getX(), -1000F, entity.getZ());
-                    user.world.sendEntityStatus(entity, (byte)46);
+                    serverWorld.sendEntityStatus(entity, (byte)46);
                     stack.damage(1, user, e -> e.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND));
                     user.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
 

@@ -5,14 +5,16 @@ import dev.amot.endshards.armor.EnderArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
 import dev.amot.endshards.util.EndshardsMiningLevels;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import static dev.amot.endshards.Endshards.modid;
+import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
+import static dev.amot.endshards.util.RegistryHelper.registerItem;
 
 public class EnderGear {
     public static final ArmorMaterial ENDER_ARMOR_MATERIAL = new BaseArmorMaterial(
@@ -22,33 +24,36 @@ public class EnderGear {
             EndshardsItems.ENDER_INGOT, 2032, 9.0F, EndshardsMiningLevels.ENDER, -1.0F, 15
     );
 
-    public static final Item ENDER_HELMET = new EnderArmorItem(EquipmentSlot.HEAD);
-    public static final Item ENDER_CHESTPLATE = new EnderArmorItem(EquipmentSlot.CHEST);
-    public static final Item ENDER_LEGGINGS = new EnderArmorItem(EquipmentSlot.LEGS);
-    public static final Item ENDER_BOOTS = new EnderArmorItem(EquipmentSlot.FEET);
+    public static final Item ENDER_HELMET = registerItem(Identifier.of(modid, "ender_helmet"), new EnderArmorItem(ArmorItem.Type.HELMET));
+    public static final Item ENDER_CHESTPLATE = registerItem(Identifier.of(modid, "ender_chestplate"), new EnderArmorItem(ArmorItem.Type.CHESTPLATE));
+    public static final Item ENDER_LEGGINGS = registerItem(Identifier.of(modid, "ender_leggings"), new EnderArmorItem(ArmorItem.Type.LEGGINGS));
+    public static final Item ENDER_BOOTS = registerItem(Identifier.of(modid, "ender_boots"), new EnderArmorItem(ArmorItem.Type.BOOTS));
 
-    public static final ToolItem ENDER_SWORD = new EnderSwordItem();
-    public static final ToolItem ENDER_PICKAXE = new EnderPickaxeItem();
-    public static final ToolItem ENDER_SHOVEL = new EnderShovelItem();
-    public static final ToolItem ENDER_AXE = new EnderAxeItem();
-    public static final ToolItem ENDER_HOE = new EnderHoeItem();
+    public static final Item ENDER_SWORD = registerItem(Identifier.of(modid, "ender_sword"), new EnderSwordItem());
+    public static final Item ENDER_PICKAXE = registerItem(Identifier.of(modid, "ender_pickaxe"), new EnderPickaxeItem());
+    public static final Item ENDER_SHOVEL = registerItem(Identifier.of(modid, "ender_shovel"), new EnderShovelItem());
+    public static final Item ENDER_AXE = registerItem(Identifier.of(modid, "ender_axe"), new EnderAxeItem());
+    public static final Item ENDER_HOE = registerItem(Identifier.of(modid, "ender_hoe"), new EnderHoeItem());
 
-    public static final StatusEffect ENDER_COOLDOWN = new CooldownEffect();
+
+    public static final StatusEffect ENDER_COOLDOWN = Registry.register(
+            Registries.STATUS_EFFECT,
+            Identifier.of(modid, "ender_cooldown"),
+            new CooldownEffect()
+    );
     public static final int ENDER_COOLDOWN_DURATION_ARMOR = 600;
     public static final int ENDER_COOLDOWN_DURATION_SWORD = 1200;
 
-    public static void register(){
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_helmet"), ENDER_HELMET);
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_chestplate"), ENDER_CHESTPLATE);
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_leggings"), ENDER_LEGGINGS);
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_boots"), ENDER_BOOTS);
+    public static void init(){
+        addToItemGroups(ENDER_HELMET, ItemGroups.COMBAT);
+        addToItemGroups(ENDER_CHESTPLATE, ItemGroups.COMBAT);
+        addToItemGroups(ENDER_LEGGINGS, ItemGroups.COMBAT);
+        addToItemGroups(ENDER_BOOTS, ItemGroups.COMBAT);
 
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_sword"), ENDER_SWORD);
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_pickaxe"), ENDER_PICKAXE);
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_shovel"), ENDER_SHOVEL);
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_axe"), ENDER_AXE);
-        Registry.register(Registry.ITEM, new Identifier(modid, "ender_hoe"), ENDER_HOE);
-
-        Registry.register(Registry.STATUS_EFFECT, new Identifier(modid, "ender_cooldown"), ENDER_COOLDOWN);
+        addToItemGroups(ENDER_SWORD, ItemGroups.COMBAT);
+        addToItemGroups(ENDER_PICKAXE, ItemGroups.TOOLS);
+        addToItemGroups(ENDER_SHOVEL, ItemGroups.TOOLS);
+        addToItemGroups(ENDER_AXE, ItemGroups.TOOLS, ItemGroups.COMBAT);
+        addToItemGroups(ENDER_HOE, ItemGroups.TOOLS);
     }
 }

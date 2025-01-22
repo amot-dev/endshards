@@ -7,7 +7,7 @@
   ],
   "key": {
     "O": {
-      "tag": "minecraft:obsidian"
+      "item": "minecraft:obsidian"
     },
     "D": {
       "item": "minecraft:diamond"

@@ -4,7 +4,6 @@ import dev.amot.endshards.items.EnderGear;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class EnderHoeItem extends HoeItem {
     public EnderHoeItem() {
-        super(EnderGear.ENDER_TOOL_MATERIAL, 1, 0F, new Item.Settings().group(ItemGroup.TOOLS));
+        super(EnderGear.ENDER_TOOL_MATERIAL, 1, 0F, new Item.Settings().fireproof());
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {

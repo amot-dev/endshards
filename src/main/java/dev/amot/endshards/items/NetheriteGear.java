@@ -6,16 +6,14 @@ import dev.amot.endshards.armor.NetheriteArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
 import dev.amot.endshards.util.EndshardsMiningLevels;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
+import net.minecraft.registry.MutableRegistry;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.MutableRegistry;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-
-import java.util.OptionalInt;
 
 import static dev.amot.endshards.Endshards.modid;
 
@@ -27,10 +25,10 @@ public class NetheriteGear {
             Items.NETHERITE_INGOT, 2032, 9.0F, EndshardsMiningLevels.NETHERITE, -1.0F, 15
     );
 
-    public static final Item NETHERITE_HELMET = new NetheriteArmorItem(EquipmentSlot.HEAD);
-    public static final Item NETHERITE_CHESTPLATE = new NetheriteArmorItem(EquipmentSlot.CHEST);
-    public static final Item NETHERITE_LEGGINGS = new NetheriteArmorItem(EquipmentSlot.LEGS);
-    public static final Item NETHERITE_BOOTS = new NetheriteArmorItem(EquipmentSlot.FEET);
+    public static final Item NETHERITE_HELMET = new NetheriteArmorItem(ArmorItem.Type.HELMET);
+    public static final Item NETHERITE_CHESTPLATE = new NetheriteArmorItem(ArmorItem.Type.CHESTPLATE);
+    public static final Item NETHERITE_LEGGINGS = new NetheriteArmorItem(ArmorItem.Type.LEGGINGS);
+    public static final Item NETHERITE_BOOTS = new NetheriteArmorItem(ArmorItem.Type.BOOTS);
 
     public static final ToolItem NETHERITE_SWORD = new NetheriteSwordItem();
     public static final ToolItem NETHERITE_PICKAXE = new NetheritePickaxeItem();
@@ -38,66 +36,72 @@ public class NetheriteGear {
     public static final ToolItem NETHERITE_AXE = new NetheriteAxeItem();
     public static final ToolItem NETHERITE_HOE = new NetheriteHoeItem();
 
-    public static final StatusEffect NETHERITE_COOLDOWN = new CooldownEffect();
+    public static final StatusEffect NETHERITE_COOLDOWN = Registry.register(
+            Registries.STATUS_EFFECT,
+            Identifier.of(modid, "netherite_cooldown"),
+            new CooldownEffect()
+    );
     public static final int NETHERITE_COOLDOWN_DURATION_ARMOR = 1200;
     public static final int NETHERITE_COOLDOWN_DURATION_SWORD = 600;
 
-    public static void register(){
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_HELMET)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_helmet")),
+    public static void init(){
+        replaceRegistries();
+    }
+
+    private static void replaceRegistries() {
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_HELMET),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_helmet")),
                 NETHERITE_HELMET,
                 Lifecycle.stable()
         );
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_CHESTPLATE)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_chestplate")),
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_CHESTPLATE),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_chestplate")),
                 NETHERITE_CHESTPLATE,
                 Lifecycle.stable()
         );
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_LEGGINGS)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_leggings")),
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_LEGGINGS),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_leggings")),
                 NETHERITE_LEGGINGS,
                 Lifecycle.stable()
         );
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_BOOTS)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_boots")),
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_BOOTS),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_boots")),
                 NETHERITE_BOOTS,
                 Lifecycle.stable()
         );
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_SWORD)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_sword")),
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_SWORD),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_sword")),
                 NETHERITE_SWORD,
                 Lifecycle.stable()
         );
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_PICKAXE)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_pickaxe")),
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_PICKAXE),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_pickaxe")),
                 NETHERITE_PICKAXE,
                 Lifecycle.stable()
         );
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_SHOVEL)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_shovel")),
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_SHOVEL),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_shovel")),
                 NETHERITE_SHOVEL,
                 Lifecycle.stable()
         );
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_AXE)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_axe")),
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_AXE),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_axe")),
                 NETHERITE_AXE,
                 Lifecycle.stable()
         );
-        ((MutableRegistry<Item>)Registry.ITEM).replace(
-                OptionalInt.of(Registry.ITEM.getRawId(Items.NETHERITE_HOE)),
-                RegistryKey.of(Registry.ITEM.getKey(), new Identifier("minecraft", "netherite_hoe")),
+        ((MutableRegistry<Item>)Registries.ITEM).set(
+                Registries.ITEM.getRawId(Items.NETHERITE_HOE),
+                RegistryKey.of(Registries.ITEM.getKey(), Identifier.of("minecraft", "netherite_hoe")),
                 NETHERITE_HOE,
                 Lifecycle.stable()
         );
-
-        Registry.register(Registry.STATUS_EFFECT, new Identifier(modid, "netherite_cooldown"), NETHERITE_COOLDOWN);
     }
 }

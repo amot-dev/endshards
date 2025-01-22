@@ -1,5 +1,6 @@
 package dev.amot.endshards.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import dev.amot.endshards.util.EndshardsGameRules;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,12 +11,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(PlayerScreenHandler.class)
 public class InventoryEquipmentSwitchMixin {
-    @Inject(method = "transferSlot", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EquipmentSlot;getType()Lnet/minecraft/entity/EquipmentSlot$Type;"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-    void startArmorSwitch(PlayerEntity player, int index, CallbackInfoReturnable<ItemStack> cir, ItemStack itemStack, Slot slot, ItemStack itemStack2, EquipmentSlot equipmentSlot) {
+    @Inject(method = "quickMove", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EquipmentSlot;getType()Lnet/minecraft/entity/EquipmentSlot$Type;"), cancellable = true)
+    void doEquipmentSwitch(PlayerEntity player, int index, CallbackInfoReturnable<ItemStack> cir, @Local Slot slot, @Local(ordinal = 1) ItemStack itemStack2, @Local EquipmentSlot equipmentSlot) {
         // Only apply this if the gamerule is set
         // Need to handle this on both client and server sides
         if (EndshardsGameRules.doEasyArmorSwitchGamerule) {
@@ -28,7 +28,7 @@ public class InventoryEquipmentSwitchMixin {
                     // Deep copy the equipped item stack, then delete it
                     int i = 8 - equipmentSlot.getEntitySlotId(); // Mojang magic number yay
                     ItemStack currentEquipped = switchSlot.getStack().copy();
-                    switchSlot.setStack(ItemStack.EMPTY);
+                    switchSlot.setStackNoCallbacks(ItemStack.EMPTY);
 
                     // Attempt to equip into the now-empty slot
                     IScreenHandlerInvoker invoker = (IScreenHandlerInvoker) this;
@@ -39,7 +39,7 @@ public class InventoryEquipmentSwitchMixin {
                     }
 
                     // Set the stack in the hand to what was previously equipped
-                    slot.setStack(currentEquipped);
+                    slot.setStackNoCallbacks(currentEquipped);
                     slot.markDirty(); // Presumably trigger a re-render
 
                     // Return early on success as we don't want to allow other possible operations

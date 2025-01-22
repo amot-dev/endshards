@@ -5,17 +5,16 @@ import dev.amot.endshards.armor.SculkArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
 import dev.amot.endshards.util.EndshardsMiningLevels;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.Item;
-import net.minecraft.item.ToolItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.*;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import static dev.amot.endshards.Endshards.modid;
+import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
+import static dev.amot.endshards.util.RegistryHelper.registerItem;
 
 public class SculkGear {
     public static final ArmorMaterial SCULK_ARMOR_MATERIAL = new BaseArmorMaterial(
@@ -25,32 +24,34 @@ public class SculkGear {
             EndshardsItems.SCULK_GEM, 2032, 9.0F, EndshardsMiningLevels.SCULK, -1.0F, 15
     );
 
-    public static final Item SCULK_HELMET = new SculkArmorItem(EquipmentSlot.HEAD);
-    public static final Item SCULK_CHESTPLATE = new SculkArmorItem(EquipmentSlot.CHEST);
-    public static final Item SCULK_LEGGINGS = new SculkArmorItem(EquipmentSlot.LEGS);
-    public static final Item SCULK_BOOTS = new SculkArmorItem(EquipmentSlot.FEET);
+    public static final Item SCULK_HELMET = registerItem(Identifier.of(modid, "sculk_helmet"), new SculkArmorItem(ArmorItem.Type.HELMET));
+    public static final Item SCULK_CHESTPLATE = registerItem(Identifier.of(modid, "sculk_chestplate"), new SculkArmorItem(ArmorItem.Type.CHESTPLATE));
+    public static final Item SCULK_LEGGINGS = registerItem(Identifier.of(modid, "sculk_leggings"), new SculkArmorItem(ArmorItem.Type.LEGGINGS));
+    public static final Item SCULK_BOOTS = registerItem(Identifier.of(modid, "sculk_boots"), new SculkArmorItem(ArmorItem.Type.BOOTS));
 
-    public static final ToolItem SCULK_SWORD = new SculkSwordItem();
-    public static final ToolItem SCULK_PICKAXE = new SculkPickaxeItem();
-    public static final ToolItem SCULK_SHOVEL = new SculkShovelItem();
-    public static final ToolItem SCULK_AXE = new SculkAxeItem();
-    public static final ToolItem SCULK_HOE = new SculkHoeItem();
+    public static final Item SCULK_SWORD = registerItem(Identifier.of(modid, "sculk_sword"), new SculkSwordItem());
+    public static final Item SCULK_PICKAXE = registerItem(Identifier.of(modid, "sculk_pickaxe"), new SculkPickaxeItem());
+    public static final Item SCULK_SHOVEL = registerItem(Identifier.of(modid, "sculk_shovel"), new SculkShovelItem());
+    public static final Item SCULK_AXE = registerItem(Identifier.of(modid, "sculk_axe"), new SculkAxeItem());
+    public static final Item SCULK_HOE = registerItem(Identifier.of(modid, "sculk_hoe"), new SculkHoeItem());
 
-    public static final StatusEffect SCULK_COOLDOWN = new CooldownEffect();
+    public static final StatusEffect SCULK_COOLDOWN = Registry.register(
+            Registries.STATUS_EFFECT,
+            Identifier.of(modid, "sculk_cooldown"),
+            new CooldownEffect()
+    );
     public static final int SCULK_COOLDOWN_DURATION_SWORD = 200;
 
-    public static void register(){
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_helmet"), SCULK_HELMET);
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_chestplate"), SCULK_CHESTPLATE);
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_leggings"), SCULK_LEGGINGS);
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_boots"), SCULK_BOOTS);
+    public static void init(){
+        addToItemGroups(SCULK_HELMET, ItemGroups.COMBAT);
+        addToItemGroups(SCULK_CHESTPLATE, ItemGroups.COMBAT);
+        addToItemGroups(SCULK_LEGGINGS, ItemGroups.COMBAT);
+        addToItemGroups(SCULK_BOOTS, ItemGroups.COMBAT);
 
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_sword"), SCULK_SWORD);
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_pickaxe"), SCULK_PICKAXE);
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_shovel"), SCULK_SHOVEL);
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_axe"), SCULK_AXE);
-        Registry.register(Registry.ITEM, new Identifier(modid, "sculk_hoe"), SCULK_HOE);
-
-        Registry.register(Registry.STATUS_EFFECT, new Identifier(modid, "sculk_cooldown"), SCULK_COOLDOWN);
+        addToItemGroups(SCULK_SWORD, ItemGroups.COMBAT);
+        addToItemGroups(SCULK_PICKAXE, ItemGroups.TOOLS);
+        addToItemGroups(SCULK_SHOVEL, ItemGroups.TOOLS);
+        addToItemGroups(SCULK_AXE, ItemGroups.TOOLS, ItemGroups.COMBAT);
+        addToItemGroups(SCULK_HOE, ItemGroups.TOOLS);
     }
 }

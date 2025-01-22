@@ -8,28 +8,10 @@
       }
     },
     {
-      "item": "endshards:ender_ingot",
-      "data": {
-        "deny": {
-          "Enchantments": [
-            {
-              "id": "endshards:infused",
-              "lvl": 1
-            }
-          ]
-        }
-      }
+      "item": "endshards:ender_ingot"
     }
   ],
   "result": {
-    "item": "endshards:ender_ingot",
-    "data" : {
-      "Enchantments": [
-        {
-          "id": "endshards:infused",
-          "lvl": 1
-        }
-      ]
-    }
+    "item": "endshards:ender_ingot_infused"
   }
 }

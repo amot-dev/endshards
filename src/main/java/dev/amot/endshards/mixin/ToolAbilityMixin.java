@@ -6,7 +6,7 @@ import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.items.SculkGear;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.OreBlock;
+import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -17,7 +17,6 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SmeltingRecipe;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.BiasedToBottomIntProvider;
@@ -88,7 +87,7 @@ public abstract class ToolAbilityMixin {
                 // Smelt items if possible, else return unsmelted items
                 Optional<SmeltingRecipe> recipe = world.getRecipeManager().listAllOfType(RecipeType.SMELTING).stream().filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(unsmeltedDrop))).findFirst();
                 if (recipe.isPresent()) {
-                    ItemStack smeltedDrop = recipe.get().getOutput();
+                    ItemStack smeltedDrop = recipe.get().getOutput(null); // TODO: Verify that null here is okay
                     smeltedDrop.setCount(unsmeltedDrop.getCount());
                     smeltedDrops.add(smeltedDrop);
 
@@ -111,7 +110,7 @@ public abstract class ToolAbilityMixin {
             // Only run for Sculk Tools
             if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == SculkGear.SCULK_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
                 // Ore Blocks already do their own XP handling
-                if (!(state.getBlock() instanceof OreBlock)) {
+                if (!(state.getBlock() instanceof ExperienceDroppingBlock)) {
                     // Don't want to trigger advancement for player unless XP is actually dropped
                     /*
                         This is a hacky way of doing this, but to prevent this triggering for the wrong player,

@@ -8,28 +8,10 @@
       }
     },
     {
-      "item": "endshards:sculk_gem",
-      "data": {
-        "deny": {
-          "Enchantments": [
-            {
-              "id": "endshards:infused",
-              "lvl": 1
-            }
-          ]
-        }
-      }
+      "item": "endshards:sculk_gem"
     }
   ],
   "result": {
-    "item": "endshards:sculk_gem",
-    "data" : {
-      "Enchantments": [
-        {
-          "id": "endshards:infused",
-          "lvl": 1
-        }
-      ]
-    }
+    "item": "endshards:sculk_gem_infused"
   }
 }

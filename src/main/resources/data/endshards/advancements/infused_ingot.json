@@ -18,16 +18,10 @@
         "items": [
           {
             "items": [
-              "endshards:ender_ingot",
-              "minecraft:netherite_ingot",
-              "endshards:sculk_gem",
-              "endshards:nightmare_pearl"
-            ],
-            "enchantments": [
-              {
-                "enchantment": "endshards:infused",
-                "levels": 1
-              }
+              "endshards:ender_ingot_infused",
+              "endshards:netherite_ingot_infused",
+              "endshards:sculk_gem_infused",
+              "endshards:nightmare_pearl_infused"
             ]
           }
         ]

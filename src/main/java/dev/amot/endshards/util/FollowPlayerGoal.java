@@ -24,7 +24,7 @@ public class FollowPlayerGoal extends Goal {
 
     public FollowPlayerGoal(MobEntity mob, PlayerEntity player, double speed, float minDistance, float maxDistance) {
         this.mob = mob;
-        this.world = mob.world;
+        this.world = mob.getWorld();
         this.navigation = mob.getNavigation();
         this.speed = speed;
         this.player = player;

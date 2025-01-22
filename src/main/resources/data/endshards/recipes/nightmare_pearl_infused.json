@@ -8,28 +8,10 @@
       }
     },
     {
-      "item": "endshards:nightmare_pearl",
-      "data": {
-        "deny": {
-          "Enchantments": [
-            {
-              "id": "endshards:infused",
-              "lvl": 1
-            }
-          ]
-        }
-      }
+      "item": "endshards:nightmare_pearl"
     }
   ],
   "result": {
-    "item": "endshards:nightmare_pearl",
-    "data" : {
-      "Enchantments": [
-        {
-          "id": "endshards:infused",
-          "lvl": 1
-        }
-      ]
-    }
+    "item": "endshards:nightmare_pearl_infused"
   }
 }

@@ -1,22 +1,15 @@
 {
-  "type": "minecraft:smithing",
-  "base": {
-      "item": "minecraft:diamond_leggings"
-  },
+  "type": "minecraft:smithing_transform",
   "addition": {
-    "item": "minecraft:netherite_ingot",
-    "data": {
-      "require": {
-        "Enchantments": [
-          {
-            "id": "endshards:infused",
-            "lvl": 1
-          }
-        ]
-      }
-    }
+    "item": "endshards:netherite_ingot_infused"
+  },
+  "base": {
+    "item": "minecraft:diamond_leggings"
   },
   "result": {
     "item": "minecraft:netherite_leggings"
+  },
+  "template": {
+    "item": "minecraft:netherite_upgrade_smithing_template"
   }
 }

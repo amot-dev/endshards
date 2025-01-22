@@ -8,28 +8,10 @@
       }
     },
     {
-      "item": "minecraft:netherite_ingot",
-      "data": {
-        "deny": {
-          "Enchantments": [
-            {
-              "id": "endshards:infused",
-              "lvl": 1
-            }
-          ]
-        }
-      }
+      "item": "minecraft:netherite_ingot"
     }
   ],
   "result": {
-    "item": "minecraft:netherite_ingot",
-    "data" : {
-      "Enchantments": [
-        {
-          "id": "endshards:infused",
-          "lvl": 1
-        }
-      ]
-    }
+    "item": "endshards:netherite_ingot_infused"
   }
 }

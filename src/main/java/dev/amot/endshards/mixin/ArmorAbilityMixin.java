@@ -18,6 +18,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolItem;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -55,14 +56,15 @@ public abstract class ArmorAbilityMixin {
         return armorCount;
     }
 
-    //TODO: Find better way to handle damage (I don't like this injection point needed in 1.19)
+    // TODO: Find better way to handle damage (I don't like this injection point needed in 1.19)
+    // Perhaps inject into handleFallDamage once everything builds
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void doEnderArmorAbility(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if (((LivingEntity)(Object)this).isInvulnerableTo(source)) {
             cir.setReturnValue(false);
             cir.cancel();
         }
-        else if (((LivingEntity)(Object)this).world.isClient) {
+        else if (((LivingEntity)(Object)this).getWorld().isClient) {
             cir.setReturnValue(false);
             cir.cancel();
         }
@@ -72,7 +74,7 @@ public abstract class ArmorAbilityMixin {
         }
 
         // Handle fall damage with full Ender Armor
-        if (source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4) {
+        if (source.isIn(DamageTypeTags.IS_FALL) && getArmorCount((LivingEntity)(Object)this, EnderArmorItem.class) == 4) {
             // Ability is good!
             if (!this.activeStatusEffects.containsKey(EnderGear.ENDER_COOLDOWN)) {
                 this.addStatusEffect(new StatusEffectInstance(
@@ -104,7 +106,7 @@ public abstract class ArmorAbilityMixin {
         totemUsed = false;
 
         // Want to trigger Played Self Criterion even if totem is used
-        if (enderArmorAbilityValid && (cir.getReturnValue() || totemUsedLocal) && source.isFromFalling()) {
+        if (enderArmorAbilityValid && (cir.getReturnValue() || totemUsedLocal) && source.isIn(DamageTypeTags.IS_FALL)) {
             // Only trigger if Ender Cooldown has been active for a second or less
             if (this.activeStatusEffects.containsKey(EnderGear.ENDER_COOLDOWN)) {
                 if (this.activeStatusEffects.get(EnderGear.ENDER_COOLDOWN).getDuration() >= EnderGear.ENDER_COOLDOWN_DURATION_SWORD - 20) {
@@ -121,7 +123,7 @@ public abstract class ArmorAbilityMixin {
 
     @Inject(method = "damage", at = @At("RETURN"))
     public void doNetheriteArmorAbility(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (cir.getReturnValue() && !source.isFromFalling() && getArmorCount((LivingEntity)(Object)this, NetheriteArmorItem.class) == 4) {
+        if (cir.getReturnValue() && !source.isIn(DamageTypeTags.IS_FALL) && getArmorCount((LivingEntity)(Object)this, NetheriteArmorItem.class) == 4) {
             if (!this.activeStatusEffects.containsKey(NetheriteGear.NETHERITE_COOLDOWN)) {
                 // Only trigger ability if health is going below half
                 if (this.getHealth() <= this.getMaxHealth()/2) {

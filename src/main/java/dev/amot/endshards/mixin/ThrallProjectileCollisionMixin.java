@@ -18,15 +18,15 @@ public class ThrallProjectileCollisionMixin {
     @Inject(method = "canHit", at = @At(value = "RETURN"), cancellable = true)
     public void canHitThrall(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         // Check if owner of projectile is a thrall
-        if (this.owner != null && ((IThrall)this.owner).isThrall()) {
+        if (this.owner != null && ((IThrall)this.owner).endshards$isThrall()) {
             IThrall shootingThrall = ((IThrall)this.owner);
             // If entity being shot is thrall owner, projectile should not hit
-            if (entity.getUuid() == shootingThrall.getThrallOwnerUUID()) cir.setReturnValue(false);
+            if (entity.getUuid() == shootingThrall.endshards$getThrallOwnerUUID()) cir.setReturnValue(false);
             // If entity being shot is a thrall...
-            else if (entity instanceof MobEntity && ((IThrall)entity).isThrall()) {
+            else if (entity instanceof MobEntity && ((IThrall)entity).endshards$isThrall()) {
                 IThrall shotThrall = ((IThrall)entity);
                 // ...and both thralls have the same owner, projectile should not hit
-                if (shotThrall.getThrallOwnerUUID() == shootingThrall.getThrallOwnerUUID()) cir.setReturnValue(false);
+                if (shotThrall.endshards$getThrallOwnerUUID() == shootingThrall.endshards$getThrallOwnerUUID()) cir.setReturnValue(false);
             }
         }
     }

@@ -6,7 +6,7 @@ import net.minecraft.advancement.criterion.AbstractCriterion;
 import net.minecraft.advancement.criterion.AbstractCriterionConditions;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
 import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
-import net.minecraft.predicate.entity.EntityPredicate;
+import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
@@ -20,8 +20,9 @@ public class EndshardsCriterion extends AbstractCriterion<EndshardsCriterion.Con
         return ID;
     }
 
-    public EndshardsCriterion.Conditions conditionsFromJson(JsonObject jsonObject, EntityPredicate.Extended extended, AdvancementEntityPredicateDeserializer advancementEntityPredicateDeserializer) {
-        return new EndshardsCriterion.Conditions(extended);
+    @Override
+    protected Conditions conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
+        return new EndshardsCriterion.Conditions(playerPredicate);
     }
 
     public void trigger(ServerPlayerEntity player) {
@@ -29,7 +30,7 @@ public class EndshardsCriterion extends AbstractCriterion<EndshardsCriterion.Con
     }
 
     public class Conditions extends AbstractCriterionConditions {
-        public Conditions(EntityPredicate.Extended player) {
+        public Conditions(LootContextPredicate player) {
             super(EndshardsCriterion.this.ID, player);
         }
 
@@ -37,5 +38,4 @@ public class EndshardsCriterion extends AbstractCriterion<EndshardsCriterion.Con
             return super.toJson(predicateSerializer);
         }
     }
-
 }

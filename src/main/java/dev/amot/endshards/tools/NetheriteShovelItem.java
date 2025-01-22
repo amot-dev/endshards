@@ -2,7 +2,6 @@ package dev.amot.endshards.tools;
 
 import dev.amot.endshards.items.NetheriteGear;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.text.Text;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class NetheriteShovelItem extends ShovelItem {
     public NetheriteShovelItem() {
-        super(NetheriteGear.NETHERITE_TOOL_MATERIAL, 6.5F, -3.0F, new Settings().group(ItemGroup.TOOLS));
+        super(NetheriteGear.NETHERITE_TOOL_MATERIAL, 6.5F, -3.0F, new Settings().fireproof());
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {

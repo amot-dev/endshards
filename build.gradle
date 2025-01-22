@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.8-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT' // Downgrade temporarily to 1.7-SNAPSHOT to migrate mappings (allows overwriting src/main/java)
 	id 'maven-publish'
 }
 
@@ -28,7 +28,6 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modImplementation "de.siphalor:nbtcrafting-${project.minecraft_version}:2+"
 }
 
 processResources {

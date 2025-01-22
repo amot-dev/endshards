@@ -9,7 +9,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -25,7 +24,7 @@ import java.util.List;
 
 public class NetheriteSwordItem extends SwordItem {
     public NetheriteSwordItem() {
-        super(NetheriteGear.NETHERITE_TOOL_MATERIAL, 8, -2.4F, new Settings().group(ItemGroup.COMBAT));
+        super(NetheriteGear.NETHERITE_TOOL_MATERIAL, 8, -2.4F, new Settings().fireproof());
     }
     @Override
     public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
@@ -37,7 +36,7 @@ public class NetheriteSwordItem extends SwordItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        if (user.world instanceof ServerWorld serverWorld) {
+        if (user.getWorld() instanceof ServerWorld serverWorld) {
             if (!user.getActiveStatusEffects().containsKey(NetheriteGear.NETHERITE_COOLDOWN)) {
                 // Get living entities in range
                 List<LivingEntity> targets = serverWorld.getEntitiesByClass(
@@ -71,7 +70,7 @@ public class NetheriteSwordItem extends SwordItem {
                 if (burnedMobs > 99) {
                     if (user instanceof ServerPlayerEntity serverPlayer) {
                         for (LivingEntity target : targets) {
-                            ((ISacrificedEntity)target).setSacrificingPlayer(serverPlayer);
+                            ((ISacrificedEntity)target).endshards$setSacrificingPlayer(serverPlayer);
                         }
                     }
                 }

@@ -3,7 +3,6 @@ package dev.amot.endshards.blocks;
 import dev.amot.endshards.items.EnderGear;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
@@ -29,7 +28,7 @@ public class StrangeCrystal extends AmethystClusterBlock {
     private static final int offset = 3;
 
     public StrangeCrystal() {
-        super(height, offset, FabricBlockSettings.of(Material.AMETHYST).sounds(BlockSoundGroup.AMETHYST_CLUSTER).nonOpaque().strength(4.0f).requiresTool());
+        super(height, offset, FabricBlockSettings.create().sounds(BlockSoundGroup.AMETHYST_CLUSTER).nonOpaque().strength(4.0f).requiresTool());
     }
 
     @Override
@@ -40,7 +39,7 @@ public class StrangeCrystal extends AmethystClusterBlock {
         Random random = new Random();
         boolean blockDropped = false;
         for (int i = 0; i < warpAttempts; ++i) {
-            BlockPos randomPos = new BlockPos(
+            BlockPos randomPos = BlockPos.ofFloored(
                     pos.getX() + (random.nextDouble() - 0.5) * warpRange,
                     MathHelper.clamp(pos.getY() + (random.nextDouble() - 0.5) * warpRange, world.getBottomY(), world.getTopY()),
                     pos.getZ() + (random.nextDouble() - 0.5) * warpRange

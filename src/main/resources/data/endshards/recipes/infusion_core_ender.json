@@ -7,7 +7,7 @@
   ],
   "key": {
     "I": {
-      "tag": "minecraft:dragon_breath"
+      "item": "minecraft:dragon_breath"
     },
     "C": {
       "item": "endshards:infusion_core"

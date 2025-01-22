@@ -27,19 +27,19 @@ public abstract class ThrallOwnerMixin implements IThrallOwner {
     private List<UUID> thrallUUIDs = new LinkedList<>();
 
     @Unique
-    public boolean addThrall(MobEntity thrall) {
-        if (((IThrall)thrall).isThrall()) return false;
+    public boolean endshards$addThrall(MobEntity thrall) {
+        if (((IThrall)thrall).endshards$isThrall()) return false;
 
-        ((IThrall)thrall).convertToThrall();
-        ((IThrall)thrall).assignOwner((PlayerEntity)(Object)this);
+        ((IThrall)thrall).endshards$convertToThrall();
+        ((IThrall)thrall).endshards$assignOwner((PlayerEntity)(Object)this);
         this.thrallUUIDs.add(thrall.getUuid());
 
         thrall.setGlowing(true);//debug
 
         // Clear targeting of all thralls to prevent thralls attacking each other (temp measure)
-        ServerWorld serverWorld = ((ServerPlayerEntity)(Object)this).getWorld();
+        ServerWorld serverWorld = ((ServerPlayerEntity)(Object)this).getServerWorld();
         for (UUID ownedThrallUUID : this.thrallUUIDs) {
-            ((IThrall)Objects.requireNonNull(serverWorld.getEntity(ownedThrallUUID))).clearActiveTarget();
+            ((IThrall)Objects.requireNonNull(serverWorld.getEntity(ownedThrallUUID))).endshards$clearActiveTarget();
         }
         return true;
     }
@@ -71,17 +71,17 @@ public abstract class ThrallOwnerMixin implements IThrallOwner {
         for (NbtElement nbtElement : thrallsNbt) {
             // Search World for thrall matching UUID and reinstate Thrall
             UUID thrallUUID = ((NbtCompound)nbtElement).getUuid("Thrall");
-            ServerWorld serverWorld = ((ServerPlayerEntity)(Object)this).getWorld();
+            ServerWorld serverWorld = ((ServerPlayerEntity)(Object)this).getServerWorld();
             IThrall thrall = (IThrall)serverWorld.getEntity(thrallUUID);
 
             // Only add loaded thralls; if the thrall is not loaded, sayonara baby
-            if (thrall != null) this.addThrall((MobEntity)thrall);
+            if (thrall != null) this.endshards$addThrall((MobEntity)thrall);
         }
     }
 
     @Unique
-    public int getThrallCount() {
-        ServerWorld serverWorld = ((ServerPlayerEntity)(Object)this).getWorld();
+    public int endshards$getThrallCount() {
+        ServerWorld serverWorld = ((ServerPlayerEntity)(Object)this).getServerWorld();
         // Remove dead and no longer existing thralls before taking count
         this.thrallUUIDs.removeIf(ownedThrallUUID -> {
             Entity thrall = serverWorld.getEntity(ownedThrallUUID);

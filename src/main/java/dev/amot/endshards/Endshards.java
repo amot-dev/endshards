@@ -2,8 +2,7 @@ package dev.amot.endshards;
 
 import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.blocks.EndshardsBlocks;
-import dev.amot.endshards.enchantments.EndshardsEnchantments;
-import dev.amot.endshards.features.EndshardsFeatures;
+//import dev.amot.endshards.features.EndshardsFeatures;
 import dev.amot.endshards.items.EndshardsItems;
 import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.items.NetheriteGear;
@@ -22,13 +21,12 @@ public class Endshards implements ModInitializer {
 	public void onInitialize() {
 		EndshardsGameRules.init();
 		EndshardsCriteria.init();
-		EndshardsEnchantments.init();
-		EndshardsItems.register();
-		EndshardsBlocks.register();
-		EndshardsFeatures.register();
-		EnderGear.register();
-		NetheriteGear.register();
-		SculkGear.register();
+		EndshardsItems.init();
+		EndshardsBlocks.init();
+		//EndshardsFeatures.register();
+		EnderGear.init();
+		NetheriteGear.init();
+		SculkGear.init();
 		EndshardsLootTables.init();
 		LOGGER.info("Mod loaded!");
 	}
