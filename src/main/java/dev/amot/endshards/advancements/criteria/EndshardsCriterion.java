@@ -1,41 +1,31 @@
 package dev.amot.endshards.advancements.criteria;
 
-import com.google.gson.JsonObject;
-import dev.amot.endshards.Endshards;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.advancement.criterion.AbstractCriterion;
-import net.minecraft.advancement.criterion.AbstractCriterionConditions;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateDeserializer;
-import net.minecraft.predicate.entity.AdvancementEntityPredicateSerializer;
+import net.minecraft.predicate.entity.EntityPredicate;
 import net.minecraft.predicate.entity.LootContextPredicate;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
+
+import java.util.Optional;
 
 public class EndshardsCriterion extends AbstractCriterion<EndshardsCriterion.Conditions> {
-    public EndshardsCriterion(String identifier){
-        this.ID = new Identifier(Endshards.modid, identifier);
-    }
+    EndshardsCriterion() {
 
-    Identifier ID;
-    public Identifier getId() {
-        return ID;
     }
 
     @Override
-    protected Conditions conditionsFromJson(JsonObject obj, LootContextPredicate playerPredicate, AdvancementEntityPredicateDeserializer predicateDeserializer) {
-        return new EndshardsCriterion.Conditions(playerPredicate);
+    public Codec<Conditions> getConditionsCodec() {
+        return Conditions.CODEC;
     }
 
     public void trigger(ServerPlayerEntity player) {
         this.trigger(player, (conditions) -> true);
     }
 
-    public class Conditions extends AbstractCriterionConditions {
-        public Conditions(LootContextPredicate player) {
-            super(EndshardsCriterion.this.ID, player);
-        }
-
-        public JsonObject toJson(AdvancementEntityPredicateSerializer predicateSerializer) {
-            return super.toJson(predicateSerializer);
-        }
+    public record Conditions(Optional<LootContextPredicate> player) implements AbstractCriterion.Conditions {
+        public static final Codec<Conditions> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                EntityPredicate.LOOT_CONTEXT_PREDICATE_CODEC.optionalFieldOf("player").forGetter(Conditions::player)
+        ).apply(instance, Conditions::new));
     }
 }

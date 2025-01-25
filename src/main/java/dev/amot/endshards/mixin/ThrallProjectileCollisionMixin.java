@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class ThrallProjectileCollisionMixin {
     @Shadow @Nullable private Entity owner;
 
-    @Inject(method = "canHit", at = @At(value = "RETURN"), cancellable = true)
+    @Inject(method = "canHit(Lnet/minecraft/entity/Entity;)Z", at = @At(value = "RETURN"), cancellable = true)
     public void canHitThrall(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         // Check if owner of projectile is a thrall
         if (this.owner != null && ((IThrall)this.owner).endshards$isThrall()) {

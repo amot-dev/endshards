@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#endshards:needs_ender_tool",
+    "#endshards:needs_netherite_tool",
+    "#endshards:needs_sculk_tool"
+  ]
+}

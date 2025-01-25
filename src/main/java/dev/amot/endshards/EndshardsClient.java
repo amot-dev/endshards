@@ -13,11 +13,15 @@ public class EndshardsClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(EndshardsBlocks.STRANGE_CRYSTAL, RenderLayer.getCutout());
 
-        ClientPlayNetworking.registerGlobalReceiver(EndshardsGameRules.DO_EASY_ARMOR_SWITCH_CHANNEL, (client, handler, buf, responseSender) -> {
-            EndshardsGameRules.doEasyArmorSwitchGamerule = buf.readBoolean();
+        ClientPlayNetworking.registerGlobalReceiver(EndshardsGameRules.DoEasyArmorSwitchGamerulePayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                EndshardsGameRules.doEasyArmorSwitchGamerule = payload.value();
+            });
         });
-        ClientPlayNetworking.registerGlobalReceiver(EndshardsGameRules.DO_NIGHT_VISION_FLICKER_CHANNEL, (client, handler, buf, responseSender) -> {
-            EndshardsGameRules.doNightVisionFlickerGamerule = buf.readBoolean();
+        ClientPlayNetworking.registerGlobalReceiver(EndshardsGameRules.DoNightVisionFlickerGamerulePayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                EndshardsGameRules.doNightVisionFlickerGamerule = payload.value();
+            });
         });
     }
 }

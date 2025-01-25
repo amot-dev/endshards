@@ -1,9 +1,9 @@
 package dev.amot.endshards.mixin;
 
 import dev.amot.endshards.items.EnderGear;
-import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.util.IMiningToolMaterial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ExperienceDroppingBlock;
@@ -13,8 +13,8 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.SmeltingRecipe;
+import net.minecraft.recipe.*;
+import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
@@ -49,8 +49,8 @@ public abstract class ToolAbilityMixin {
     @Inject(method = "afterBreak", at = @At("HEAD"), cancellable = true)
     public void doEnderToolAbility(World world, PlayerEntity player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
         Item itemInHand = player.getEquippedStack(EquipmentSlot.MAINHAND).getItem();
-        // Only run for Ender Tools
-        if (itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderGear.ENDER_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
+        // Check if tool is Ender
+        if (itemInHand instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == EnderGear.ENDER_TOOL_MATERIAL) {
             // This only runs once as the method cancels early for Ender Tools
             player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
             player.addExhaustion(0.005F);
@@ -67,7 +67,7 @@ public abstract class ToolAbilityMixin {
                     else {
                         //TODO: Decide whether to increase pick up stats for inventory warps (note: this line only works on client)
                         //player.increaseStat(Stats.PICKED_UP.getOrCreateStat(stackX.getItem()), stackX.getCount());
-                        player.playSound(ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
+                        player.playSoundToPlayer(ENTITY_ITEM_PICKUP, player.getSoundCategory(), 1F, 1F);
                         if (player instanceof ServerPlayerEntity serverPlayer) EndshardsCriteria.ENDER_TOOL_WARP_CRITERION.trigger(serverPlayer);
                     }
                 });
@@ -81,13 +81,14 @@ public abstract class ToolAbilityMixin {
     private static void doNetheriteToolAbility(BlockState state, ServerWorld world, BlockPos pos, @Nullable BlockEntity blockEntity, @Nullable Entity entity, ItemStack stack, CallbackInfoReturnable<List<ItemStack>> cir) {
         List<ItemStack> smeltedDrops = new ArrayList<>();
         List<ItemStack> unsmeltedDrops = cir.getReturnValue();
-        // Only run for Netherite Tools
-        if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == NetheriteGear.NETHERITE_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
+        // Check if tool is Netherite
+        if (stack.getItem() instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == ToolMaterial.NETHERITE) {
             for (ItemStack unsmeltedDrop : unsmeltedDrops) {
                 // Smelt items if possible, else return unsmelted items
-                Optional<SmeltingRecipe> recipe = world.getRecipeManager().listAllOfType(RecipeType.SMELTING).stream().filter((smeltingRecipe -> smeltingRecipe.getIngredients().get(0).test(unsmeltedDrop))).findFirst();
+                SingleStackRecipeInput recipeInput = new SingleStackRecipeInput(unsmeltedDrop);
+                Optional<RecipeEntry<SmeltingRecipe>> recipe = world.getRecipeManager().getFirstMatch(RecipeType.SMELTING, recipeInput, world);
                 if (recipe.isPresent()) {
-                    ItemStack smeltedDrop = recipe.get().getOutput(null); // TODO: Verify that null here is okay
+                    ItemStack smeltedDrop = recipe.get().value().craft(recipeInput, world.getRegistryManager());
                     smeltedDrop.setCount(unsmeltedDrop.getCount());
                     smeltedDrops.add(smeltedDrop);
 
@@ -107,8 +108,8 @@ public abstract class ToolAbilityMixin {
     @Inject(method = "dropStacks(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/entity/BlockEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;onStacksDropped(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/item/ItemStack;Z)V"))
     private static void doSculkToolAbility(BlockState state, World world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack, CallbackInfo ci) {
         if (world instanceof ServerWorld serverWorld) {
-            // Only run for Sculk Tools
-            if (stack.getItem() instanceof ToolItem toolInHand && toolInHand.getMaterial() == SculkGear.SCULK_TOOL_MATERIAL && !(toolInHand instanceof SwordItem)) {
+            // Check if tool is Sculk
+            if (stack.getItem() instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == SculkGear.SCULK_TOOL_MATERIAL) {
                 // Ore Blocks already do their own XP handling
                 if (!(state.getBlock() instanceof ExperienceDroppingBlock)) {
                     // Don't want to trigger advancement for player unless XP is actually dropped

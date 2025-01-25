@@ -1,0 +1,19 @@
+{
+  "parent": "endshards:netherite_ingot",
+  "display": {
+    "icon": {
+      "id": "minecraft:netherite_chestplate"
+    },
+    "title": "Pls Help",
+    "description": "Be given some extra protection by your armor",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "netherite_armor_protect": {
+      "trigger": "endshards:netherite_armor_protect_trigger"
+    }
+  }
+}

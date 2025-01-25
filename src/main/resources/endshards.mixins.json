@@ -2,22 +2,23 @@
   "required": true,
   "minVersion": "0.8",
   "package": "dev.amot.endshards.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "ArmorAbilityMixin",
-    "DoNightVisionFlickerMixin",
+    "ArmorMaterialMixin",
+    "NightVisionFlickerMixin",
     "IBlockInvoker",
     "InventoryEquipmentSwitchMixin",
     "IScreenHandlerInvoker",
+    "MendingBreakAdvancementMixin",
+    "MiningToolMaterialMixin",
+    "NetheriteSwordAbilityMixin",
     "SacrificedEntityMixin",
     "SacrificingPlayerMixin",
     "ThrallMixin",
     "ThrallOwnerMixin",
     "ThrallProjectileCollisionMixin",
     "ToolAbilityMixin"
-  ],
-  "client": [
-    "EndshardsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

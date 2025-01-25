@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "endshards:ender_ingot_infused",
+  "base": "minecraft:diamond_chestplate",
+  "result": {
+    "id": "endshards:ender_chestplate"
+  },
+  "template": "endshards:ender_upgrade_smithing_template"
+}

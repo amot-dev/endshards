@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "endshards:ender_ingot_infused",
+  "base": "minecraft:diamond_sword",
+  "result": {
+    "id": "endshards:ender_sword"
+  },
+  "template": "endshards:ender_upgrade_smithing_template"
+}

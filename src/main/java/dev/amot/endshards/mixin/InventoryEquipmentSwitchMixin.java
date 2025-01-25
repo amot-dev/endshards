@@ -13,13 +13,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerScreenHandler.class)
-public class InventoryEquipmentSwitchMixin {
+public abstract class InventoryEquipmentSwitchMixin {
     @Inject(method = "quickMove", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/EquipmentSlot;getType()Lnet/minecraft/entity/EquipmentSlot$Type;"), cancellable = true)
     void doEquipmentSwitch(PlayerEntity player, int index, CallbackInfoReturnable<ItemStack> cir, @Local Slot slot, @Local(ordinal = 1) ItemStack itemStack2, @Local EquipmentSlot equipmentSlot) {
         // Only apply this if the gamerule is set
         // Need to handle this on both client and server sides
         if (EndshardsGameRules.doEasyArmorSwitchGamerule) {
-            if (equipmentSlot.getType() == EquipmentSlot.Type.ARMOR) {
+            if (equipmentSlot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
                 Slot switchSlot = (((PlayerScreenHandler) (Object) this).slots.get(8 - equipmentSlot.getEntitySlotId()));
 
                 // This block only runs if the equipment is armor and there is already an armor stack in the slot

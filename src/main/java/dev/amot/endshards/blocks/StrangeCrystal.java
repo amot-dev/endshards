@@ -1,15 +1,14 @@
 package dev.amot.endshards.blocks;
 
 import dev.amot.endshards.items.EnderGear;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import dev.amot.endshards.util.IMiningToolMaterial;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
-import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.item.MiningToolItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
@@ -27,8 +26,8 @@ public class StrangeCrystal extends AmethystClusterBlock {
     private static final int height = 7;
     private static final int offset = 3;
 
-    public StrangeCrystal() {
-        super(height, offset, FabricBlockSettings.create().sounds(BlockSoundGroup.AMETHYST_CLUSTER).nonOpaque().strength(4.0f).requiresTool());
+    public StrangeCrystal(AbstractBlock.Settings settings) {
+        super(height, offset, settings);
     }
 
     @Override
@@ -41,16 +40,26 @@ public class StrangeCrystal extends AmethystClusterBlock {
         for (int i = 0; i < warpAttempts; ++i) {
             BlockPos randomPos = BlockPos.ofFloored(
                     pos.getX() + (random.nextDouble() - 0.5) * warpRange,
-                    MathHelper.clamp(pos.getY() + (random.nextDouble() - 0.5) * warpRange, world.getBottomY(), world.getTopY()),
+                    MathHelper.clamp(pos.getY() + (random.nextDouble() - 0.5) * warpRange, world.getBottomY(), world.getTopYInclusive()),
                     pos.getZ() + (random.nextDouble() - 0.5) * warpRange
             );
             if (world.getBlockState(randomPos).getBlock() == Blocks.AIR){
                 if (world.getBlockState(randomPos.offset(Direction.DOWN)).getBlock() != Blocks.AIR){
                     super.afterBreak(world, player, randomPos, state, blockEntity, stack);
 
+                    // Play teleport sound upon break unless broken by Ender tool (which would cause it to teleport into inventory directly)
                     Item itemInHand = player.getEquippedStack(EquipmentSlot.MAINHAND).getItem();
-                    if (!(itemInHand instanceof ToolItem toolInHand && toolInHand.getMaterial() == EnderGear.ENDER_TOOL_MATERIAL)) {
-                        world.playSound(null, randomPos.getX(), randomPos.getY(), randomPos.getZ(), SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT, SoundCategory.BLOCKS, 1.0f, 1.0f);
+                    if (!(itemInHand instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == EnderGear.ENDER_TOOL_MATERIAL)) {
+                        world.playSound(
+                                null,
+                                randomPos.getX(),
+                                randomPos.getY(),
+                                randomPos.getZ(),
+                                SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT,
+                                SoundCategory.BLOCKS,
+                                1.0f,
+                                1.0f
+                        );
                     }
                     blockDropped = true;
                 }

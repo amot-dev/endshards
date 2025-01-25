@@ -48,13 +48,57 @@ public abstract class ThrallMixin implements IThrall {
         // Set targeting goals
         this.endshards$clearActiveTarget();
         this.targetSelector.clear(new AlwaysTruePredicate<>());
-        this.targetSelector.add(2, new ActiveTargetGoal<>((MobEntity)(Object)this, LivingEntity.class, true,
-                new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.SELF_DEFENSE)));
-        this.targetSelector.add(3, new ActiveTargetGoal<>((MobEntity)(Object)this, LivingEntity.class, true,
-                new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.DEFENSE)));
-        this.targetSelector.add(4, new ActiveTargetGoal<>((MobEntity)(Object)this, LivingEntity.class, true,
-                new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.OFFENSE)));
-        this.goalSelector.add(1, new FollowPlayerGoal((MobEntity)(Object)this, thrallOwner, 1.0D, 10.0F, 4.0F));
+
+        MobEntity thisThrall = (MobEntity)(Object)this;
+        this.targetSelector.add(
+                2,
+                new ActiveTargetGoal<>(
+                        thisThrall,
+                        LivingEntity.class,
+                        true,
+                        new ThrallTargetPredicate(
+                                thisThrall,
+                                thrallOwner,
+                                ThrallTargetPredicate.TargetMode.SELF_DEFENSE
+                        )
+                )
+        );
+        this.targetSelector.add(
+                3,
+                new ActiveTargetGoal<>(
+                        thisThrall,
+                        LivingEntity.class,
+                        true,
+                        new ThrallTargetPredicate(
+                                thisThrall,
+                                thrallOwner,
+                                ThrallTargetPredicate.TargetMode.DEFENSE
+                        )
+                )
+        );
+        this.targetSelector.add(
+                4,
+                new ActiveTargetGoal<>(
+                        thisThrall,
+                        LivingEntity.class,
+                        true,
+                        new ThrallTargetPredicate(
+                                thisThrall,
+                                thrallOwner,
+                                ThrallTargetPredicate.TargetMode.OFFENSE
+                        )
+                )
+        );
+        this.goalSelector.add(
+                1,
+                new FollowPlayerGoal(
+                        thisThrall,
+                        thrallOwner,
+                        1.0D,
+                        10.0F,
+                        4.0F
+                )
+        );
     }
 
     @Unique
@@ -76,7 +120,7 @@ public abstract class ThrallMixin implements IThrall {
 
         // Get rid of zombie reinforcements
         if ((MobEntity)(Object)this instanceof ZombieEntity zombie) {
-            EntityAttributeInstance reinforcements = zombie.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+            EntityAttributeInstance reinforcements = zombie.getAttributeInstance(EntityAttributes.SPAWN_REINFORCEMENTS);
             if (reinforcements != null) reinforcements.setBaseValue(0.0);
         }
     }

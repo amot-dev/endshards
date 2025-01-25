@@ -1,14 +1,20 @@
 package dev.amot.endshards.items;
 
-import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.SculkArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
-import dev.amot.endshards.util.EndshardsMiningLevels;
+import net.minecraft.block.Block;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentAsset;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
@@ -17,23 +23,42 @@ import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
 import static dev.amot.endshards.util.RegistryHelper.registerItem;
 
 public class SculkGear {
-    public static final ArmorMaterial SCULK_ARMOR_MATERIAL = new BaseArmorMaterial(
-            "sculk", EndshardsItems.SCULK_GEM, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
+    public static final TagKey<Item> REPAIRS_SCULK = TagKey.of(RegistryKeys.ITEM, Identifier.of(modid, "repairs_sculk"));
+    public static final RegistryKey<EquipmentAsset> SCULK_ARMOR_MATERIAL_KEY = RegistryKey.of(
+            EquipmentAssetKeys.REGISTRY_KEY,
+            Identifier.of(modid, "sculk")
     );
-    public static final ToolMaterial SCULK_TOOL_MATERIAL = new BaseToolMaterial(
-            EndshardsItems.SCULK_GEM, 2032, 9.0F, EndshardsMiningLevels.SCULK, -1.0F, 15
+    public static final TagKey<Block> INCORRECT_FOR_SCULK_TOOL = TagKey.of(RegistryKeys.BLOCK, Identifier.of(modid, "incorrect_for_sculk_tool"));
+
+    public static final ArmorMaterial SCULK_ARMOR_MATERIAL = EndshardsGear.createArmorMaterial(REPAIRS_SCULK, SCULK_ARMOR_MATERIAL_KEY, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
+    public static final ToolMaterial SCULK_TOOL_MATERIAL = EndshardsGear.createToolMaterial(REPAIRS_SCULK, INCORRECT_FOR_SCULK_TOOL);
+
+    public static final Item SCULK_HELMET = registerItem(
+            "sculk_helmet",
+            settings -> new SculkArmorItem(EquipmentType.HELMET, settings),
+            new Item.Settings().maxDamage(EquipmentType.HELMET.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+    );
+    public static final Item SCULK_CHESTPLATE = registerItem(
+            "sculk_chestplate",
+            settings -> new SculkArmorItem(EquipmentType.CHESTPLATE, settings),
+            new Item.Settings().maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+    );
+    public static final Item SCULK_LEGGINGS = registerItem(
+            "sculk_leggings",
+            settings -> new SculkArmorItem(EquipmentType.LEGGINGS, settings),
+            new Item.Settings().maxDamage(EquipmentType.LEGGINGS.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+    );
+    public static final Item SCULK_BOOTS = registerItem(
+            "sculk_boots",
+            settings -> new SculkArmorItem(EquipmentType.BOOTS, settings),
+            new Item.Settings().maxDamage(EquipmentType.BOOTS.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
     );
 
-    public static final Item SCULK_HELMET = registerItem(Identifier.of(modid, "sculk_helmet"), new SculkArmorItem(ArmorItem.Type.HELMET));
-    public static final Item SCULK_CHESTPLATE = registerItem(Identifier.of(modid, "sculk_chestplate"), new SculkArmorItem(ArmorItem.Type.CHESTPLATE));
-    public static final Item SCULK_LEGGINGS = registerItem(Identifier.of(modid, "sculk_leggings"), new SculkArmorItem(ArmorItem.Type.LEGGINGS));
-    public static final Item SCULK_BOOTS = registerItem(Identifier.of(modid, "sculk_boots"), new SculkArmorItem(ArmorItem.Type.BOOTS));
-
-    public static final Item SCULK_SWORD = registerItem(Identifier.of(modid, "sculk_sword"), new SculkSwordItem());
-    public static final Item SCULK_PICKAXE = registerItem(Identifier.of(modid, "sculk_pickaxe"), new SculkPickaxeItem());
-    public static final Item SCULK_SHOVEL = registerItem(Identifier.of(modid, "sculk_shovel"), new SculkShovelItem());
-    public static final Item SCULK_AXE = registerItem(Identifier.of(modid, "sculk_axe"), new SculkAxeItem());
-    public static final Item SCULK_HOE = registerItem(Identifier.of(modid, "sculk_hoe"), new SculkHoeItem());
+    public static final Item SCULK_SWORD = registerItem("sculk_sword", SculkSwordItem::new);
+    public static final Item SCULK_PICKAXE = registerItem("sculk_pickaxe", SculkPickaxeItem::new);
+    public static final Item SCULK_SHOVEL = registerItem("sculk_shovel", SculkShovelItem::new);
+    public static final Item SCULK_AXE = registerItem("sculk_axe", SculkAxeItem::new);
+    public static final Item SCULK_HOE = registerItem("sculk_hoe", SculkHoeItem::new);
 
     public static final StatusEffect SCULK_COOLDOWN = Registry.register(
             Registries.STATUS_EFFECT,

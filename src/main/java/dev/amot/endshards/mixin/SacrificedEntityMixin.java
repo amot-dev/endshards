@@ -26,7 +26,7 @@ public abstract class SacrificedEntityMixin implements ISacrificedEntity {
     public void incrementSacrificeCount(DamageSource damageSource, CallbackInfo ci) {
         // If entity has a sacrificing player and died from fire, count is as a sacrifice
         if (this.sacrificingPlayer != null && damageSource.isIn(DamageTypeTags.IS_FIRE)) {
-            ((ISacrificingPlayer)this.sacrificingPlayer).incrementSacrificeCount();
+            ((ISacrificingPlayer)this.sacrificingPlayer).endshards$incrementSacrificeCount();
         }
     }
 

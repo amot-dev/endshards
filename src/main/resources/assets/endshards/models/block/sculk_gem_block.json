@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "endshards:block/sculk_gem_block"
+  }
+}

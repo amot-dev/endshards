@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "endshards:sculk_gem_infused",
+  "base": "minecraft:diamond_helmet",
+  "result": {
+    "id": "endshards:sculk_helmet"
+  },
+  "template": "endshards:sculk_upgrade_smithing_template"
+}

@@ -1,13 +1,14 @@
 package dev.amot.endshards.util;
 
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.mob.CreeperEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 
 import java.util.Objects;
-import java.util.function.Predicate;
 
-public class ThrallTargetPredicate<LivingEntity> implements Predicate<LivingEntity> {
+public class ThrallTargetPredicate implements TargetPredicate.EntityPredicate {
     public enum TargetMode {
         SELF_DEFENSE,
         DEFENSE,
@@ -22,12 +23,13 @@ public class ThrallTargetPredicate<LivingEntity> implements Predicate<LivingEnti
         this.thrallOwner = thrallOwner;
         this.targetMode = targetMode;
     }
+
     @Override
-    public boolean test(LivingEntity targetEntity) {
+    public boolean test(net.minecraft.entity.LivingEntity targetEntity, ServerWorld world) {
         // Do not attack creepers unless gamerule set
-        if (targetEntity instanceof CreeperEntity creeper
-                && !creeper.getWorld().getGameRules().getBoolean(EndshardsGameRules.THRALLS_ATTACK_CREEPERS))
-            return false;
+        if (targetEntity instanceof CreeperEntity) {
+            if (!world.getGameRules().getBoolean(EndshardsGameRules.THRALLS_ATTACK_CREEPERS)) return false;
+        }
 
         // Assign target based on mode
         if (this.targetMode == TargetMode.SELF_DEFENSE) {

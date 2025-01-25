@@ -1,14 +1,20 @@
 package dev.amot.endshards.items;
 
-import dev.amot.endshards.armor.BaseArmorMaterial;
 import dev.amot.endshards.armor.EnderArmorItem;
 import dev.amot.endshards.effects.CooldownEffect;
 import dev.amot.endshards.tools.*;
-import dev.amot.endshards.util.EndshardsMiningLevels;
+import net.minecraft.block.Block;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.*;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentAsset;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
@@ -17,23 +23,42 @@ import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
 import static dev.amot.endshards.util.RegistryHelper.registerItem;
 
 public class EnderGear {
-    public static final ArmorMaterial ENDER_ARMOR_MATERIAL = new BaseArmorMaterial(
-            "ender", EndshardsItems.ENDER_INGOT, new int[] {3,6,8,3}, 37, 15, 3F, 0.1F, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC
+    public static final TagKey<Item> REPAIRS_ENDER = TagKey.of(RegistryKeys.ITEM, Identifier.of(modid, "repairs_ender"));
+    public static final RegistryKey<EquipmentAsset> ENDER_ARMOR_MATERIAL_KEY = RegistryKey.of(
+            EquipmentAssetKeys.REGISTRY_KEY,
+            Identifier.of(modid, "ender")
     );
-    public static final ToolMaterial ENDER_TOOL_MATERIAL = new BaseToolMaterial(
-            EndshardsItems.ENDER_INGOT, 2032, 9.0F, EndshardsMiningLevels.ENDER, -1.0F, 15
+    public static final TagKey<Block> INCORRECT_FOR_ENDER_TOOL = TagKey.of(RegistryKeys.BLOCK, Identifier.of(modid, "incorrect_for_ender_tool"));
+
+    public static final ArmorMaterial ENDER_ARMOR_MATERIAL = EndshardsGear.createArmorMaterial(REPAIRS_ENDER, ENDER_ARMOR_MATERIAL_KEY, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
+    public static final ToolMaterial ENDER_TOOL_MATERIAL = EndshardsGear.createToolMaterial(REPAIRS_ENDER, INCORRECT_FOR_ENDER_TOOL);
+
+    public static final Item ENDER_HELMET = registerItem(
+            "ender_helmet",
+            settings -> new EnderArmorItem(EquipmentType.HELMET, settings),
+            new Item.Settings().maxDamage(EquipmentType.HELMET.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+    );
+    public static final Item ENDER_CHESTPLATE = registerItem(
+            "ender_chestplate",
+            settings -> new EnderArmorItem(EquipmentType.CHESTPLATE, settings),
+            new Item.Settings().maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+    );
+    public static final Item ENDER_LEGGINGS = registerItem(
+            "ender_leggings",
+            settings -> new EnderArmorItem(EquipmentType.LEGGINGS, settings),
+            new Item.Settings().maxDamage(EquipmentType.LEGGINGS.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+    );
+    public static final Item ENDER_BOOTS = registerItem(
+            "ender_boots",
+            settings -> new EnderArmorItem(EquipmentType.BOOTS, settings),
+            new Item.Settings().maxDamage(EquipmentType.BOOTS.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
     );
 
-    public static final Item ENDER_HELMET = registerItem(Identifier.of(modid, "ender_helmet"), new EnderArmorItem(ArmorItem.Type.HELMET));
-    public static final Item ENDER_CHESTPLATE = registerItem(Identifier.of(modid, "ender_chestplate"), new EnderArmorItem(ArmorItem.Type.CHESTPLATE));
-    public static final Item ENDER_LEGGINGS = registerItem(Identifier.of(modid, "ender_leggings"), new EnderArmorItem(ArmorItem.Type.LEGGINGS));
-    public static final Item ENDER_BOOTS = registerItem(Identifier.of(modid, "ender_boots"), new EnderArmorItem(ArmorItem.Type.BOOTS));
-
-    public static final Item ENDER_SWORD = registerItem(Identifier.of(modid, "ender_sword"), new EnderSwordItem());
-    public static final Item ENDER_PICKAXE = registerItem(Identifier.of(modid, "ender_pickaxe"), new EnderPickaxeItem());
-    public static final Item ENDER_SHOVEL = registerItem(Identifier.of(modid, "ender_shovel"), new EnderShovelItem());
-    public static final Item ENDER_AXE = registerItem(Identifier.of(modid, "ender_axe"), new EnderAxeItem());
-    public static final Item ENDER_HOE = registerItem(Identifier.of(modid, "ender_hoe"), new EnderHoeItem());
+    public static final Item ENDER_SWORD = registerItem("ender_sword", EnderSwordItem::new);
+    public static final Item ENDER_PICKAXE = registerItem("ender_pickaxe", EnderPickaxeItem::new);
+    public static final Item ENDER_SHOVEL = registerItem("ender_shovel", EnderShovelItem::new);
+    public static final Item ENDER_AXE = registerItem("ender_axe", EnderAxeItem::new);
+    public static final Item ENDER_HOE = registerItem("ender_hoe", EnderHoeItem::new);
 
 
     public static final StatusEffect ENDER_COOLDOWN = Registry.register(
