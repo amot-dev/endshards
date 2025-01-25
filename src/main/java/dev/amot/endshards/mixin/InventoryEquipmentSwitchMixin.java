@@ -18,7 +18,7 @@ public abstract class InventoryEquipmentSwitchMixin {
     void doEquipmentSwitch(PlayerEntity player, int index, CallbackInfoReturnable<ItemStack> cir, @Local Slot slot, @Local(ordinal = 1) ItemStack itemStack2, @Local EquipmentSlot equipmentSlot) {
         // Only apply this if the gamerule is set
         // Need to handle this on both client and server sides
-        if (EndshardsGameRules.doEasyArmorSwitchGamerule) {
+        if (EndshardsGameRules.doInventoryEquipmentSwitchGamerule) {
             if (equipmentSlot.getType() == EquipmentSlot.Type.HUMANOID_ARMOR) {
                 Slot switchSlot = (((PlayerScreenHandler) (Object) this).slots.get(8 - equipmentSlot.getEntitySlotId()));
 

@@ -15,25 +15,25 @@ import net.minecraft.world.GameRules;
 import static dev.amot.endshards.Endshards.modid;
 
 public class EndshardsGameRules {
-    public static GameRules.Key<GameRules.BooleanRule> DO_EASY_ARMOR_SWITCH;
+    public static GameRules.Key<GameRules.BooleanRule> DO_INVENTORY_EQUIPMENT_SWITCH;
     public static GameRules.Key<GameRules.BooleanRule> DO_NIGHT_VISION_FLICKER;
     public static GameRules.Key<GameRules.BooleanRule> THRALLS_ATTACK_CREEPERS;
 
-    public static final boolean DO_EASY_ARMOR_SWITCH_DEFAULT = true;
+    public static final boolean DO_INVENTORY_EQUIPMENT_SWITCH_DEFAULT = true;
     public static final boolean DO_NIGHT_VISION_FLICKER_DEFAULT = false;
     public static final boolean THRALLS_ATTACK_CREEPERS_DEFAULT = false;
 
-    public static boolean doEasyArmorSwitchGamerule = DO_EASY_ARMOR_SWITCH_DEFAULT;
+    public static boolean doInventoryEquipmentSwitchGamerule = DO_INVENTORY_EQUIPMENT_SWITCH_DEFAULT;
     public static boolean doNightVisionFlickerGamerule = DO_NIGHT_VISION_FLICKER_DEFAULT;
 
     public static void init() {
-        PayloadTypeRegistry.playS2C().register(EndshardsGameRules.DoEasyArmorSwitchGamerulePayload.ID, EndshardsGameRules.DoEasyArmorSwitchGamerulePayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(DoInventoryEquipmentSwitchGamerulePayload.ID, DoInventoryEquipmentSwitchGamerulePayload.CODEC);
         PayloadTypeRegistry.playS2C().register(EndshardsGameRules.DoNightVisionFlickerGamerulePayload.ID, EndshardsGameRules.DoNightVisionFlickerGamerulePayload.CODEC);
 
-        DO_EASY_ARMOR_SWITCH = GameRuleRegistry.register("doEasyArmorSwitch", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(DO_EASY_ARMOR_SWITCH_DEFAULT,
+        DO_INVENTORY_EQUIPMENT_SWITCH = GameRuleRegistry.register("doInventoryEquipmentSwitch", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(DO_INVENTORY_EQUIPMENT_SWITCH_DEFAULT,
                 ((minecraftServer, booleanRule) -> {
                     for (ServerPlayerEntity player : minecraftServer.getPlayerManager().getPlayerList()) {
-                        ServerPlayNetworking.send(player, new DoEasyArmorSwitchGamerulePayload(booleanRule.get()));
+                        ServerPlayNetworking.send(player, new DoInventoryEquipmentSwitchGamerulePayload(booleanRule.get()));
                     }
                 })));
         DO_NIGHT_VISION_FLICKER = GameRuleRegistry.register("doNightVisionFlicker", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(DO_NIGHT_VISION_FLICKER_DEFAULT,
@@ -46,14 +46,14 @@ public class EndshardsGameRules {
         THRALLS_ATTACK_CREEPERS = GameRuleRegistry.register("thrallsAttackCreepers", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(THRALLS_ATTACK_CREEPERS_DEFAULT));
     }
 
-    public record DoEasyArmorSwitchGamerulePayload(boolean value) implements CustomPayload {
-        public static final CustomPayload.Id<DoEasyArmorSwitchGamerulePayload> ID = new CustomPayload.Id<>(
-                Identifier.of(modid, "do_easy_armor_switch_gamerule_payload")
+    public record DoInventoryEquipmentSwitchGamerulePayload(boolean value) implements CustomPayload {
+        public static final CustomPayload.Id<DoInventoryEquipmentSwitchGamerulePayload> ID = new CustomPayload.Id<>(
+                Identifier.of(modid, "do_inventory_equipment_switch_gamerule_payload")
         );
-        public static final PacketCodec<RegistryByteBuf, DoEasyArmorSwitchGamerulePayload> CODEC = PacketCodec.tuple(
+        public static final PacketCodec<RegistryByteBuf, DoInventoryEquipmentSwitchGamerulePayload> CODEC = PacketCodec.tuple(
                 PacketCodecs.BOOLEAN,
-                DoEasyArmorSwitchGamerulePayload::value,
-                DoEasyArmorSwitchGamerulePayload::new
+                DoInventoryEquipmentSwitchGamerulePayload::value,
+                DoInventoryEquipmentSwitchGamerulePayload::new
         );
 
         public Id<? extends CustomPayload> getId() {

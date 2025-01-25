@@ -1,7 +1,7 @@
 {
   "message.endshards.cooldown_active": "Cooldown still active",
 
-  "gamerule.doEasyArmorSwitch": "Allows right-click switching equipped armor",
+  "gamerule.doInventoryEquipmentSwitch": "Allows shift-clicking in inventory to switch equipment",
   "gamerule.doNightVisionFlicker": "Do flicker effect when Night Vision is about to end",
   "gamerule.thrallsAttackCreepers": "Thralls will attack Creepers",
 

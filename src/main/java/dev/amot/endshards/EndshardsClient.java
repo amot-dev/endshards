@@ -13,9 +13,9 @@ public class EndshardsClient implements ClientModInitializer {
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(EndshardsBlocks.STRANGE_CRYSTAL, RenderLayer.getCutout());
 
-        ClientPlayNetworking.registerGlobalReceiver(EndshardsGameRules.DoEasyArmorSwitchGamerulePayload.ID, (payload, context) -> {
+        ClientPlayNetworking.registerGlobalReceiver(EndshardsGameRules.DoInventoryEquipmentSwitchGamerulePayload.ID, (payload, context) -> {
             context.client().execute(() -> {
-                EndshardsGameRules.doEasyArmorSwitchGamerule = payload.value();
+                EndshardsGameRules.doInventoryEquipmentSwitchGamerule = payload.value();
             });
         });
         ClientPlayNetworking.registerGlobalReceiver(EndshardsGameRules.DoNightVisionFlickerGamerulePayload.ID, (payload, context) -> {
