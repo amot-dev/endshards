@@ -1,0 +1,22 @@
+{
+  "parent": "endshards:infused_ingot",
+  "criteria": {
+    "ender_armor_fall": {
+      "trigger": "endshards:ender_armor_fall_trigger"
+    }
+  },
+  "display": {
+    "description": "Have a great fall while wearing Ender Armor",
+    "icon": {
+      "count": 1,
+      "id": "endshards:ender_chestplate"
+    },
+    "title": "Humpty Dumpty"
+  },
+  "requirements": [
+    [
+      "ender_armor_fall"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

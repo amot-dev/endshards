@@ -1,0 +1,22 @@
+{
+  "parent": "endshards:netherite_ingot",
+  "criteria": {
+    "netherite_tool_autosmelt": {
+      "trigger": "endshards:netherite_tool_autosmelt_trigger"
+    }
+  },
+  "display": {
+    "description": "Autosmelt a mined block",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:netherite_pickaxe"
+    },
+    "title": "Personal Forge"
+  },
+  "requirements": [
+    [
+      "netherite_tool_autosmelt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

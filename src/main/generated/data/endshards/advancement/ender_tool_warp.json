@@ -1,0 +1,22 @@
+{
+  "parent": "endshards:infused_ingot",
+  "criteria": {
+    "ender_tool_warp": {
+      "trigger": "endshards:ender_tool_warp_trigger"
+    }
+  },
+  "display": {
+    "description": "Have a block be warped to your inventory",
+    "icon": {
+      "count": 1,
+      "id": "endshards:ender_pickaxe"
+    },
+    "title": "Beam Me Up, Scotty"
+  },
+  "requirements": [
+    [
+      "ender_tool_warp"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,22 @@
+{
+  "parent": "endshards:netherite_ingot",
+  "criteria": {
+    "netherite_sword_flame": {
+      "trigger": "endshards:netherite_sword_flame_trigger"
+    }
+  },
+  "display": {
+    "description": "Light a mob on fire without touching it",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:netherite_sword"
+    },
+    "title": "Smells Like Bacon"
+  },
+  "requirements": [
+    [
+      "netherite_sword_flame"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

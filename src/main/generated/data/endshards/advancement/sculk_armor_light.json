@@ -1,0 +1,22 @@
+{
+  "parent": "endshards:sculk_gem",
+  "criteria": {
+    "sculk_armor_light": {
+      "trigger": "endshards:sculk_armor_light_trigger"
+    }
+  },
+  "display": {
+    "description": "Have your armor light your way",
+    "icon": {
+      "count": 1,
+      "id": "endshards:sculk_chestplate"
+    },
+    "title": "A Glare's Best Friend"
+  },
+  "requirements": [
+    [
+      "sculk_armor_light"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -32,3 +32,4 @@ bin/
 
 run/
 textures/
+src/main/generated/.cache

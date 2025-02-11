@@ -1,0 +1,23 @@
+{
+  "parent": "endshards:sculk_tool_xp",
+  "criteria": {
+    "sculk_tool_mending_break": {
+      "trigger": "endshards:sculk_tool_mending_break_trigger"
+    }
+  },
+  "display": {
+    "description": "Break your Sculk tool despite Mending",
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "endshards:sculk_hoe"
+    },
+    "title": "Rock Bottom"
+  },
+  "requirements": [
+    [
+      "sculk_tool_mending_break"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "endshards:root",
+  "criteria": {
+    "picked_up_endshard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:endshard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Obtain an Endshard",
+    "icon": {
+      "count": 1,
+      "id": "endshards:strange_crystal"
+    },
+    "title": "A Strange Crystal"
+  },
+  "requirements": [
+    [
+      "picked_up_endshard"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

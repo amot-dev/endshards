@@ -1,0 +1,24 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "endshards:textures/block/ender_block.png",
+    "description": "The beginning of something awesome",
+    "icon": {
+      "count": 1,
+      "id": "endshards:endshard"
+    },
+    "show_toast": false,
+    "title": "Endshards"
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
