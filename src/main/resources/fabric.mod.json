@@ -23,6 +23,9 @@
     ],
     "client": [
       "dev.amot.endshards.EndshardsClient"
+    ],
+    "fabric-datagen": [
+      "dev.amot.endshards.datagen.EndshardsDataGen"
     ]
   },
   "mixins": [

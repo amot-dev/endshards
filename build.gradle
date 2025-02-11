@@ -11,16 +11,6 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-	// Required by NBT Crafting
-	maven {
-		name "Siphalor's Maven"
-		url "https://maven.siphalor.de"
-	}
-	// Required by NBT Crafting
-	maven {
-		name "Jitpack"
-		url "https://jitpack.io"
-	}
 }
 
 dependencies {
@@ -49,6 +39,12 @@ java {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
+
+fabricApi {
+	configureDataGeneration() {
+		client = true
 	}
 }
 
