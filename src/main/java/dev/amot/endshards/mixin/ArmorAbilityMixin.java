@@ -52,8 +52,8 @@ public abstract class ArmorAbilityMixin {
         return armorCount;
     }
 
-    // Inject after wakeUp call (marks end of invulnerability and dead checks, and we only care about fall damage so don't care about checking shield)
-    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;wakeUp()V", shift = At.Shift.AFTER), cancellable = true)
+    // Inject after isSleeping call (marks end of invulnerability and dead checks, and we only care about fall damage so don't care about checking shield)
+    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isSleeping()Z", shift = At.Shift.AFTER), cancellable = true)
     public void doEnderArmorAbility(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         boolean wearingFullEnderArmor = getArmorCount((LivingEntity)(Object)this, EnderGear.ENDER_ARMOR_MATERIAL) == 4;
 
@@ -80,19 +80,19 @@ public abstract class ArmorAbilityMixin {
         }
     }
 
-    @Inject(method = "damage", at = @At("RETURN"))
+    // Inject when trying to use totem (allows advancement when using totem and removes need to check damage taken (it's already known lethal))
+    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;tryUseDeathProtector(Lnet/minecraft/entity/damage/DamageSource;)Z"))
     public void enderArmorPlayedSelfTrigger(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         boolean wearingFullEnderArmor = getArmorCount((LivingEntity)(Object)this, EnderGear.ENDER_ARMOR_MATERIAL) == 4;
 
         // Check if fall damage was taken while wearing full Ender Armor
-        if (wearingFullEnderArmor && cir.getReturnValue() && source.isIn(DamageTypeTags.IS_FALL)) {
+        if (wearingFullEnderArmor && source.isIn(DamageTypeTags.IS_FALL)) {
             // Ensure Ender Cooldown has been active for a second or less
             RegistryEntry<StatusEffect> enderCooldownEntry = Registries.STATUS_EFFECT.getEntry(EnderGear.ENDER_COOLDOWN);
             if (this.activeStatusEffects.containsKey(enderCooldownEntry)) {
                 if (this.activeStatusEffects.get(enderCooldownEntry).getDuration() >= EnderGear.ENDER_COOLDOWN_DURATION_SWORD - 20) {
-                    float totalDamage = this.modifyAppliedDamage(source, amount);
-                    // Only trigger if lethal damage was taken
-                    if ((totalDamage >= this.getHealth()) && (LivingEntity)(Object)this instanceof ServerPlayerEntity serverPlayer) {
+                    // Only trigger for players
+                    if ((LivingEntity)(Object)this instanceof ServerPlayerEntity serverPlayer) {
                         EndshardsCriteria.ENDER_ARMOR_PLAYED_SELF_CRITERION.trigger(serverPlayer);
                     }
                 }
