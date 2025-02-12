@@ -145,6 +145,24 @@ public class EndshardsRecipeProvider extends FabricRecipeProvider {
                         .input(EndshardsItems.INFUSION_CORE_NIGHTMARE, 1).criterion(hasItem(EndshardsItems.INFUSION_CORE_NIGHTMARE), conditionsFromItem(EndshardsItems.INFUSION_CORE_NIGHTMARE))
                         .offerTo(exporter);
 
+                // Un-Infusion
+                createShapeless(RecipeCategory.MISC, EndshardsItems.ENDER_INGOT)
+                        .group(getItemPath(EndshardsItems.ENDER_INGOT))
+                        .input(EndshardsItems.ENDER_INGOT_INFUSED, 1).criterion(hasItem(EndshardsItems.ENDER_INGOT_INFUSED), conditionsFromItem(EndshardsItems.ENDER_INGOT_INFUSED))
+                        .offerTo(exporter, getItemPath(EndshardsItems.ENDER_INGOT) + "_from_infused");
+                createShapeless(RecipeCategory.MISC, Items.NETHERITE_INGOT)
+                        .group(getItemPath(Items.NETHERITE_INGOT))
+                        .input(EndshardsItems.NETHERITE_INGOT_INFUSED, 1).criterion(hasItem(EndshardsItems.NETHERITE_INGOT_INFUSED), conditionsFromItem(EndshardsItems.NETHERITE_INGOT_INFUSED))
+                        .offerTo(exporter, getItemPath(Items.NETHERITE_INGOT) + "_from_infused");
+                createShapeless(RecipeCategory.MISC, EndshardsItems.SCULK_GEM)
+                        .group(getItemPath(EndshardsItems.SCULK_GEM))
+                        .input(EndshardsItems.SCULK_GEM_INFUSED, 1).criterion(hasItem(EndshardsItems.SCULK_GEM_INFUSED), conditionsFromItem(EndshardsItems.SCULK_GEM_INFUSED))
+                        .offerTo(exporter, getItemPath(EndshardsItems.SCULK_GEM) + "_from_infused");
+                createShapeless(RecipeCategory.MISC, EndshardsItems.NIGHTMARE_PEARL)
+                        .group(getItemPath(EndshardsItems.NIGHTMARE_PEARL))
+                        .input(EndshardsItems.NIGHTMARE_PEARL_INFUSED, 1).criterion(hasItem(EndshardsItems.NIGHTMARE_PEARL_INFUSED), conditionsFromItem(EndshardsItems.NIGHTMARE_PEARL_INFUSED))
+                        .offerTo(exporter, getItemPath(EndshardsItems.NIGHTMARE_PEARL) + "_from_infused");
+
                 // Ender Gear
                 offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderGear.ENDER_HELMET, Items.DIAMOND_HELMET);
                 offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderGear.ENDER_CHESTPLATE, Items.DIAMOND_CHESTPLATE);

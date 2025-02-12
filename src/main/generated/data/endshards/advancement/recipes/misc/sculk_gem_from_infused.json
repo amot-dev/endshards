@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_sculk_gem_infused": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:sculk_gem_infused"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:sculk_gem_from_infused"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_sculk_gem_infused"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:sculk_gem_from_infused"
+    ]
+  }
+}
