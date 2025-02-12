@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "sculk_gem",
+  "ingredients": [
+    "endshards:soul_fragment",
+    "endshards:soul_fragment",
+    "endshards:soul_fragment",
+    "endshards:soul_fragment",
+    "minecraft:redstone",
+    "minecraft:redstone",
+    "minecraft:redstone",
+    "minecraft:redstone"
+  ],
+  "result": {
+    "count": 1,
+    "id": "endshards:sculk_gem"
+  }
+}

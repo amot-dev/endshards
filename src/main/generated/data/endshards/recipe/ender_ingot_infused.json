@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endshards:ender_ingot",
+    "endshards:infusion_core_ender"
+  ],
+  "result": {
+    "count": 1,
+    "id": "endshards:ender_ingot_infused"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "endshards:sculk_gem_infused",
+  "base": "minecraft:diamond_hoe",
+  "result": {
+    "count": 1,
+    "id": "endshards:sculk_hoe"
+  },
+  "template": "endshards:sculk_upgrade_smithing_template"
+}

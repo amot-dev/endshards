@@ -9,5 +9,6 @@ public class EndshardsDataGen implements DataGeneratorEntrypoint {
         FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
         pack.addProvider(EndshardsAdvancementProvider::new);
+        pack.addProvider(EndshardsRecipeProvider::new);
     }
 }

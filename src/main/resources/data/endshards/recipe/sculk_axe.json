@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "addition": "endshards:sculk_gem_infused",
-  "base": "minecraft:diamond_axe",
-  "result": {
-    "id": "endshards:sculk_axe"
-  },
-  "template": "endshards:sculk_upgrade_smithing_template"
-}

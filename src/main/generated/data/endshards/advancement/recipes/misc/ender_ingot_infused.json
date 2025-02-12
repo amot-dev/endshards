@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ender_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:ender_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_infusion_core_ender": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:infusion_core_ender"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "endshards:ender_ingot_infused"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ender_ingot",
+      "has_infusion_core_ender"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "endshards:ender_ingot_infused"
+    ]
+  }
+}

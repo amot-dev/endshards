@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fear_essence": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:fear_essence"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_nightmare_fuel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:nightmare_fuel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "endshards:nightmare_pearl"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_nightmare_fuel",
+      "has_fear_essence"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "endshards:nightmare_pearl"
+    ]
+  }
+}

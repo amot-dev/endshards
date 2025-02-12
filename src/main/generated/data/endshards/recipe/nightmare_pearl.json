@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endshards:nightmare_fuel",
+    "endshards:nightmare_fuel",
+    "endshards:nightmare_fuel",
+    "endshards:nightmare_fuel",
+    "endshards:fear_essence",
+    "endshards:fear_essence",
+    "endshards:fear_essence",
+    "endshards:fear_essence"
+  ],
+  "result": {
+    "count": 1,
+    "id": "endshards:nightmare_pearl"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endshards:nightmare_pearl",
+    "endshards:infusion_core_nightmare"
+  ],
+  "result": {
+    "count": 1,
+    "id": "endshards:nightmare_pearl_infused"
+  }
+}

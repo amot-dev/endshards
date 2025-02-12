@@ -5,8 +5,6 @@
   "gamerule.doNightVisionFlicker": "Do flicker effect when Night Vision is about to end",
   "gamerule.thrallsAttackCreepers": "Thralls will attack Creepers",
 
-  "enchantment.endshards.infused": "Infused",
-
   "item.endshards.endshard": "End Shard",
   "item.endshards.ender_ingot": "Ender Ingot",
   "item.endshards.ender_ingot_infused": "Ender Ingot (Infused)",
@@ -71,5 +69,8 @@
   "effect.endshards.sculk_cooldown": "Sculk Cooldown",
   "message.endshards.sculk_sword_thrall_count": "Created enthralled. You may enthrall %s more",
   "message.endshards.sculk_sword_thrall_count_over": "Thrall limit has been reached",
-  "message.endshards.sculk_sword_fail": "This creature cannot be enthralled"
+  "message.endshards.sculk_sword_fail": "This creature cannot be enthralled",
+
+  "tag.item.endshards.repairs_ender": "Repairs Ender",
+  "tag.item.endshards.repairs_sculk": "Repairs Sculk"
 }

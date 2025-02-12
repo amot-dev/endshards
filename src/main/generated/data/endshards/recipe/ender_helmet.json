@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "endshards:ender_ingot_infused",
+  "base": "minecraft:diamond_helmet",
+  "result": {
+    "count": 1,
+    "id": "endshards:ender_helmet"
+  },
+  "template": "endshards:ender_upgrade_smithing_template"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "sculk_gem",
+  "ingredients": [
+    "endshards:sculk_gem_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "endshards:sculk_gem"
+  }
+}
