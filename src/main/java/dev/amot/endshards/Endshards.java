@@ -8,7 +8,7 @@ import dev.amot.endshards.items.EnderGear;
 import dev.amot.endshards.items.NetheriteGear;
 import dev.amot.endshards.items.SculkGear;
 import dev.amot.endshards.util.EndshardsGameRules;
-import dev.amot.endshards.util.EndshardsLootTables;
+import dev.amot.endshards.util.EndshardsModifiedLootTables;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class Endshards implements ModInitializer {
 		EnderGear.init();
 		NetheriteGear.init();
 		SculkGear.init();
-		EndshardsLootTables.init();
+		EndshardsModifiedLootTables.init();
 		LOGGER.info("Mod loaded!");
 	}
 }

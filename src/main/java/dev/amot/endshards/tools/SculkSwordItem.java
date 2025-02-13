@@ -34,10 +34,10 @@ public class SculkSwordItem extends SwordItem {
         tooltip.add(Text.translatable("item.endshards.sculk_sword.tooltip").formatted(Formatting.DARK_BLUE));
     }
 
-    private static final int AbilityMaxThrallCount = 3;
+    private static final int ABILITY_MAX_THRALL_COUNT = 3;
 
-    public static final float SoulFragmentDropChance = 0.005F;
-    public static final float SoulFragmentLootingMultiplier = 0.002F;
+    public static final float SOUL_FRAGMENT_DROP_CHANCE = 0.005F;
+    public static final float SOUL_FRAGMENT_LOOTING_MULTIPLIER = 0.002F;
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
@@ -46,7 +46,7 @@ public class SculkSwordItem extends SwordItem {
             RegistryEntry<StatusEffect> sculkCooldownEntry = Registries.STATUS_EFFECT.getEntry(SculkGear.SCULK_COOLDOWN);
             if (!serverPlayer.getActiveStatusEffects().containsKey(sculkCooldownEntry)) {
                 if (THRALL_ALLOWED_ENTITIES.contains(entity.getType())) {
-                    if (((IThrallOwner)serverPlayer).endshards$getThrallCount() < AbilityMaxThrallCount) {
+                    if (((IThrallOwner)serverPlayer).endshards$getThrallCount() < ABILITY_MAX_THRALL_COUNT) {
                         // Try to add thrall
                         if (((IThrallOwner)serverPlayer).endshards$addThrall((MobEntity)entity)) {
                             serverPlayer.addStatusEffect(new StatusEffectInstance(
@@ -54,7 +54,7 @@ public class SculkSwordItem extends SwordItem {
                             );
                             client.inGameHud.setOverlayMessage(Text.translatable(
                                     "message.endshards.sculk_sword_thrall_count",
-                                    AbilityMaxThrallCount - ((IThrallOwner)serverPlayer).endshards$getThrallCount()
+                                    ABILITY_MAX_THRALL_COUNT - ((IThrallOwner)serverPlayer).endshards$getThrallCount()
                             ).formatted(Formatting.DARK_GREEN), false);
                             EndshardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
                         }

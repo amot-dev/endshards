@@ -34,13 +34,13 @@ public class NetheriteGear {
         ItemTooltipCallback.EVENT.register((stack, context, tooltip, lines) -> {
             // Add tooltip for Netherite Armor
             if (stack.getItem() instanceof ArmorItem armorItem && ((IArmorMaterial)armorItem).endshards$getMaterial() == ArmorMaterials.NETHERITE) {
-                lines.add(Text.translatable("item.endshards.netherite_armor.tooltip").formatted(Formatting.DARK_BLUE));
+                lines.add(1, Text.translatable("item.endshards.netherite_armor.tooltip").formatted(Formatting.DARK_BLUE));
             }
             else if (stack.getItem() instanceof MiningToolItem toolItem && ((IMiningToolMaterial)toolItem).endshards$getMaterial() == ToolMaterial.NETHERITE) {
-                lines.add(Text.translatable("item.endshards.netherite_tool.tooltip").formatted(Formatting.DARK_BLUE));
+                lines.add(1, Text.translatable("item.endshards.netherite_tool.tooltip").formatted(Formatting.DARK_BLUE));
             }
             else if (stack.getItem() == Items.NETHERITE_SWORD) {
-                lines.add(Text.translatable("item.endshards.netherite_sword.tooltip").formatted(Formatting.DARK_BLUE));
+                lines.add(1, Text.translatable("item.endshards.netherite_sword.tooltip").formatted(Formatting.DARK_BLUE));
             }
         });
     }
