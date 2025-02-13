@@ -13,6 +13,7 @@
     "MiningToolMaterialMixin",
     "NetheriteSwordAbilityMixin",
     "NightVisionFlickerMixin",
+    "PreventSculkVeinGrowthMixin",
     "SacrificedEntityMixin",
     "SacrificingPlayerMixin",
     "SmithingTemplateItemMixin",

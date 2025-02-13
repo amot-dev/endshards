@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:replace_single_block",
+  "config": {
+    "targets": [
+      {
+        "state": {
+          "Name": "endshards:soul_sculk"
+        },
+        "target": {
+          "block_state": {
+            "Name": "minecraft:sculk"
+          },
+          "predicate_type": "minecraft:blockstate_match"
+        }
+      }
+    ]
+  }
+}

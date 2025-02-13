@@ -192,6 +192,6 @@ public class EndshardsRecipeProvider extends FabricRecipeProvider {
 
     @Override
     public String getName() {
-        return "EndshardsRecipeProviderRecipeProvider";
+        return "EndshardsRecipeProvider";
     }
 }

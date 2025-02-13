@@ -12,6 +12,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.PlacedFeature;
 
 import java.util.function.Function;
 
@@ -52,6 +54,14 @@ public class RegistryHelper {
         }
 
         return Registry.register(Registries.BLOCK, blockKey, block);
+    }
+
+    public static RegistryKey<PlacedFeature> registerPlacedFeature(String id) {
+        return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(modid,id));
+    }
+
+    public static RegistryKey<ConfiguredFeature<?, ?>> registerConfiguredFeature(String id) {
+        return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier.of(modid,id));
     }
 
     @SafeVarargs
