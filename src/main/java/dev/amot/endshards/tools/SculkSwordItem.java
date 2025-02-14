@@ -1,7 +1,7 @@
 package dev.amot.endshards.tools;
 
 import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.items.SculkEquipment;
 import dev.amot.endshards.util.IThrallOwner;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.*;
@@ -27,7 +27,7 @@ import static dev.amot.endshards.util.AbilityConstants.THRALL_ALLOWED_ENTITIES;
 
 public class SculkSwordItem extends SwordItem {
     public SculkSwordItem(Item.Settings settings) {
-        super(SculkGear.SCULK_TOOL_MATERIAL, 3.0F, -2.4F, settings.fireproof());
+        super(SculkEquipment.SCULK_TOOL_MATERIAL, 3.0F, -2.4F, settings.fireproof());
     }
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
@@ -43,14 +43,14 @@ public class SculkSwordItem extends SwordItem {
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user instanceof ServerPlayerEntity serverPlayer) {
             MinecraftClient client = MinecraftClient.getInstance();
-            RegistryEntry<StatusEffect> sculkCooldownEntry = Registries.STATUS_EFFECT.getEntry(SculkGear.SCULK_COOLDOWN);
+            RegistryEntry<StatusEffect> sculkCooldownEntry = Registries.STATUS_EFFECT.getEntry(SculkEquipment.SCULK_COOLDOWN);
             if (!serverPlayer.getActiveStatusEffects().containsKey(sculkCooldownEntry)) {
                 if (THRALL_ALLOWED_ENTITIES.contains(entity.getType())) {
                     if (((IThrallOwner)serverPlayer).endshards$getThrallCount() < ABILITY_MAX_THRALL_COUNT) {
                         // Try to add thrall
                         if (((IThrallOwner)serverPlayer).endshards$addThrall((MobEntity)entity)) {
                             serverPlayer.addStatusEffect(new StatusEffectInstance(
-                                    sculkCooldownEntry, SculkGear.SCULK_COOLDOWN_DURATION_SWORD, 0, false, false, true)
+                                    sculkCooldownEntry, SculkEquipment.SCULK_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                             );
                             client.inGameHud.setOverlayMessage(Text.translatable(
                                     "message.endshards.sculk_sword_thrall_count",

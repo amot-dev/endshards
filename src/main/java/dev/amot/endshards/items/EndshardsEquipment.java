@@ -13,7 +13,7 @@ import net.minecraft.sound.SoundEvent;
 
 import java.util.Map;
 
-public class EndshardsGear {
+public class EndshardsEquipment {
     public static final int ARMOR_DURABILITY = 37;
     private static final Map<EquipmentType, Integer> ARMOR_PROTECTION_VALUES = Map.of(
             EquipmentType.HELMET, 3,

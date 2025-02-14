@@ -1,7 +1,7 @@
 package dev.amot.endshards.mixin;
 
 import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.items.SculkEquipment;
 import dev.amot.endshards.util.IMiningToolMaterial;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -28,7 +28,7 @@ public abstract class MendingBreakAdvancementMixin {
         Item thisAsItem = ((ItemStack)(Object)this).getItem();
         if (thisAsItem instanceof MiningToolItem toolInHand) {
             // Check if tool being broken is Sculk
-            if (((IMiningToolMaterial)toolInHand).endshards$getMaterial() == SculkGear.SCULK_TOOL_MATERIAL) {
+            if (((IMiningToolMaterial)toolInHand).endshards$getMaterial() == SculkEquipment.SCULK_TOOL_MATERIAL) {
                 // Only trigger achievement if Mending is on the tool
                 Registry<Enchantment> enchantmentRegistry = player.getServerWorld().getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT);
                 RegistryEntry<Enchantment> mendingEntry = enchantmentRegistry.getEntry(enchantmentRegistry.get(Enchantments.MENDING));

@@ -1,6 +1,6 @@
 package dev.amot.endshards.blocks;
 
-import dev.amot.endshards.items.EnderGear;
+import dev.amot.endshards.items.EnderEquipment;
 import dev.amot.endshards.util.IMiningToolMaterial;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -50,7 +50,7 @@ public class StrangeCrystal extends AmethystClusterBlock {
 
                 // Play teleport sound upon break unless broken by Ender tool (which would cause it to teleport into inventory directly)
                 Item itemInHand = player.getEquippedStack(EquipmentSlot.MAINHAND).getItem();
-                if (!(itemInHand instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == EnderGear.ENDER_TOOL_MATERIAL)) {
+                if (!(itemInHand instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == EnderEquipment.ENDER_TOOL_MATERIAL)) {
                     world.playSound(
                             null,
                             randomPos.getX(),

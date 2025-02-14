@@ -14,7 +14,7 @@ import net.minecraft.util.Identifier;
 
 import static dev.amot.endshards.Endshards.modid;
 
-public class NetheriteGear {
+public class NetheriteEquipment {
     public static final StatusEffect NETHERITE_COOLDOWN = Registry.register(
             Registries.STATUS_EFFECT,
             Identifier.of(modid, "netherite_cooldown"),

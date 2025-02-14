@@ -1,8 +1,8 @@
 package dev.amot.endshards.mixin;
 
-import dev.amot.endshards.items.EnderGear;
+import dev.amot.endshards.items.EnderEquipment;
 import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.items.SculkEquipment;
 import dev.amot.endshards.util.IMiningToolMaterial;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -50,7 +50,7 @@ public abstract class ToolAbilityMixin {
     public void doEnderToolAbility(World world, PlayerEntity player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack stack, CallbackInfo ci) {
         Item itemInHand = player.getEquippedStack(EquipmentSlot.MAINHAND).getItem();
         // Check if tool is Ender
-        if (itemInHand instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == EnderGear.ENDER_TOOL_MATERIAL) {
+        if (itemInHand instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == EnderEquipment.ENDER_TOOL_MATERIAL) {
             // This only runs once as the method cancels early for Ender Tools
             player.incrementStat(Stats.MINED.getOrCreateStat(state.getBlock()));
             player.addExhaustion(0.005F);
@@ -109,7 +109,7 @@ public abstract class ToolAbilityMixin {
     private static void doSculkToolAbility(BlockState state, World world, BlockPos pos, BlockEntity blockEntity, Entity entity, ItemStack stack, CallbackInfo ci) {
         if (world instanceof ServerWorld serverWorld) {
             // Check if tool is Sculk
-            if (stack.getItem() instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == SculkGear.SCULK_TOOL_MATERIAL) {
+            if (stack.getItem() instanceof MiningToolItem toolInHand && ((IMiningToolMaterial)toolInHand).endshards$getMaterial() == SculkEquipment.SCULK_TOOL_MATERIAL) {
                 // Ore Blocks already do their own XP handling
                 if (!(state.getBlock() instanceof ExperienceDroppingBlock)) {
                     // Don't want to trigger advancement for player unless XP is actually dropped

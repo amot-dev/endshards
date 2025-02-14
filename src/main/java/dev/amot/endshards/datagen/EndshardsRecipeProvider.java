@@ -1,9 +1,9 @@
 package dev.amot.endshards.datagen;
 
 import dev.amot.endshards.blocks.EndshardsBlocks;
-import dev.amot.endshards.items.EnderGear;
+import dev.amot.endshards.items.EnderEquipment;
 import dev.amot.endshards.items.EndshardsItems;
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.items.SculkEquipment;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.recipe.RecipeExporter;
@@ -163,29 +163,29 @@ public class EndshardsRecipeProvider extends FabricRecipeProvider {
                         .input(EndshardsItems.NIGHTMARE_PEARL_INFUSED, 1).criterion(hasItem(EndshardsItems.NIGHTMARE_PEARL_INFUSED), conditionsFromItem(EndshardsItems.NIGHTMARE_PEARL_INFUSED))
                         .offerTo(exporter, getItemPath(EndshardsItems.NIGHTMARE_PEARL) + "_from_infused");
 
-                // Ender Gear
-                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderGear.ENDER_HELMET, Items.DIAMOND_HELMET);
-                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderGear.ENDER_CHESTPLATE, Items.DIAMOND_CHESTPLATE);
-                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderGear.ENDER_LEGGINGS, Items.DIAMOND_LEGGINGS);
-                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderGear.ENDER_BOOTS, Items.DIAMOND_BOOTS);
-                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderGear.ENDER_SWORD, Items.DIAMOND_SWORD);
-                offerEnderUpgradeRecipe(RecipeCategory.TOOLS, EnderGear.ENDER_PICKAXE, Items.DIAMOND_PICKAXE);
-                offerEnderUpgradeRecipe(RecipeCategory.TOOLS, EnderGear.ENDER_SHOVEL, Items.DIAMOND_SHOVEL);
-                offerEnderUpgradeRecipe(RecipeCategory.TOOLS, EnderGear.ENDER_AXE, Items.DIAMOND_AXE);
-                offerEnderUpgradeRecipe(RecipeCategory.TOOLS, EnderGear.ENDER_HOE, Items.DIAMOND_HOE);
+                // Ender Equipment
+                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderEquipment.ENDER_HELMET, Items.DIAMOND_HELMET);
+                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderEquipment.ENDER_CHESTPLATE, Items.DIAMOND_CHESTPLATE);
+                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderEquipment.ENDER_LEGGINGS, Items.DIAMOND_LEGGINGS);
+                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderEquipment.ENDER_BOOTS, Items.DIAMOND_BOOTS);
+                offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderEquipment.ENDER_SWORD, Items.DIAMOND_SWORD);
+                offerEnderUpgradeRecipe(RecipeCategory.TOOLS, EnderEquipment.ENDER_PICKAXE, Items.DIAMOND_PICKAXE);
+                offerEnderUpgradeRecipe(RecipeCategory.TOOLS, EnderEquipment.ENDER_SHOVEL, Items.DIAMOND_SHOVEL);
+                offerEnderUpgradeRecipe(RecipeCategory.TOOLS, EnderEquipment.ENDER_AXE, Items.DIAMOND_AXE);
+                offerEnderUpgradeRecipe(RecipeCategory.TOOLS, EnderEquipment.ENDER_HOE, Items.DIAMOND_HOE);
 
-                // Netherite Gear still manually added to overwrite
+                // Netherite Equipment still manually added to overwrite
 
-                // Sculk Gear
-                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkGear.SCULK_HELMET, Items.DIAMOND_HELMET);
-                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkGear.SCULK_CHESTPLATE, Items.DIAMOND_CHESTPLATE);
-                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkGear.SCULK_LEGGINGS, Items.DIAMOND_LEGGINGS);
-                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkGear.SCULK_BOOTS, Items.DIAMOND_BOOTS);
-                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkGear.SCULK_SWORD, Items.DIAMOND_SWORD);
-                offerSculkUpgradeRecipe(RecipeCategory.TOOLS, SculkGear.SCULK_PICKAXE, Items.DIAMOND_PICKAXE);
-                offerSculkUpgradeRecipe(RecipeCategory.TOOLS, SculkGear.SCULK_SHOVEL, Items.DIAMOND_SHOVEL);
-                offerSculkUpgradeRecipe(RecipeCategory.TOOLS, SculkGear.SCULK_AXE, Items.DIAMOND_AXE);
-                offerSculkUpgradeRecipe(RecipeCategory.TOOLS, SculkGear.SCULK_HOE, Items.DIAMOND_HOE);
+                // Sculk Equipment
+                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkEquipment.SCULK_HELMET, Items.DIAMOND_HELMET);
+                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkEquipment.SCULK_CHESTPLATE, Items.DIAMOND_CHESTPLATE);
+                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkEquipment.SCULK_LEGGINGS, Items.DIAMOND_LEGGINGS);
+                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkEquipment.SCULK_BOOTS, Items.DIAMOND_BOOTS);
+                offerSculkUpgradeRecipe(RecipeCategory.COMBAT, SculkEquipment.SCULK_SWORD, Items.DIAMOND_SWORD);
+                offerSculkUpgradeRecipe(RecipeCategory.TOOLS, SculkEquipment.SCULK_PICKAXE, Items.DIAMOND_PICKAXE);
+                offerSculkUpgradeRecipe(RecipeCategory.TOOLS, SculkEquipment.SCULK_SHOVEL, Items.DIAMOND_SHOVEL);
+                offerSculkUpgradeRecipe(RecipeCategory.TOOLS, SculkEquipment.SCULK_AXE, Items.DIAMOND_AXE);
+                offerSculkUpgradeRecipe(RecipeCategory.TOOLS, SculkEquipment.SCULK_HOE, Items.DIAMOND_HOE);
             }
         };
     }

@@ -3,9 +3,9 @@ package dev.amot.endshards.datagen;
 import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import dev.amot.endshards.advancements.criteria.EndshardsCriterion;
 import dev.amot.endshards.blocks.EndshardsBlocks;
-import dev.amot.endshards.items.EnderGear;
+import dev.amot.endshards.items.EnderEquipment;
 import dev.amot.endshards.items.EndshardsItems;
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.items.SculkEquipment;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancement.Advancement;
@@ -127,7 +127,7 @@ public class EndshardsAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry enderSwordWarp = Advancement.Builder.create()
                 .parent(infusedIngot)
                 .display(
-                        EnderGear.ENDER_SWORD,
+                        EnderEquipment.ENDER_SWORD,
                         Text.literal("Banished to the Shadow Realm"),
                         Text.literal("Send an enemy to the void"),
                         null,
@@ -142,7 +142,7 @@ public class EndshardsAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry enderArmorFall = Advancement.Builder.create()
                 .parent(infusedIngot)
                 .display(
-                        EnderGear.ENDER_CHESTPLATE,
+                        EnderEquipment.ENDER_CHESTPLATE,
                         Text.literal("Humpty Dumpty"),
                         Text.literal("Have a great fall while wearing Ender Armor"),
                         null,
@@ -157,7 +157,7 @@ public class EndshardsAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry enderArmorPlayedSelf = Advancement.Builder.create()
                 .parent(enderArmorFall)
                 .display(
-                        EnderGear.ENDER_BOOTS,
+                        EnderEquipment.ENDER_BOOTS,
                         Text.literal("Congrats, You Played Yourself"),
                         Text.literal("Warp a mob right before taking preventable critical fall damage"),
                         null,
@@ -172,7 +172,7 @@ public class EndshardsAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry enderToolWarp = Advancement.Builder.create()
                 .parent(infusedIngot)
                 .display(
-                        EnderGear.ENDER_PICKAXE,
+                        EnderEquipment.ENDER_PICKAXE,
                         Text.literal("Beam Me Up, Scotty"),
                         Text.literal("Have a block be warped to your inventory"),
                         null,
@@ -277,7 +277,7 @@ public class EndshardsAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry sculkSwordEnthrall = Advancement.Builder.create()
                 .parent(sculkGem)
                 .display(
-                        SculkGear.SCULK_SWORD,
+                        SculkEquipment.SCULK_SWORD,
                         Text.literal("The Gamesters of Triskelion"),
                         Text.literal("Enthrall an enemy with your sword"),
                         null,
@@ -292,7 +292,7 @@ public class EndshardsAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry sculkArmorLight = Advancement.Builder.create()
                 .parent(sculkGem)
                 .display(
-                        SculkGear.SCULK_CHESTPLATE,
+                        SculkEquipment.SCULK_CHESTPLATE,
                         Text.literal("A Glare's Best Friend"),
                         Text.literal("Have your armor light your way"),
                         null,
@@ -307,7 +307,7 @@ public class EndshardsAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry sculkToolXp = Advancement.Builder.create()
                 .parent(sculkGem)
                 .display(
-                        SculkGear.SCULK_PICKAXE,
+                        SculkEquipment.SCULK_PICKAXE,
                         Text.literal("Mending++"),
                         Text.literal("Get XP from a basic block"),
                         null,
@@ -322,7 +322,7 @@ public class EndshardsAdvancementProvider extends FabricAdvancementProvider {
         AdvancementEntry sculkToolMendingBreak = Advancement.Builder.create()
                 .parent(sculkToolXp)
                 .display(
-                        SculkGear.SCULK_HOE,
+                        SculkEquipment.SCULK_HOE,
                         Text.literal("Rock Bottom"),
                         Text.literal("Break your Sculk tool despite Mending"),
                         null,

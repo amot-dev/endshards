@@ -1,6 +1,6 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.items.SculkEquipment;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
@@ -12,7 +12,7 @@ import java.util.List;
 
 public class SculkPickaxeItem extends PickaxeItem {
     public SculkPickaxeItem(Item.Settings settings) {
-        super(SculkGear.SCULK_TOOL_MATERIAL, 1.0F, -2.8F, settings.fireproof());
+        super(SculkEquipment.SCULK_TOOL_MATERIAL, 1.0F, -2.8F, settings.fireproof());
     }
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {

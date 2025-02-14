@@ -1,6 +1,6 @@
 package dev.amot.endshards.armor;
 
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.items.SculkEquipment;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class SculkArmorItem extends ArmorItem {
     public SculkArmorItem(EquipmentType type, Item.Settings settings) {
-        super(SculkGear.SCULK_ARMOR_MATERIAL, type, settings.fireproof());
+        super(SculkEquipment.SCULK_ARMOR_MATERIAL, type, settings.fireproof());
     }
 
     @Override

@@ -1,6 +1,6 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.items.EnderGear;
+import dev.amot.endshards.items.EnderEquipment;
 import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EquipmentSlot;
@@ -27,7 +27,7 @@ import static dev.amot.endshards.util.AbilityConstants.ENDER_WARP_BANNED_ENTITIE
 
 public class EnderSwordItem extends SwordItem {
     public EnderSwordItem(Item.Settings settings) {
-        super(EnderGear.ENDER_TOOL_MATERIAL, 3.0F, -2.4F, settings.fireproof());
+        super(EnderEquipment.ENDER_TOOL_MATERIAL, 3.0F, -2.4F, settings.fireproof());
     }
 
     @Override
@@ -38,7 +38,7 @@ public class EnderSwordItem extends SwordItem {
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user.getWorld() instanceof ServerWorld serverWorld) {
-            RegistryEntry<StatusEffect> enderCooldownEntry = Registries.STATUS_EFFECT.getEntry(EnderGear.ENDER_COOLDOWN);
+            RegistryEntry<StatusEffect> enderCooldownEntry = Registries.STATUS_EFFECT.getEntry(EnderEquipment.ENDER_COOLDOWN);
             if (!user.getActiveStatusEffects().containsKey(enderCooldownEntry)) {
                 if (entity.getType().getSpawnGroup() == SpawnGroup.MONSTER && !ENDER_WARP_BANNED_ENTITIES.contains(entity.getType())) {
                     entity.setPos(entity.getX(), -1000F, entity.getZ());
@@ -47,7 +47,7 @@ public class EnderSwordItem extends SwordItem {
                     user.playSoundToPlayer(SoundEvents.ENTITY_ENDERMAN_TELEPORT, user.getSoundCategory(), 1.0f, 1.0f);
 
                     user.addStatusEffect(new StatusEffectInstance(
-                            enderCooldownEntry, EnderGear.ENDER_COOLDOWN_DURATION_SWORD, 0, false, false, true)
+                            enderCooldownEntry, EnderEquipment.ENDER_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                     );
 
                     if (user instanceof ServerPlayerEntity serverUser) EndshardsCriteria.ENDER_SWORD_WARP_CRITERION.trigger(serverUser);

@@ -22,7 +22,7 @@ import static dev.amot.endshards.Endshards.modid;
 import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
 import static dev.amot.endshards.util.RegistryHelper.registerItem;
 
-public class SculkGear {
+public class SculkEquipment {
     public static final TagKey<Item> REPAIRS_SCULK = TagKey.of(RegistryKeys.ITEM, Identifier.of(modid, "repairs_sculk"));
     public static final RegistryKey<EquipmentAsset> SCULK_ARMOR_MATERIAL_KEY = RegistryKey.of(
             EquipmentAssetKeys.REGISTRY_KEY,
@@ -30,28 +30,28 @@ public class SculkGear {
     );
     public static final TagKey<Block> INCORRECT_FOR_SCULK_TOOL = TagKey.of(RegistryKeys.BLOCK, Identifier.of(modid, "incorrect_for_sculk_tool"));
 
-    public static final ArmorMaterial SCULK_ARMOR_MATERIAL = EndshardsGear.createArmorMaterial(REPAIRS_SCULK, SCULK_ARMOR_MATERIAL_KEY, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
-    public static final ToolMaterial SCULK_TOOL_MATERIAL = EndshardsGear.createToolMaterial(REPAIRS_SCULK, INCORRECT_FOR_SCULK_TOOL);
+    public static final ArmorMaterial SCULK_ARMOR_MATERIAL = EndshardsEquipment.createArmorMaterial(REPAIRS_SCULK, SCULK_ARMOR_MATERIAL_KEY, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
+    public static final ToolMaterial SCULK_TOOL_MATERIAL = EndshardsEquipment.createToolMaterial(REPAIRS_SCULK, INCORRECT_FOR_SCULK_TOOL);
 
     public static final Item SCULK_HELMET = registerItem(
             "sculk_helmet",
             settings -> new SculkArmorItem(EquipmentType.HELMET, settings),
-            new Item.Settings().maxDamage(EquipmentType.HELMET.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+            new Item.Settings().maxDamage(EquipmentType.HELMET.getMaxDamage(EndshardsEquipment.ARMOR_DURABILITY))
     );
     public static final Item SCULK_CHESTPLATE = registerItem(
             "sculk_chestplate",
             settings -> new SculkArmorItem(EquipmentType.CHESTPLATE, settings),
-            new Item.Settings().maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+            new Item.Settings().maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(EndshardsEquipment.ARMOR_DURABILITY))
     );
     public static final Item SCULK_LEGGINGS = registerItem(
             "sculk_leggings",
             settings -> new SculkArmorItem(EquipmentType.LEGGINGS, settings),
-            new Item.Settings().maxDamage(EquipmentType.LEGGINGS.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+            new Item.Settings().maxDamage(EquipmentType.LEGGINGS.getMaxDamage(EndshardsEquipment.ARMOR_DURABILITY))
     );
     public static final Item SCULK_BOOTS = registerItem(
             "sculk_boots",
             settings -> new SculkArmorItem(EquipmentType.BOOTS, settings),
-            new Item.Settings().maxDamage(EquipmentType.BOOTS.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+            new Item.Settings().maxDamage(EquipmentType.BOOTS.getMaxDamage(EndshardsEquipment.ARMOR_DURABILITY))
     );
 
     public static final Item SCULK_SWORD = registerItem("sculk_sword", SculkSwordItem::new);

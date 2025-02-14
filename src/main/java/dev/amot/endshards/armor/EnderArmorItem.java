@@ -1,6 +1,6 @@
 package dev.amot.endshards.armor;
 
-import dev.amot.endshards.items.EnderGear;
+import dev.amot.endshards.items.EnderEquipment;
 import net.minecraft.item.*;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.item.tooltip.TooltipType;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EnderArmorItem extends ArmorItem {
     public EnderArmorItem(EquipmentType type, Item.Settings settings) {
-        super(EnderGear.ENDER_ARMOR_MATERIAL, type, settings.fireproof());
+        super(EnderEquipment.ENDER_ARMOR_MATERIAL, type, settings.fireproof());
     }
 
     @Override

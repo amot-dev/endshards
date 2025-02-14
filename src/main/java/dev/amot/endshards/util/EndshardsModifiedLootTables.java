@@ -1,7 +1,7 @@
 package dev.amot.endshards.util;
 
 import dev.amot.endshards.items.EndshardsItems;
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.items.SculkEquipment;
 import dev.amot.endshards.tools.SculkSwordItem;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.entity.EntityType;
@@ -48,7 +48,7 @@ public class EndshardsModifiedLootTables {
                                     LootContext.EntityTarget.DIRECT_ATTACKER,
                                     EntityPredicate.Builder.create().equipment(
                                             EntityEquipmentPredicate.Builder.create().mainhand(
-                                                    ItemPredicate.Builder.create().items(registries.getOrThrow(RegistryKeys.ITEM), SculkGear.SCULK_SWORD)
+                                                    ItemPredicate.Builder.create().items(registries.getOrThrow(RegistryKeys.ITEM), SculkEquipment.SCULK_SWORD)
                                             ).build()
                                     ).build()
                             ))

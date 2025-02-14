@@ -22,7 +22,7 @@ import static dev.amot.endshards.Endshards.modid;
 import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
 import static dev.amot.endshards.util.RegistryHelper.registerItem;
 
-public class EnderGear {
+public class EnderEquipment {
     public static final TagKey<Item> REPAIRS_ENDER = TagKey.of(RegistryKeys.ITEM, Identifier.of(modid, "repairs_ender"));
     public static final RegistryKey<EquipmentAsset> ENDER_ARMOR_MATERIAL_KEY = RegistryKey.of(
             EquipmentAssetKeys.REGISTRY_KEY,
@@ -30,28 +30,28 @@ public class EnderGear {
     );
     public static final TagKey<Block> INCORRECT_FOR_ENDER_TOOL = TagKey.of(RegistryKeys.BLOCK, Identifier.of(modid, "incorrect_for_ender_tool"));
 
-    public static final ArmorMaterial ENDER_ARMOR_MATERIAL = EndshardsGear.createArmorMaterial(REPAIRS_ENDER, ENDER_ARMOR_MATERIAL_KEY, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
-    public static final ToolMaterial ENDER_TOOL_MATERIAL = EndshardsGear.createToolMaterial(REPAIRS_ENDER, INCORRECT_FOR_ENDER_TOOL);
+    public static final ArmorMaterial ENDER_ARMOR_MATERIAL = EndshardsEquipment.createArmorMaterial(REPAIRS_ENDER, ENDER_ARMOR_MATERIAL_KEY, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE);
+    public static final ToolMaterial ENDER_TOOL_MATERIAL = EndshardsEquipment.createToolMaterial(REPAIRS_ENDER, INCORRECT_FOR_ENDER_TOOL);
 
     public static final Item ENDER_HELMET = registerItem(
             "ender_helmet",
             settings -> new EnderArmorItem(EquipmentType.HELMET, settings),
-            new Item.Settings().maxDamage(EquipmentType.HELMET.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+            new Item.Settings().maxDamage(EquipmentType.HELMET.getMaxDamage(EndshardsEquipment.ARMOR_DURABILITY))
     );
     public static final Item ENDER_CHESTPLATE = registerItem(
             "ender_chestplate",
             settings -> new EnderArmorItem(EquipmentType.CHESTPLATE, settings),
-            new Item.Settings().maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+            new Item.Settings().maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(EndshardsEquipment.ARMOR_DURABILITY))
     );
     public static final Item ENDER_LEGGINGS = registerItem(
             "ender_leggings",
             settings -> new EnderArmorItem(EquipmentType.LEGGINGS, settings),
-            new Item.Settings().maxDamage(EquipmentType.LEGGINGS.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+            new Item.Settings().maxDamage(EquipmentType.LEGGINGS.getMaxDamage(EndshardsEquipment.ARMOR_DURABILITY))
     );
     public static final Item ENDER_BOOTS = registerItem(
             "ender_boots",
             settings -> new EnderArmorItem(EquipmentType.BOOTS, settings),
-            new Item.Settings().maxDamage(EquipmentType.BOOTS.getMaxDamage(EndshardsGear.ARMOR_DURABILITY))
+            new Item.Settings().maxDamage(EquipmentType.BOOTS.getMaxDamage(EndshardsEquipment.ARMOR_DURABILITY))
     );
 
     public static final Item ENDER_SWORD = registerItem("ender_sword", EnderSwordItem::new);
