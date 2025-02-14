@@ -7,8 +7,7 @@ import net.minecraft.util.Rarity;
 
 import java.util.List;
 
-import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
-import static dev.amot.endshards.util.RegistryHelper.registerItem;
+import static dev.amot.endshards.util.RegistryHelper.*;
 
 public class EndshardsItems {
     public static final Item ENDSHARD = registerItem("endshard");
@@ -64,26 +63,40 @@ public class EndshardsItems {
     public static final Item WARDING_HEART = registerItem("warding_heart", Rarity.RARE);
 
     public static void init() {
-        addToItemGroups(ENDSHARD, ItemGroups.INGREDIENTS);
-        addToItemGroups(ENDER_INGOT, ItemGroups.INGREDIENTS);
-        addToItemGroups(ENDER_INGOT_INFUSED, ItemGroups.INGREDIENTS);
-        addToItemGroups(ENDER_UPGRADE_SMITHING_TEMPLATE, ItemGroups.INGREDIENTS);
-        addToItemGroups(FEAR_ESSENCE, ItemGroups.INGREDIENTS);
-        addToItemGroups(INFUSION_CORE, ItemGroups.INGREDIENTS);
-        addToItemGroups(INFUSION_CORE_ENDER, ItemGroups.INGREDIENTS);
-        addToItemGroups(INFUSION_CORE_NETHERITE, ItemGroups.INGREDIENTS);
-        addToItemGroups(INFUSION_CORE_SCULK, ItemGroups.INGREDIENTS);
-        addToItemGroups(INFUSION_CORE_NIGHTMARE, ItemGroups.INGREDIENTS);
-        addToItemGroups(NETHERITE_INGOT_INFUSED, ItemGroups.INGREDIENTS);
-        addToItemGroups(NIGHTMARE_FUEL, ItemGroups.INGREDIENTS);
-        addToItemGroups(NIGHTMARE_PEARL, ItemGroups.INGREDIENTS);
-        addToItemGroups(NIGHTMARE_PEARL_INFUSED, ItemGroups.INGREDIENTS);
-        addToItemGroups(PHANTOM_SOUL_FRAGMENT, ItemGroups.INGREDIENTS);
-        addToItemGroups(SCULK_GEM, ItemGroups.INGREDIENTS);
-        addToItemGroups(SCULK_GEM_INFUSED, ItemGroups.INGREDIENTS);
-        addToItemGroups(SCULK_UPGRADE_SMITHING_TEMPLATE, ItemGroups.INGREDIENTS);
-        addToItemGroups(SOUL_FRAGMENT, ItemGroups.INGREDIENTS);
-        addToItemGroups(TERROR_EYES, ItemGroups.INGREDIENTS);
-        addToItemGroups(WARDING_HEART, ItemGroups.INGREDIENTS);
+        addToItemGroupBefore(ItemGroups.INGREDIENTS, Items.NETHERITE_SCRAP,
+                ENDSHARD,
+                ENDER_INGOT,
+                ENDER_INGOT_INFUSED
+        );
+        addToItemGroupAfter(ItemGroups.INGREDIENTS, Items.NETHERITE_INGOT,
+                NETHERITE_INGOT_INFUSED,
+                SOUL_FRAGMENT,
+                SCULK_GEM,
+                SCULK_GEM_INFUSED,
+                NIGHTMARE_FUEL,
+                NIGHTMARE_PEARL,
+                NIGHTMARE_PEARL_INFUSED
+        );
+        addToItemGroupAfter(ItemGroups.INGREDIENTS, Items.NETHER_STAR,
+                WARDING_HEART,
+                TERROR_EYES
+        );
+        addToItemGroupAfter(ItemGroups.INGREDIENTS, Items.ECHO_SHARD,
+                FEAR_ESSENCE
+        );
+        addToItemGroupAfter(ItemGroups.INGREDIENTS, Items.PHANTOM_MEMBRANE,
+                PHANTOM_SOUL_FRAGMENT
+        );
+        addToItemGroupBefore(ItemGroups.INGREDIENTS, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,
+                INFUSION_CORE,
+                INFUSION_CORE_ENDER,
+                INFUSION_CORE_NETHERITE,
+                INFUSION_CORE_SCULK,
+                INFUSION_CORE_NIGHTMARE,
+                ENDER_UPGRADE_SMITHING_TEMPLATE
+        );
+        addToItemGroupAfter(ItemGroups.INGREDIENTS, Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,
+                SCULK_UPGRADE_SMITHING_TEMPLATE
+        );
     }
 }

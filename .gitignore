@@ -30,6 +30,6 @@ bin/
 
 # fabric
 
-run/
-textures/
-src/main/generated/.cache
+/run/
+/textures/
+/src/main/generated/.cache

@@ -73,10 +73,11 @@ public class RegistryHelper {
         return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier.of(modid,id));
     }
 
-    @SafeVarargs
-    public static void addToItemGroups(ItemConvertible item, RegistryKey<ItemGroup>... groups) {
-        for (RegistryKey<ItemGroup> group : groups) {
-            ItemGroupEvents.modifyEntriesEvent(group).register((itemGroup) -> itemGroup.add(item));
-        }
+    public static void addToItemGroupBefore(RegistryKey<ItemGroup> group, ItemConvertible marker, ItemConvertible... before) {
+        ItemGroupEvents.modifyEntriesEvent(group).register((itemGroup) -> itemGroup.addBefore(marker, before));
+    }
+
+    public static void addToItemGroupAfter(RegistryKey<ItemGroup> group, ItemConvertible marker, ItemConvertible... after) {
+        ItemGroupEvents.modifyEntriesEvent(group).register((itemGroup) -> itemGroup.addAfter(marker, after));
     }
 }

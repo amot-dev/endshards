@@ -19,8 +19,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
 import static dev.amot.endshards.Endshards.modid;
-import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
-import static dev.amot.endshards.util.RegistryHelper.registerItem;
+import static dev.amot.endshards.util.RegistryHelper.*;
 
 public class EnderEquipment {
     public static final TagKey<Item> REPAIRS_ENDER = TagKey.of(RegistryKeys.ITEM, Identifier.of(modid, "repairs_ender"));
@@ -70,15 +69,23 @@ public class EnderEquipment {
     public static final int ENDER_COOLDOWN_DURATION_SWORD = 1200;
 
     public static void init(){
-        addToItemGroups(ENDER_HELMET, ItemGroups.COMBAT);
-        addToItemGroups(ENDER_CHESTPLATE, ItemGroups.COMBAT);
-        addToItemGroups(ENDER_LEGGINGS, ItemGroups.COMBAT);
-        addToItemGroups(ENDER_BOOTS, ItemGroups.COMBAT);
-
-        addToItemGroups(ENDER_SWORD, ItemGroups.COMBAT);
-        addToItemGroups(ENDER_PICKAXE, ItemGroups.TOOLS);
-        addToItemGroups(ENDER_SHOVEL, ItemGroups.TOOLS);
-        addToItemGroups(ENDER_AXE, ItemGroups.TOOLS, ItemGroups.COMBAT);
-        addToItemGroups(ENDER_HOE, ItemGroups.TOOLS);
+        addToItemGroupAfter(ItemGroups.TOOLS, Items.DIAMOND_HOE,
+                ENDER_SHOVEL,
+                ENDER_PICKAXE,
+                ENDER_AXE,
+                ENDER_HOE
+        );
+        addToItemGroupAfter(ItemGroups.COMBAT, Items.DIAMOND_SWORD,
+                ENDER_SWORD
+        );
+        addToItemGroupAfter(ItemGroups.COMBAT, Items.DIAMOND_AXE,
+                ENDER_AXE
+        );
+        addToItemGroupAfter(ItemGroups.COMBAT, Items.DIAMOND_BOOTS,
+                ENDER_HELMET,
+                ENDER_CHESTPLATE,
+                ENDER_LEGGINGS,
+                ENDER_BOOTS
+        );
     }
 }

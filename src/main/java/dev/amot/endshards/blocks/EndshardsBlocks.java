@@ -5,8 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraft.sound.BlockSoundGroup;
 
-import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
-import static dev.amot.endshards.util.RegistryHelper.registerBlock;
+import static dev.amot.endshards.util.RegistryHelper.*;
 
 public class EndshardsBlocks {
     public static final Block ENDER_BLOCK = registerBlock(
@@ -31,9 +30,17 @@ public class EndshardsBlocks {
     );
 
     public static void init() {
-        addToItemGroups(ENDER_BLOCK.asItem(), ItemGroups.BUILDING_BLOCKS);
-        addToItemGroups(SCULK_GEM_BLOCK.asItem(), ItemGroups.BUILDING_BLOCKS);
-        addToItemGroups(SOUL_SCULK.asItem(), ItemGroups.BUILDING_BLOCKS, ItemGroups.NATURAL);
-        addToItemGroups(STRANGE_CRYSTAL.asItem(), ItemGroups.NATURAL);
+        addToItemGroupAfter(ItemGroups.BUILDING_BLOCKS, Items.DIAMOND_BLOCK,
+                ENDER_BLOCK
+        );
+        addToItemGroupAfter(ItemGroups.BUILDING_BLOCKS, Items.NETHERITE_BLOCK,
+                SCULK_GEM_BLOCK
+        );
+        addToItemGroupBefore(ItemGroups.NATURAL, Items.ANCIENT_DEBRIS,
+                STRANGE_CRYSTAL
+        );
+        addToItemGroupAfter(ItemGroups.NATURAL, Items.ANCIENT_DEBRIS,
+                SOUL_SCULK
+        );
     }
 }

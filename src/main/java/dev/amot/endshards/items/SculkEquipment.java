@@ -19,8 +19,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 
 import static dev.amot.endshards.Endshards.modid;
-import static dev.amot.endshards.util.RegistryHelper.addToItemGroups;
-import static dev.amot.endshards.util.RegistryHelper.registerItem;
+import static dev.amot.endshards.util.RegistryHelper.*;
 
 public class SculkEquipment {
     public static final TagKey<Item> REPAIRS_SCULK = TagKey.of(RegistryKeys.ITEM, Identifier.of(modid, "repairs_sculk"));
@@ -68,15 +67,23 @@ public class SculkEquipment {
     public static final int SCULK_COOLDOWN_DURATION_SWORD = 200;
 
     public static void init(){
-        addToItemGroups(SCULK_HELMET, ItemGroups.COMBAT);
-        addToItemGroups(SCULK_CHESTPLATE, ItemGroups.COMBAT);
-        addToItemGroups(SCULK_LEGGINGS, ItemGroups.COMBAT);
-        addToItemGroups(SCULK_BOOTS, ItemGroups.COMBAT);
-
-        addToItemGroups(SCULK_SWORD, ItemGroups.COMBAT);
-        addToItemGroups(SCULK_PICKAXE, ItemGroups.TOOLS);
-        addToItemGroups(SCULK_SHOVEL, ItemGroups.TOOLS);
-        addToItemGroups(SCULK_AXE, ItemGroups.TOOLS, ItemGroups.COMBAT);
-        addToItemGroups(SCULK_HOE, ItemGroups.TOOLS);
+        addToItemGroupAfter(ItemGroups.TOOLS, Items.NETHERITE_HOE,
+                SCULK_SHOVEL,
+                SCULK_PICKAXE,
+                SCULK_AXE,
+                SCULK_HOE
+        );
+        addToItemGroupAfter(ItemGroups.COMBAT, Items.NETHERITE_SWORD,
+                SCULK_SWORD
+        );
+        addToItemGroupAfter(ItemGroups.COMBAT, Items.NETHERITE_AXE,
+                SCULK_AXE
+        );
+        addToItemGroupAfter(ItemGroups.COMBAT, Items.NETHERITE_BOOTS,
+                SCULK_HELMET,
+                SCULK_CHESTPLATE,
+                SCULK_LEGGINGS,
+                SCULK_BOOTS
+        );
     }
 }
