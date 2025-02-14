@@ -12,6 +12,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.PlacedFeature;
 
@@ -25,8 +26,16 @@ public class RegistryHelper {
         return registerItem(id, Item::new, new Item.Settings());
     }
 
+    public static Item registerItem(String id, Rarity rarity) {
+        return registerItem(id, Item::new, new Item.Settings().rarity(rarity));
+    }
+
     public static Item registerItem(String id, Function<Item.Settings, Item> factory) {
         return registerItem(id, factory, new Item.Settings());
+    }
+
+    public static Item registerItem(String id, Function<Item.Settings, Item> factory, Rarity rarity) {
+        return registerItem(id, factory, new Item.Settings().rarity(rarity));
     }
 
     public static Item registerItem(String id, Function<Item.Settings, Item> factory, Item.Settings settings) {
