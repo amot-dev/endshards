@@ -1,5 +1,6 @@
 package dev.amot.endshards.mixin;
 
+import dev.amot.endshards.util.AlwaysTruePredicate;
 import dev.amot.endshards.util.FollowPlayerGoal;
 import dev.amot.endshards.util.IThrall;
 import dev.amot.endshards.util.ThrallTargetPredicate;
@@ -31,38 +32,82 @@ public abstract class ThrallMixin implements IThrall {
     @Unique private boolean isThrall = false;
 
     @Unique
-    public boolean isThrall() {
+    public boolean endshards$isThrall() {
         return this.isThrall;
     }
 
     @Unique
-    public UUID getThrallOwnerUUID() {
+    public UUID endshards$getThrallOwnerUUID() {
         return this.thrallOwnerUUID;
     }
 
     @Unique
-    public void assignOwner(PlayerEntity thrallOwner) {
+    public void endshards$assignOwner(PlayerEntity thrallOwner) {
         this.thrallOwnerUUID = thrallOwner.getUuid();
 
         // Set targeting goals
-        this.clearActiveTarget();
-        this.targetSelector.clear();
-        this.targetSelector.add(2, new ActiveTargetGoal<>((MobEntity)(Object)this, LivingEntity.class, true,
-                new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.SELF_DEFENSE)));
-        this.targetSelector.add(3, new ActiveTargetGoal<>((MobEntity)(Object)this, LivingEntity.class, true,
-                new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.DEFENSE)));
-        this.targetSelector.add(4, new ActiveTargetGoal<>((MobEntity)(Object)this, LivingEntity.class, true,
-                new ThrallTargetPredicate<>((MobEntity)(Object)this, thrallOwner, ThrallTargetPredicate.TargetMode.OFFENSE)));
-        this.goalSelector.add(1, new FollowPlayerGoal((MobEntity)(Object)this, thrallOwner, 1.0D, 10.0F, 4.0F));
+        this.endshards$clearActiveTarget();
+        this.targetSelector.clear(new AlwaysTruePredicate<>());
+
+        MobEntity thisThrall = (MobEntity)(Object)this;
+        this.targetSelector.add(
+                2,
+                new ActiveTargetGoal<>(
+                        thisThrall,
+                        LivingEntity.class,
+                        true,
+                        new ThrallTargetPredicate(
+                                thisThrall,
+                                thrallOwner,
+                                ThrallTargetPredicate.TargetMode.SELF_DEFENSE
+                        )
+                )
+        );
+        this.targetSelector.add(
+                3,
+                new ActiveTargetGoal<>(
+                        thisThrall,
+                        LivingEntity.class,
+                        true,
+                        new ThrallTargetPredicate(
+                                thisThrall,
+                                thrallOwner,
+                                ThrallTargetPredicate.TargetMode.DEFENSE
+                        )
+                )
+        );
+        this.targetSelector.add(
+                4,
+                new ActiveTargetGoal<>(
+                        thisThrall,
+                        LivingEntity.class,
+                        true,
+                        new ThrallTargetPredicate(
+                                thisThrall,
+                                thrallOwner,
+                                ThrallTargetPredicate.TargetMode.OFFENSE
+                        )
+                )
+        );
+        this.goalSelector.add(
+                1,
+                new FollowPlayerGoal(
+                        thisThrall,
+                        thrallOwner,
+                        1.0D,
+                        10.0F,
+                        4.0F
+                )
+        );
     }
 
     @Unique
-    public void convertToThrall() {
+    public void endshards$convertToThrall() {
         this.isThrall = true;
 
         // Clear targeting goals
-        this.clearActiveTarget();
-        this.targetSelector.clear();
+        this.endshards$clearActiveTarget();
+        this.targetSelector.clear(new AlwaysTruePredicate<>());
 
         // Clear other goals
         removeGoal(LookAtEntityGoal.class);
@@ -75,7 +120,7 @@ public abstract class ThrallMixin implements IThrall {
 
         // Get rid of zombie reinforcements
         if ((MobEntity)(Object)this instanceof ZombieEntity zombie) {
-            EntityAttributeInstance reinforcements = zombie.getAttributeInstance(EntityAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+            EntityAttributeInstance reinforcements = zombie.getAttributeInstance(EntityAttributes.SPAWN_REINFORCEMENTS);
             if (reinforcements != null) reinforcements.setBaseValue(0.0);
         }
     }
@@ -86,7 +131,7 @@ public abstract class ThrallMixin implements IThrall {
     }
 
     @Unique
-    public void clearActiveTarget() {
+    public void endshards$clearActiveTarget() {
         for (PrioritizedGoal prioritizedGoal : this.targetSelector.getGoals()) prioritizedGoal.stop();
         ((MobEntity)(Object)this).setTarget(null);
     }
@@ -95,7 +140,7 @@ public abstract class ThrallMixin implements IThrall {
     @Inject(method = "baseTick", at = @At(value = "RETURN"))
     public void clearInvalidTarget(CallbackInfo ci) {
         // Return if mob is not a thrall
-        if (!this.isThrall()) return;
+        if (!this.endshards$isThrall()) return;
 
         // Return if thrall does not have a target
         LivingEntity target = ((MobEntity)(Object)this).getTarget();
@@ -107,8 +152,8 @@ public abstract class ThrallMixin implements IThrall {
 
         // Find enemy player (targeted player or owner of targeted thrall)
         if (target instanceof MobEntity targetMob) {
-            if (((IThrall)targetMob).isThrall()) {
-                enemyPlayer = targetMob.getWorld().getPlayerByUuid(((IThrall)targetMob).getThrallOwnerUUID());
+            if (((IThrall)targetMob).endshards$isThrall()) {
+                enemyPlayer = targetMob.getWorld().getPlayerByUuid(((IThrall)targetMob).endshards$getThrallOwnerUUID());
             }
         }
         else if (target instanceof PlayerEntity targetPlayer) enemyPlayer = targetPlayer;
@@ -118,8 +163,8 @@ public abstract class ThrallMixin implements IThrall {
         if (enemyPlayer == null) return;
 
         // If enemy player is owner, or enemy player is not attacking/attacked, clear target
-        if (Objects.equals(enemyPlayer, owner)) this.clearActiveTarget();
+        if (Objects.equals(enemyPlayer, owner)) this.endshards$clearActiveTarget();
         if (!Objects.equals(enemyPlayer.getAttacking(), owner) && !Objects.equals(owner.getAttacking(), enemyPlayer))
-            this.clearActiveTarget();
+            this.endshards$clearActiveTarget();
     }
 }

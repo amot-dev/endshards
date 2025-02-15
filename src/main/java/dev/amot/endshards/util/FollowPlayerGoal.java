@@ -24,7 +24,7 @@ public class FollowPlayerGoal extends Goal {
 
     public FollowPlayerGoal(MobEntity mob, PlayerEntity player, double speed, float minDistance, float maxDistance) {
         this.mob = mob;
-        this.world = mob.world;
+        this.world = mob.getWorld();
         this.navigation = mob.getNavigation();
         this.speed = speed;
         this.player = player;
@@ -106,7 +106,7 @@ public class FollowPlayerGoal extends Goal {
     }
 
     private boolean canTeleportTo(BlockPos pos) {
-        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(this.world, pos.mutableCopy());
+        PathNodeType pathNodeType = LandPathNodeMaker.getLandNodeType(this.mob, pos.mutableCopy());
         if (pathNodeType != PathNodeType.WALKABLE) {
             return false;
         } else {

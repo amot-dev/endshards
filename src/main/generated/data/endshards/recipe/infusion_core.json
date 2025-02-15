@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "minecraft:diamond",
+    "G": "minecraft:glass",
+    "O": "minecraft:obsidian"
+  },
+  "pattern": [
+    "ODO",
+    "DGD",
+    "ODO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "endshards:infusion_core"
+  }
+}

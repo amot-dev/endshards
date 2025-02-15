@@ -1,0 +1,29 @@
+{
+  "parent": "endshards:root",
+  "criteria": {
+    "picked_up_infusion_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:infusion_core"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Craft an Infusion Core",
+    "icon": {
+      "count": 1,
+      "id": "endshards:infusion_core"
+    },
+    "title": "Is this a Poké Ball?"
+  },
+  "requirements": [
+    [
+      "picked_up_infusion_core"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

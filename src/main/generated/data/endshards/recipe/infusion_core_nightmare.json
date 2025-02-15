@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "endshards:infusion_core",
+    "I": "endshards:terror_eyes"
+  },
+  "pattern": [
+    "   ",
+    "CIC",
+    " C "
+  ],
+  "result": {
+    "count": 3,
+    "id": "endshards:infusion_core_nightmare"
+  }
+}

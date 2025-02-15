@@ -1,22 +1,21 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.items.SculkGear;
-import net.minecraft.client.item.TooltipContext;
-import net.minecraft.item.ItemGroup;
+import dev.amot.endshards.items.SculkEquipment;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShovelItem;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
 
 import java.util.List;
 
 public class SculkShovelItem extends ShovelItem {
-    public SculkShovelItem() {
-        super(SculkGear.SCULK_TOOL_MATERIAL, 6.5F, -3.0F, new Settings().group(ItemGroup.TOOLS));
+    public SculkShovelItem(Item.Settings settings) {
+        super(SculkEquipment.SCULK_TOOL_MATERIAL, 1.5F, -3.0F, settings.fireproof());
     }
     @Override
-    public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("item.endshards.sculk_tool.tooltip").formatted(Formatting.DARK_BLUE));
     }
 }

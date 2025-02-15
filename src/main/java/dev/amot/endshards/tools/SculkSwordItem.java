@@ -1,60 +1,62 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.advancements.criteria.EndShardsCriteria;
-import dev.amot.endshards.items.SculkGear;
+import dev.amot.endshards.advancements.criteria.EndshardsCriteria;
+import dev.amot.endshards.items.SculkEquipment;
 import dev.amot.endshards.util.IThrallOwner;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.*;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-
+import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import net.minecraft.world.World;
 
 import java.util.List;
 
 import static dev.amot.endshards.util.AbilityConstants.THRALL_ALLOWED_ENTITIES;
 
 public class SculkSwordItem extends SwordItem {
-    public SculkSwordItem() {
-        super(SculkGear.SCULK_TOOL_MATERIAL, 8, -2.4F, new Settings().group(ItemGroup.COMBAT));
+    public SculkSwordItem(Item.Settings settings) {
+        super(SculkEquipment.SCULK_TOOL_MATERIAL, 3.0F, -2.4F, settings.fireproof());
     }
     @Override
-    public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("item.endshards.sculk_sword.tooltip").formatted(Formatting.DARK_BLUE));
     }
 
-    private static final int AbilityMaxThrallCount = 3;
+    private static final int ABILITY_MAX_THRALL_COUNT = 3;
 
-    public static final float SoulFragmentDropChance = 0.005F;
-    public static final float SoulFragmentLootingMultiplier = 0.002F;
+    public static final float SOUL_FRAGMENT_DROP_CHANCE = 0.005F;
+    public static final float SOUL_FRAGMENT_LOOTING_MULTIPLIER = 0.002F;
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
         if (user instanceof ServerPlayerEntity serverPlayer) {
             MinecraftClient client = MinecraftClient.getInstance();
-            if (!serverPlayer.getActiveStatusEffects().containsKey(SculkGear.SCULK_COOLDOWN)) {
+            RegistryEntry<StatusEffect> sculkCooldownEntry = Registries.STATUS_EFFECT.getEntry(SculkEquipment.SCULK_COOLDOWN);
+            if (!serverPlayer.getActiveStatusEffects().containsKey(sculkCooldownEntry)) {
                 if (THRALL_ALLOWED_ENTITIES.contains(entity.getType())) {
-                    if (((IThrallOwner)serverPlayer).getThrallCount() < AbilityMaxThrallCount) {
+                    if (((IThrallOwner)serverPlayer).endshards$getThrallCount() < ABILITY_MAX_THRALL_COUNT) {
                         // Try to add thrall
-                        if (((IThrallOwner)serverPlayer).addThrall((MobEntity)entity)) {
+                        if (((IThrallOwner)serverPlayer).endshards$addThrall((MobEntity)entity)) {
                             serverPlayer.addStatusEffect(new StatusEffectInstance(
-                                    SculkGear.SCULK_COOLDOWN, SculkGear.SCULK_COOLDOWN_DURATION_SWORD, 0, false, false, true)
+                                    sculkCooldownEntry, SculkEquipment.SCULK_COOLDOWN_DURATION_SWORD, 0, false, false, true)
                             );
                             client.inGameHud.setOverlayMessage(Text.translatable(
                                     "message.endshards.sculk_sword_thrall_count",
-                                    AbilityMaxThrallCount - ((IThrallOwner)serverPlayer).getThrallCount()
+                                    ABILITY_MAX_THRALL_COUNT - ((IThrallOwner)serverPlayer).endshards$getThrallCount()
                             ).formatted(Formatting.DARK_GREEN), false);
-                            EndShardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
+                            EndshardsCriteria.SCULK_SWORD_ENTHRALL.trigger(serverPlayer);
                         }
                     }
                     else {

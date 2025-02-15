@@ -1,23 +1,21 @@
 package dev.amot.endshards.tools;
 
-import dev.amot.endshards.items.EnderGear;
-import net.minecraft.client.item.TooltipContext;
+import dev.amot.endshards.items.EnderEquipment;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
 
 import java.util.List;
 
 public class EnderPickaxeItem extends PickaxeItem {
-    public EnderPickaxeItem() {
-        super(EnderGear.ENDER_TOOL_MATERIAL, 6, -2.8F, new Item.Settings().group(ItemGroup.TOOLS));
+    public EnderPickaxeItem(Item.Settings settings) {
+        super(EnderEquipment.ENDER_TOOL_MATERIAL, 1.0F, -2.8F, settings.fireproof());
     }
     @Override
-    public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
+    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("item.endshards.ender_tool.tooltip").formatted(Formatting.DARK_BLUE));
     }
 }

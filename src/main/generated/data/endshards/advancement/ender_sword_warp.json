@@ -1,0 +1,22 @@
+{
+  "parent": "endshards:infused_ingot",
+  "criteria": {
+    "ender_sword_warp": {
+      "trigger": "endshards:ender_sword_warp_trigger"
+    }
+  },
+  "display": {
+    "description": "Send an enemy to the void",
+    "icon": {
+      "count": 1,
+      "id": "endshards:ender_sword"
+    },
+    "title": "Banished to the Shadow Realm"
+  },
+  "requirements": [
+    [
+      "ender_sword_warp"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

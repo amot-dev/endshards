@@ -1,0 +1,23 @@
+{
+  "parent": "endshards:ender_armor_fall",
+  "criteria": {
+    "ender_armor_played_self": {
+      "trigger": "endshards:ender_armor_played_self_trigger"
+    }
+  },
+  "display": {
+    "description": "Warp a mob right before taking preventable critical fall damage",
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "endshards:ender_boots"
+    },
+    "title": "Congrats, You Played Yourself"
+  },
+  "requirements": [
+    [
+      "ender_armor_played_self"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

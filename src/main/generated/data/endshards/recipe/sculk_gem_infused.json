@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "endshards:sculk_gem",
+    "endshards:infusion_core_sculk"
+  ],
+  "result": {
+    "count": 1,
+    "id": "endshards:sculk_gem_infused"
+  }
+}

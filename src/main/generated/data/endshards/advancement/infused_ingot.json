@@ -1,0 +1,34 @@
+{
+  "parent": "endshards:endshard",
+  "criteria": {
+    "picked_up_infused_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "endshards:ender_ingot_infused",
+              "endshards:netherite_ingot_infused",
+              "endshards:sculk_gem_infused",
+              "endshards:nightmare_pearl_infused"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Infuse an Ingot",
+    "icon": {
+      "count": 1,
+      "id": "endshards:ender_ingot_infused"
+    },
+    "title": "It's... not a Poké Ball"
+  },
+  "requirements": [
+    [
+      "picked_up_infused_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

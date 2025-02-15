@@ -1,33 +1,40 @@
 {
   "message.endshards.cooldown_active": "Cooldown still active",
 
-  "gamerule.doEasyArmorSwitch": "Allows right-click switching equipped armor",
+  "gamerule.doInventoryEquipmentSwitch": "Allows shift-clicking in inventory to switch equipment",
   "gamerule.doNightVisionFlicker": "Do flicker effect when Night Vision is about to end",
   "gamerule.thrallsAttackCreepers": "Thralls will attack Creepers",
 
-  "enchantment.endshards.infused": "Infused",
-
-  "item.endshards.endshard": "End Shard",
+  "item.endshards.endshard": "Endshard",
   "item.endshards.ender_ingot": "Ender Ingot",
+  "item.endshards.ender_ingot_infused": "Ender Ingot (Infused)",
+  "item.endshards.ender_upgrade_smithing_template": "Ender Upgrade",
   "item.endshards.fear_essence": "Essence of Fear",
   "item.endshards.infusion_core": "Infusion Core",
   "item.endshards.infusion_core_ender": "Infusion Core (Essence of Dragon)",
   "item.endshards.infusion_core_netherite": "Infusion Core (Essence of Wither)",
   "item.endshards.infusion_core_sculk": "Infusion Core (Essence of Warden)",
   "item.endshards.infusion_core_nightmare": "Infusion Core (Essence of Terror)",
+  "item.endshards.netherite_ingot_infused": "Netherite Ingot (Infused)",
   "item.endshards.nightmare_fuel": "Nightmare Fuel",
   "item.endshards.nightmare_pearl": "Nightmare Pearl",
+  "item.endshards.nightmare_pearl_infused": "Nightmare Pearl (Infused)",
+  "item.endshards.nightmare_upgrade_smithing_template": "Nightmare Upgrade",
   "item.endshards.phantom_soul_fragment": "Phantom Soul Fragment",
   "item.endshards.sculk_gem": "Sculk Gem",
+  "item.endshards.sculk_gem_infused": "Sculk Gem (Infused)",
+  "item.endshards.sculk_upgrade_smithing_template": "Sculk Upgrade",
   "item.endshards.soul_fragment": "Soul Fragment",
   "item.endshards.terror_eyes": "Terror Eyes",
   "item.endshards.warding_heart": "Warding Heart",
 
   "block.endshards.ender_block": "Block of Ender",
-  "block.endshards.sculk_block": "Block of Sculk",
+  "block.endshards.sculk_gem_block": "Block of Sculk Gem",
   "block.endshards.soul_sculk": "Soul-Infused Sculk",
   "block.endshards.strange_crystal": "Strange Crystal",
 
+  "smithing_template.endshards.ender_upgrade.ingredients": "Ender Ingot (Infused)",
+  "smithing_template.endshards.ender_upgrade.additions_slot_description": "Add Ender Ingot (Infused)",
   "item.endshards.ender_helmet": "Ender Helmet",
   "item.endshards.ender_chestplate": "Ender Chestplate",
   "item.endshards.ender_leggings": "Ender Leggings",
@@ -43,12 +50,16 @@
   "effect.endshards.ender_cooldown": "Ender Cooldown",
   "message.endshards.ender_sword_fail": "This creature cannot be voided",
 
+  "smithing_template.endshards.netherite_upgrade.ingredients": "Netherite Ingot (Infused)",
+  "smithing_template.endshards.netherite_upgrade.additions_slot_description": "Add Netherite Ingot (Infused)",
   "item.endshards.netherite_armor.tooltip": "SET BONUS: Provides Resistance on damage",
   "item.endshards.netherite_sword.tooltip": "RIGHT CLICK: Set nearby enemies on fire",
   "item.endshards.netherite_tool.tooltip": "Autosmelts mined blocks",
   "effect.endshards.netherite_cooldown": "Netherite Cooldown",
   "message.endshards.netherite_sword_fail": "No creatures nearby",
 
+  "smithing_template.endshards.sculk_upgrade.ingredients": "Sculk Gem (Infused)",
+  "smithing_template.endshards.sculk_upgrade.additions_slot_description": "Add Sculk Gem (Infused)",
   "item.endshards.sculk_helmet": "Sculk Helmet",
   "item.endshards.sculk_chestplate": "Sculk Chestplate",
   "item.endshards.sculk_leggings": "Sculk Leggings",
@@ -64,5 +75,8 @@
   "effect.endshards.sculk_cooldown": "Sculk Cooldown",
   "message.endshards.sculk_sword_thrall_count": "Created enthralled. You may enthrall %s more",
   "message.endshards.sculk_sword_thrall_count_over": "Thrall limit has been reached",
-  "message.endshards.sculk_sword_fail": "This creature cannot be enthralled"
+  "message.endshards.sculk_sword_fail": "This creature cannot be enthralled",
+
+  "tag.item.endshards.repairs_ender": "Repairs Ender",
+  "tag.item.endshards.repairs_sculk": "Repairs Sculk"
 }

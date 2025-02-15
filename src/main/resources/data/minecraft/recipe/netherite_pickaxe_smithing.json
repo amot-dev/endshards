@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "endshards:netherite_ingot_infused",
+  "base": "minecraft:diamond_pickaxe",
+  "result": {
+    "id": "minecraft:netherite_pickaxe"
+  },
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

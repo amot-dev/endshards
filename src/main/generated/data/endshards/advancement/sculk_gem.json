@@ -1,0 +1,29 @@
+{
+  "parent": "endshards:netherite_ingot",
+  "criteria": {
+    "picked_up_sculk_gem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:sculk_gem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Obtain a Sculk Gem",
+    "icon": {
+      "count": 1,
+      "id": "endshards:sculk_gem"
+    },
+    "title": "This isn't Right..."
+  },
+  "requirements": [
+    [
+      "picked_up_sculk_gem"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

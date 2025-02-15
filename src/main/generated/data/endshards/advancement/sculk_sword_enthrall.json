@@ -1,0 +1,22 @@
+{
+  "parent": "endshards:sculk_gem",
+  "criteria": {
+    "sculk_sword_enthrall": {
+      "trigger": "endshards:sculk_sword_enthrall_trigger"
+    }
+  },
+  "display": {
+    "description": "Enthrall an enemy with your sword",
+    "icon": {
+      "count": 1,
+      "id": "endshards:sculk_sword"
+    },
+    "title": "The Gamesters of Triskelion"
+  },
+  "requirements": [
+    [
+      "sculk_sword_enthrall"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

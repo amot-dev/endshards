@@ -1,0 +1,23 @@
+{
+  "parent": "endshards:netherite_sword_flame",
+  "criteria": {
+    "netherite_sword_sacrifice": {
+      "trigger": "endshards:netherite_sword_sacrifice_trigger"
+    }
+  },
+  "display": {
+    "description": "Conduct a mass sacrifice of 100 creatures with the Netherite Sword",
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:cooked_mutton"
+    },
+    "title": "Sacrificial Rite"
+  },
+  "requirements": [
+    [
+      "netherite_sword_sacrifice"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

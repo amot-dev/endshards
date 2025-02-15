@@ -1,0 +1,29 @@
+{
+  "parent": "endshards:ender_tool_warp",
+  "criteria": {
+    "picked_up_netherite_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:netherite_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": "Obtain a Netherite Ingot",
+    "icon": {
+      "count": 1,
+      "id": "minecraft:netherite_ingot"
+    },
+    "title": "It Needs to be Infused"
+  },
+  "requirements": [
+    [
+      "picked_up_netherite_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

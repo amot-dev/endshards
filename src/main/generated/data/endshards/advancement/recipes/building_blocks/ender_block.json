@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ender_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "endshards:ender_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "endshards:ender_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ender_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "endshards:ender_block"
+    ]
+  }
+}
