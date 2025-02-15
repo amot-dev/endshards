@@ -4,7 +4,8 @@ on:
   push:
     branches: [master]
     paths:
-      - 'src/**'  # Only trigger if files in src/ change
+      - 'src/**'                # Trigger if files in src/ change
+      - '.github/workflows/**'  # Trigger when workflow files change
 
 jobs:
   pre_build:
