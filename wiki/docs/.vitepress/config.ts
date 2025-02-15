@@ -1,9 +1,10 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+    base: '/endshards/',
     title: "Endshards Wiki",
     description: "The official wiki for the Endshards Minecraft mod.",
-    base: '/endshards/',
+    head: [['link', { rel: 'icon', href: '/endshards/img/favicon.ico' }]],
     themeConfig: {
         nav: [
             { text: "Home", link: "/" },
