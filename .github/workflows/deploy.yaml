@@ -1,11 +1,8 @@
 name: deploy
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - 'wiki/**'               # Trigger if files in wiki/ change
-      - '.github/workflows/**'  # Trigger when workflow files change
+  release:
+    types: [published]
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
