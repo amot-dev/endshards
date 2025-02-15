@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:ender_chestplate"
+        "recipe": "endshards:ender_chestplate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:ender_chestplate"
+      "endshards:ender_chestplate"
     ]
   }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:sculk_hoe"
+        "recipe": "endshards:sculk_hoe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sculk_hoe"
+      "endshards:sculk_hoe"
     ]
   }
 }

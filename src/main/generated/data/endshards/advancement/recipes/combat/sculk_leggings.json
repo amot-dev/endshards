@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:sculk_leggings"
+        "recipe": "endshards:sculk_leggings"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sculk_leggings"
+      "endshards:sculk_leggings"
     ]
   }
 }

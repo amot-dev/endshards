@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:sculk_helmet"
+        "recipe": "endshards:sculk_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sculk_helmet"
+      "endshards:sculk_helmet"
     ]
   }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:sculk_sword"
+        "recipe": "endshards:sculk_sword"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sculk_sword"
+      "endshards:sculk_sword"
     ]
   }
 }

@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:sculk_shovel"
+        "recipe": "endshards:sculk_shovel"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sculk_shovel"
+      "endshards:sculk_shovel"
     ]
   }
 }

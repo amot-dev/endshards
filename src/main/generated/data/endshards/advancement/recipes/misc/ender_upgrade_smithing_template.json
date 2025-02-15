@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ender_ingot": {
+    "has_ender_upgrade_smithing_template": {
       "conditions": {
         "items": [
           {
-            "items": "endshards:ender_ingot"
+            "items": "endshards:ender_upgrade_smithing_template"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "endshards:ender_block"
+        "recipe": "endshards:ender_upgrade_smithing_template"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_ender_ingot"
+      "has_ender_upgrade_smithing_template"
     ]
   ],
   "rewards": {
     "recipes": [
-      "endshards:ender_block"
+      "endshards:ender_upgrade_smithing_template"
     ]
   }
 }

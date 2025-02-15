@@ -13,10 +13,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.Identifier;
 
 import java.util.concurrent.CompletableFuture;
+
+import static dev.amot.endshards.Endshards.modid;
 
 public class EndshardsRecipeProvider extends FabricRecipeProvider {
     public EndshardsRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
@@ -26,9 +32,47 @@ public class EndshardsRecipeProvider extends FabricRecipeProvider {
     @Override
     protected RecipeGenerator getRecipeGenerator(RegistryWrapper.WrapperLookup registryLookup, RecipeExporter exporter) {
         return new RecipeGenerator(registryLookup, exporter) {
-            private void offerCompactionRecipe(RecipeCategory reverseCategory, ItemConvertible baseItem, RecipeCategory compactingCategory, ItemConvertible compactItem) {
-                offerReversibleCompactingRecipesWithReverseRecipeGroup(reverseCategory, baseItem, compactingCategory, compactItem, getItemPath(baseItem) + "_from_block", getItemPath(baseItem));
+            private RegistryKey<Recipe<?>> registerRecipe(String recipeId) {
+                return RegistryKey.of(RegistryKeys.RECIPE, Identifier.of(modid, recipeId));
             }
+
+            private void offerInfusionCoreRecipe(ItemConvertible infusionCore, ItemConvertible powerItem) {
+                createShaped(RecipeCategory.MISC, infusionCore, 3)
+                        .pattern("   ")
+                        .pattern("CIC")
+                        .pattern(" C ")
+                        .input('C', EndshardsItems.INFUSION_CORE).criterion(hasItem(EndshardsItems.INFUSION_CORE), conditionsFromItem(EndshardsItems.INFUSION_CORE))
+                        .input('I', powerItem).criterion(hasItem(powerItem), conditionsFromItem(powerItem))
+                        .offerTo(exporter);
+            }
+
+            private void offerCompactionRecipe(RecipeCategory reverseCategory, ItemConvertible baseItem, RecipeCategory compactingCategory, ItemConvertible compactItem) {
+                createShapeless(reverseCategory, baseItem, 9)
+                        .group(getItemPath(baseItem))
+                        .input(compactItem).criterion(hasItem(compactItem), this.conditionsFromItem(compactItem))
+                        .offerTo(exporter, registerRecipe(getItemPath(baseItem) + "_from_block"));
+                createShaped(compactingCategory, compactItem)
+                        .pattern("###")
+                        .pattern("###")
+                        .pattern("###")
+                        .input('#', baseItem).criterion(hasItem(baseItem), this.conditionsFromItem(baseItem))
+                        .offerTo(exporter, registerRecipe(getItemPath(compactItem)));
+            }
+
+            private void offerInfusionRecipe(ItemConvertible infusedItem, ItemConvertible uninfusedItem, ItemConvertible infusionCore) {
+                createShapeless(RecipeCategory.MISC, infusedItem)
+                        .input(uninfusedItem, 1).criterion(hasItem(uninfusedItem), conditionsFromItem(uninfusedItem))
+                        .input(infusionCore, 1).criterion(hasItem(infusionCore), conditionsFromItem(infusionCore))
+                        .offerTo(exporter);
+            }
+
+            private void offerUninfusionRecipe(ItemConvertible uninfusedItem, ItemConvertible infusedItem) {
+                createShapeless(RecipeCategory.MISC, uninfusedItem)
+                        .group(getItemPath(uninfusedItem))
+                        .input(infusedItem, 1).criterion(hasItem(infusedItem), conditionsFromItem(infusedItem))
+                        .offerTo(exporter, registerRecipe(getItemPath(uninfusedItem) + "_from_infused"));
+            }
+
             private void offerEnderUpgradeRecipe(RecipeCategory category, Item result, Item base) {
                 SmithingTransformRecipeJsonBuilder.create(
                                 Ingredient.ofItem(EndshardsItems.ENDER_UPGRADE_SMITHING_TEMPLATE),
@@ -39,8 +83,9 @@ public class EndshardsRecipeProvider extends FabricRecipeProvider {
                         )
                         .criterion(hasItem(EndshardsItems.ENDER_INGOT_INFUSED), conditionsFromItem(EndshardsItems.ENDER_INGOT_INFUSED))
                         .criterion(hasItem(EndshardsItems.ENDER_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(EndshardsItems.ENDER_UPGRADE_SMITHING_TEMPLATE))
-                        .offerTo(exporter, getItemPath(result));
+                        .offerTo(exporter, registerRecipe(getItemPath(result)));
             }
+
             private void offerNetheriteUpgradeRecipe(RecipeCategory category, Item result, Item base) {
                 SmithingTransformRecipeJsonBuilder.create(
                         Ingredient.ofItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
@@ -64,7 +109,7 @@ public class EndshardsRecipeProvider extends FabricRecipeProvider {
                 )
                         .criterion(hasItem(EndshardsItems.SCULK_GEM_INFUSED), conditionsFromItem(EndshardsItems.SCULK_GEM_INFUSED))
                         .criterion(hasItem(EndshardsItems.SCULK_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(EndshardsItems.SCULK_UPGRADE_SMITHING_TEMPLATE))
-                        .offerTo(exporter, getItemPath(result));
+                        .offerTo(exporter, registerRecipe(getItemPath(result)));
             }
 
             @Override
@@ -78,34 +123,10 @@ public class EndshardsRecipeProvider extends FabricRecipeProvider {
                         .input('D', Items.DIAMOND).criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
                         .input('G', Items.GLASS).criterion(hasItem(Items.GLASS), conditionsFromItem(Items.GLASS))
                         .offerTo(exporter);
-                createShaped(RecipeCategory.MISC, EndshardsItems.INFUSION_CORE_ENDER, 3)
-                        .pattern("   ")
-                        .pattern("CIC")
-                        .pattern(" C ")
-                        .input('C', EndshardsItems.INFUSION_CORE).criterion(hasItem(EndshardsItems.INFUSION_CORE), conditionsFromItem(EndshardsItems.INFUSION_CORE))
-                        .input('I', Items.DRAGON_BREATH).criterion(hasItem(Items.DRAGON_BREATH), conditionsFromItem(Items.DRAGON_BREATH))
-                        .offerTo(exporter);
-                createShaped(RecipeCategory.MISC, EndshardsItems.INFUSION_CORE_NETHERITE, 3)
-                        .pattern("   ")
-                        .pattern("CIC")
-                        .pattern(" C ")
-                        .input('C', EndshardsItems.INFUSION_CORE).criterion(hasItem(EndshardsItems.INFUSION_CORE), conditionsFromItem(EndshardsItems.INFUSION_CORE))
-                        .input('I', Items.NETHER_STAR).criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
-                        .offerTo(exporter);
-                createShaped(RecipeCategory.MISC, EndshardsItems.INFUSION_CORE_SCULK, 3)
-                        .pattern("   ")
-                        .pattern("CIC")
-                        .pattern(" C ")
-                        .input('C', EndshardsItems.INFUSION_CORE).criterion(hasItem(EndshardsItems.INFUSION_CORE), conditionsFromItem(EndshardsItems.INFUSION_CORE))
-                        .input('I', EndshardsItems.WARDING_HEART).criterion(hasItem(EndshardsItems.WARDING_HEART), conditionsFromItem(EndshardsItems.WARDING_HEART))
-                        .offerTo(exporter);
-                createShaped(RecipeCategory.MISC, EndshardsItems.INFUSION_CORE_NIGHTMARE, 3)
-                        .pattern("   ")
-                        .pattern("CIC")
-                        .pattern(" C ")
-                        .input('C', EndshardsItems.INFUSION_CORE).criterion(hasItem(EndshardsItems.INFUSION_CORE), conditionsFromItem(EndshardsItems.INFUSION_CORE))
-                        .input('I', EndshardsItems.TERROR_EYES).criterion(hasItem(EndshardsItems.TERROR_EYES), conditionsFromItem(EndshardsItems.TERROR_EYES))
-                        .offerTo(exporter);
+                offerInfusionCoreRecipe(EndshardsItems.INFUSION_CORE_ENDER, Items.DRAGON_BREATH);
+                offerInfusionCoreRecipe(EndshardsItems.INFUSION_CORE_NETHERITE, Items.NETHER_STAR);
+                offerInfusionCoreRecipe(EndshardsItems.INFUSION_CORE_SCULK, EndshardsItems.WARDING_HEART);
+                offerInfusionCoreRecipe(EndshardsItems.INFUSION_CORE_NIGHTMARE, EndshardsItems.TERROR_EYES);
 
                 // Ingots/Gems
                 createShapeless(RecipeCategory.MISC, EndshardsItems.ENDER_INGOT)
@@ -128,40 +149,20 @@ public class EndshardsRecipeProvider extends FabricRecipeProvider {
                 offerCompactionRecipe(RecipeCategory.MISC, EndshardsItems.SCULK_GEM, RecipeCategory.BUILDING_BLOCKS, EndshardsBlocks.SCULK_GEM_BLOCK);
 
                 // Infused Ingots/Gems
-                createShapeless(RecipeCategory.MISC, EndshardsItems.ENDER_INGOT_INFUSED)
-                        .input(EndshardsItems.ENDER_INGOT, 1).criterion(hasItem(EndshardsItems.ENDER_INGOT), conditionsFromItem(EndshardsItems.ENDER_INGOT))
-                        .input(EndshardsItems.INFUSION_CORE_ENDER, 1).criterion(hasItem(EndshardsItems.INFUSION_CORE_ENDER), conditionsFromItem(EndshardsItems.INFUSION_CORE_ENDER))
-                        .offerTo(exporter);
-                createShapeless(RecipeCategory.MISC, EndshardsItems.NETHERITE_INGOT_INFUSED)
-                        .input(Items.NETHERITE_INGOT, 1).criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(Items.NETHERITE_INGOT))
-                        .input(EndshardsItems.INFUSION_CORE_NETHERITE, 1).criterion(hasItem(EndshardsItems.INFUSION_CORE_NETHERITE), conditionsFromItem(EndshardsItems.INFUSION_CORE_NETHERITE))
-                        .offerTo(exporter);
-                createShapeless(RecipeCategory.MISC, EndshardsItems.SCULK_GEM_INFUSED)
-                        .input(EndshardsItems.SCULK_GEM, 1).criterion(hasItem(EndshardsItems.SCULK_GEM), conditionsFromItem(EndshardsItems.SCULK_GEM))
-                        .input(EndshardsItems.INFUSION_CORE_SCULK, 1).criterion(hasItem(EndshardsItems.INFUSION_CORE_SCULK), conditionsFromItem(EndshardsItems.INFUSION_CORE_SCULK))
-                        .offerTo(exporter);
-                createShapeless(RecipeCategory.MISC, EndshardsItems.NIGHTMARE_PEARL_INFUSED)
-                        .input(EndshardsItems.NIGHTMARE_PEARL, 1).criterion(hasItem(EndshardsItems.NIGHTMARE_PEARL), conditionsFromItem(EndshardsItems.NIGHTMARE_PEARL))
-                        .input(EndshardsItems.INFUSION_CORE_NIGHTMARE, 1).criterion(hasItem(EndshardsItems.INFUSION_CORE_NIGHTMARE), conditionsFromItem(EndshardsItems.INFUSION_CORE_NIGHTMARE))
-                        .offerTo(exporter);
+                offerInfusionRecipe(EndshardsItems.ENDER_INGOT_INFUSED, EndshardsItems.ENDER_INGOT, EndshardsItems.INFUSION_CORE_ENDER);
+                offerInfusionRecipe(EndshardsItems.NETHERITE_INGOT_INFUSED, Items.NETHERITE_INGOT, EndshardsItems.INFUSION_CORE_NETHERITE);
+                offerInfusionRecipe(EndshardsItems.SCULK_GEM_INFUSED, EndshardsItems.SCULK_GEM, EndshardsItems.INFUSION_CORE_SCULK);
+                offerInfusionRecipe(EndshardsItems.NIGHTMARE_PEARL_INFUSED, EndshardsItems.NIGHTMARE_PEARL, EndshardsItems.INFUSION_CORE_NIGHTMARE);
 
                 // Un-Infusion
-                createShapeless(RecipeCategory.MISC, EndshardsItems.ENDER_INGOT)
-                        .group(getItemPath(EndshardsItems.ENDER_INGOT))
-                        .input(EndshardsItems.ENDER_INGOT_INFUSED, 1).criterion(hasItem(EndshardsItems.ENDER_INGOT_INFUSED), conditionsFromItem(EndshardsItems.ENDER_INGOT_INFUSED))
-                        .offerTo(exporter, getItemPath(EndshardsItems.ENDER_INGOT) + "_from_infused");
-                createShapeless(RecipeCategory.MISC, Items.NETHERITE_INGOT)
-                        .group(getItemPath(Items.NETHERITE_INGOT))
-                        .input(EndshardsItems.NETHERITE_INGOT_INFUSED, 1).criterion(hasItem(EndshardsItems.NETHERITE_INGOT_INFUSED), conditionsFromItem(EndshardsItems.NETHERITE_INGOT_INFUSED))
-                        .offerTo(exporter, getItemPath(Items.NETHERITE_INGOT) + "_from_infused");
-                createShapeless(RecipeCategory.MISC, EndshardsItems.SCULK_GEM)
-                        .group(getItemPath(EndshardsItems.SCULK_GEM))
-                        .input(EndshardsItems.SCULK_GEM_INFUSED, 1).criterion(hasItem(EndshardsItems.SCULK_GEM_INFUSED), conditionsFromItem(EndshardsItems.SCULK_GEM_INFUSED))
-                        .offerTo(exporter, getItemPath(EndshardsItems.SCULK_GEM) + "_from_infused");
-                createShapeless(RecipeCategory.MISC, EndshardsItems.NIGHTMARE_PEARL)
-                        .group(getItemPath(EndshardsItems.NIGHTMARE_PEARL))
-                        .input(EndshardsItems.NIGHTMARE_PEARL_INFUSED, 1).criterion(hasItem(EndshardsItems.NIGHTMARE_PEARL_INFUSED), conditionsFromItem(EndshardsItems.NIGHTMARE_PEARL_INFUSED))
-                        .offerTo(exporter, getItemPath(EndshardsItems.NIGHTMARE_PEARL) + "_from_infused");
+                offerUninfusionRecipe(EndshardsItems.ENDER_INGOT, EndshardsItems.ENDER_INGOT_INFUSED);
+                offerUninfusionRecipe(Items.NETHERITE_INGOT, EndshardsItems.NETHERITE_INGOT_INFUSED);
+                offerUninfusionRecipe(EndshardsItems.SCULK_GEM, EndshardsItems.SCULK_GEM_INFUSED);
+                offerUninfusionRecipe(EndshardsItems.NIGHTMARE_PEARL, EndshardsItems.NIGHTMARE_PEARL_INFUSED);
+
+                // Smithing Template Duplication
+                offerSmithingTemplateCopyingRecipe(EndshardsItems.ENDER_UPGRADE_SMITHING_TEMPLATE, Items.END_STONE);
+                offerSmithingTemplateCopyingRecipe(EndshardsItems.SCULK_UPGRADE_SMITHING_TEMPLATE, Items.SCULK);
 
                 // Ender Equipment
                 offerEnderUpgradeRecipe(RecipeCategory.COMBAT, EnderEquipment.ENDER_HELMET, Items.DIAMOND_HELMET);
