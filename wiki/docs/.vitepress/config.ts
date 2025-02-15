@@ -4,7 +4,7 @@ export default defineConfig({
     base: '/endshards/',
     title: "Endshards Wiki",
     description: "The official wiki for the Endshards Minecraft mod.",
-    head: [['link', { rel: 'icon', href: '/endshards/img/favicon.ico' }]],
+    head: [['link', { rel: 'icon', href: '/endshards/favicon.ico' }]],
     themeConfig: {
         nav: [
             { text: "Home", link: "/" },
