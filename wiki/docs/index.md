@@ -15,6 +15,11 @@ inspired by the Spirit World from Witchery. This new dimension is still
 in the works, and even I don't know what will be in it yet, but I can promise
 a variety of biomes and an exciting new boss fight!
 
+## Wiki Structure
+The Progression section of the wiki explains the topics in a lore-friendly manner, but omits some details that can be
+discovered by the player. The rest of the wiki is akin to Endshards' technical manual. Every interaction (unless I
+forget one) is explained.
+
 ## Downloads
 Available on [GitHub](https://github.com/amot-dev/endshards/releases) and [Modrinth](https://modrinth.com/mod/endshards).
 Will soon be available on Curseforge.

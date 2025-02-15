@@ -18,7 +18,7 @@ inspired by the Spirit World from Witchery. This new dimension is still
 in the works, and even I don't know what will be in it yet, but I can promise
 a variety of biomes and an exciting new boss fight!
 
-More info on the [wiki](https://github.com/asd1o1/endshards/wiki).
+More info on the [wiki](https://amot.dev/endshards).
 
 ## Downloads
 Available on [GitHub](https://github.com/amot-dev/endshards/releases) and [Modrinth](https://modrinth.com/mod/endshards).

@@ -19,6 +19,7 @@ export default defineConfig({
             ],
         sidebar: [
             { text: "Home", link: "/" },
+            { text: "Quality of Life", link: "/quality_of_life" },
             {
                 text: "Progression",
                 items: [
@@ -32,8 +33,7 @@ export default defineConfig({
                 text: "Materials",
                 items: [
                     { text: "Ores", link: "/materials/ores" },
-                    { text: "Raw Items", link: "/materials/raw_items" },
-                    { text: "Refined Items", link: "/materials/refined_items" },
+                    { text: "Drops", link: "/materials/drops" },
                     { text: "Infusion", link: "/materials/infusion" }
                     ]
                 },
@@ -42,23 +42,21 @@ export default defineConfig({
                 items: [
                     { text: "Ender", link: "/equipment/ender" },
                     { text: "Netherite", link: "/equipment/netherite" },
-                    { text: "Sculk", link: "/equipment/sculk" }
+                    { text: "Sculk", link: "/equipment/sculk" },
+                    { text: "Summary", link: "/equipment/summary" }
                     ]
                 },
             {
                 text: "Nightmare Realm",
                 items: [
-                    {
-                        text: "Future Planned Content",
-                        link: "/nightmare_realm/future",
-                        items: [
-                            { text: "Entrances and Exits", link: "/nightmare_realm/future/entrance_and_exits" },
-                            { text: "Layout", link: "/nightmare_realm/future/layout" },
-                            { text: "Gate of Terror", link: "/nightmare_realm/future/gate_of_terror" }
-                            ]
-                        }
+                    { text: "NOT YET IMPLEMENTED" },
+                    { text: "Overview", link: "/nightmare_realm/overview" },
+                    { text: "Entrances and Exits", link: "/nightmare_realm/entrances_and_exits" },
+                    { text: "Layout", link: "/nightmare_realm/layout" },
+                    { text: "Gate of Terror", link: "/nightmare_realm/gate_of_terror" },
+                    { text: "Terror Guardian", link: "/nightmare_realm/terror_guardian" }
                     ]
-                }
+                },
             ]
         }
     }
